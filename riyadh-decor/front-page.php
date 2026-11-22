@@ -16,27 +16,17 @@ $mirror_photos = [
 ?>
 <main id="content">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
-        <div class="rd-shell rd-hero-layout">
-            <div class="rd-hero-content">
-                <p class="rd-kicker">مرايا حسب المقاس في الرياض</p>
-                <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تفصيل عادي ومعتّقة')); ?></h1>
-                <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'تفصيل مرايا عادية ومعتّقة للجدران والمداخل، بألواح طولية أو تقسيمات هندسية تناسب مساحتك.')); ?></p>
-                <div class="rd-actions">
-                    <a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', 'mirrors', rd_url('contact'))); ?>">اطلب عرض سعر</a>
-                    <a class="rd-button rd-button-light" href="#rd-mirror-gallery">شاهد الصور</a>
-                </div>
-            </div>
-            <div class="rd-hero-gallery" id="rd-mirror-gallery" data-gallery role="group" aria-label="صور تفصيل المرايا العادية والمعتّقة">
-                <?php $is_cover = true; ?>
-                <?php foreach ($mirror_photos as $filename => $caption): ?>
-                    <?php $photo = rd_asset($filename); ?>
-                    <a <?php if ($is_cover): ?>class="rd-hero-cover"<?php endif; ?> href="<?php echo esc_url($photo); ?>" data-gallery-image data-caption="<?php echo esc_attr($caption); ?>">
-                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($caption); ?>" <?php if ($is_cover): ?>fetchpriority="high"<?php else: ?>loading="lazy"<?php endif; ?> decoding="async">
-                    </a>
-                    <?php $is_cover = false; ?>
-                <?php endforeach; ?>
+        <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
+        <div class="rd-shell rd-hero-content">
+            <p class="rd-kicker">دهانات وتشطيبات في الرياض</p>
+            <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
+            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'دهانات وكسوات وتشطيبات داخلية وخارجية في الرياض. استكشف الخامات، جهّز مقاساتك، وتواصل معنا لتقييم مشروعك.')); ?></p>
+            <div class="rd-actions">
+                <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
+                <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
             </div>
         </div>
+        <div class="rd-hero-caption">صورة توضيحية لتصميم مجلس بلمسات خشبية</div>
     </section>
 
     <div class="rd-jump"><div class="rd-shell">
@@ -52,6 +42,23 @@ $mirror_photos = [
             <?php foreach (array_slice($services, 6, null, true) as $slug => $service): ?>
                 <a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['short']); ?></a>
             <?php endforeach; ?>
+        </div>
+        <div class="rd-mirror-collection" aria-labelledby="rd-mirror-title">
+            <div class="rd-section-head">
+                <div>
+                    <h3 id="rd-mirror-title">تفصيل عادي ومعتّقة</h3>
+                    <p>مرايا حسب المقاس للجدران والمداخل، بألواح طولية أو تقسيمات هندسية.</p>
+                </div>
+                <a class="rd-button rd-button-line" href="<?php echo esc_url(add_query_arg('service', 'mirrors', rd_url('contact'))); ?>">اطلب عرض سعر</a>
+            </div>
+            <div class="rd-mirror-gallery" data-gallery role="group" aria-label="صور تفصيل المرايا العادية والمعتّقة">
+                <?php foreach ($mirror_photos as $filename => $caption): ?>
+                    <?php $photo = rd_asset($filename); ?>
+                    <a href="<?php echo esc_url($photo); ?>" data-gallery-image data-caption="<?php echo esc_attr($caption); ?>">
+                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($caption); ?>" loading="lazy" decoding="async">
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
 
