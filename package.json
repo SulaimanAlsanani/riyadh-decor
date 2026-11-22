@@ -1,0 +1,7 @@
+{
+  "name": "riyadh-decor",
+  "private": true,
+  "scripts": {"build": "bash scripts/build.sh"},
+  "devDependencies": {"@wp-playground/cli": "3.1.65", "cheerio": "1.1.2"},
+  "engines": {"node": ">=22"}
+}
