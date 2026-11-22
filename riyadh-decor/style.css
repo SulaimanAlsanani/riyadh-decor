@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.0.0
+Version: 1.0.1
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -61,16 +61,17 @@ summary { cursor:pointer; }
 .rd-button-line { color:var(--deep); background:transparent; border-color:#75958b; }
 .rd-button-line:hover { background:#e4eee8; }
 .rd-mobile-contact { display:none; }
-.rd-hero { position:relative; isolation:isolate; display:grid; align-items:center; min-height:clamp(560px,69vh,720px); overflow:hidden; color:var(--white); background:var(--dark); }
-.rd-hero-image { width:100%; height:100%; object-fit:cover; object-position:center 55%; position:absolute; inset:0; z-index:-2; }
-.rd-hero::after { position:absolute; inset:0; z-index:-1; content:""; background:linear-gradient(270deg,#0b302bfa 0%,#0b302be0 30%,#0b302b91 56%,#0b302b0f 91%),linear-gradient(0deg,#072d2ab0,transparent 32%); }
-.rd-hero-content { padding-block:75px 95px; }
+.rd-hero { color:var(--white); background:linear-gradient(142deg,var(--deep),var(--dark) 67%); }
+.rd-hero-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.18fr); align-items:center; gap:clamp(24px,4vw,60px); min-height:clamp(530px,69vh,720px); padding-block:44px; }
+.rd-hero-gallery { display:grid; grid-template-columns:minmax(0,3fr) repeat(3,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:6px; min-width:0; height:clamp(340px,45vw,500px); }
+.rd-hero-gallery a { border-radius:8px; overflow:hidden; background:#173b35; }
+.rd-hero-gallery img { width:100%; height:100%; object-fit:cover; }
+.rd-hero-gallery .rd-hero-cover { grid-row:span 3; border-radius:14px; }
 .rd-hero-content h1 { max-width:670px; font-size:clamp(3rem,5.7vw,5.45rem); line-height:1.13; margin:.78rem 0 1rem; text-wrap:balance; }
 .rd-hero-content>p:not(.rd-kicker) { max-width:495px; color:#eef5ee; font-size:clamp(1rem,1.5vw,1.2rem); }
 .rd-kicker { color:#ffbb64; font-size:1rem; font-weight:800; display:inline-flex; align-items:center; gap:10px; }
 .rd-kicker::before { content:""; width:26px; height:2px; display:inline-block; background:var(--orange); }
 .rd-actions { display:flex; flex-wrap:wrap; gap:10px; margin-block-start:1.3rem; }
-.rd-hero-caption { position:absolute; inset-inline-end:48px; inset-block-end:22px; background:#0c2922aa; color:#fff; padding:.28rem .65rem; border-radius:4px; font-size:.78rem; }
 .rd-jump { background:var(--deep); color:#fff; }
 .rd-jump .rd-shell { display:flex; width:min(var(--shell),100%); justify-content:center; flex-wrap:wrap; }
 .rd-jump a { flex:1 1 0; min-width:175px; padding:.85rem 12px; text-align:center; text-decoration:none; font-weight:700; }
@@ -176,7 +177,6 @@ summary { cursor:pointer; }
     .rd-shell { width:calc(100% - 54px); }
     .rd-header-inner { gap:.8rem; }
     .rd-navigation { font-size:.89rem; gap:.8rem; }
-    .rd-hero-caption { inset-inline-end:27px; }
 }
 @media(max-width:780px) {
     html { scroll-padding-top:82px; }
@@ -185,6 +185,8 @@ summary { cursor:pointer; }
     .rd-brand img { width:54px; height:54px; }
     .rd-menu-toggle { display:inline-flex; background:#eef5f0; border:1px solid #bfd0c8; color:var(--deep); min-height:42px; padding:.3rem .78rem; border-radius:7px; }
     .rd-header-cta { display:none; }
+    .rd-hero-layout { grid-template-columns:1fr; gap:26px; min-height:0; padding-block:30px; }
+    .rd-hero-gallery { height:clamp(270px,68vw,460px); }
     .rd-navigation { width:100%; flex-basis:100%; align-items:stretch; flex-direction:column; gap:0; font-size:1rem; padding-block-end:.4rem; max-height:62vh; overflow:auto; }
     .rd-navigation>a, .rd-service-nav>summary { display:block; padding:.5rem .2rem; border-block-start:1px solid var(--line); }
     .rd-nav-tray { position:static; box-shadow:none; width:auto; margin-block-end:.55rem; font-size:.9rem; }
@@ -196,12 +198,10 @@ summary { cursor:pointer; }
 }
 @media(max-width:510px) {
     .rd-shell { width:calc(100% - 32px); }
-    .rd-hero { min-height:555px; align-items:end; }
-    .rd-hero-image { object-position:42% center; }
-    .rd-hero::after { background:linear-gradient(0deg,#072d28ff 1%,#0b302bdd 31%,#0b302b5e 80%,#092b273b 100%); }
-    .rd-hero-content { padding-block:125px 64px; }
-    .rd-hero-content h1 { font-size:clamp(2.6rem,12vw,4.25rem); }
-    .rd-hero-caption { inset-inline-end:16px; inset-block-end:13px; }
+    .rd-hero-content h1 { font-size:clamp(2.35rem,10vw,3.45rem); }
+    .rd-hero-gallery { gap:4px; }
+    .rd-hero-gallery a { border-radius:6px; }
+    .rd-hero-gallery .rd-hero-cover { border-radius:10px; }
     .rd-jump .rd-shell { justify-content:stretch; }
     .rd-jump a { min-width:0; padding-inline:5px; font-size:.76rem; }
     .rd-section-head { align-items:start; flex-direction:column; margin-block-end:1rem; }

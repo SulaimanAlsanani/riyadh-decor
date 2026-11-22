@@ -1,17 +1,42 @@
-<?php get_header(); $services = rd_services(); ?>
+<?php
+get_header();
+$services = rd_services();
+$mirror_photos = [
+    'mirror-bronze-door.jpg' => 'مرايا برونزية بألواح طولية وباب مدمج',
+    'mirror-antiqued-panels.jpg' => 'مرايا معتّقة ذهبية بألواح طولية',
+    'mirror-corner-panels.jpg' => 'مرايا برونزية تغطّي زاوية وأبواب خزائن',
+    'mirror-living-room-grid.jpg' => 'جدار مرايا برونزية بتقسيمات مستطيلة',
+    'mirror-backlit-black-frame.jpg' => 'مرآة بإطار أسود وإضاءة خلفية',
+    'mirror-black-frame.jpg' => 'مرآة جدارية بتقسيمات سوداء',
+    'mirror-bronze-tiles.jpg' => 'جدار بلاطات مرايا برونزية',
+    'mirror-backlit-organic.jpg' => 'مرايا بأشكال عضوية مع إضاءة خلفية',
+    'mirror-diagonal-wall.jpg' => 'جدار مرايا بخطوط هندسية مائلة',
+    'mirror-sculpted-pieces.jpg' => 'قطع مرايا غير منتظمة بحواف منحنية',
+];
+?>
 <main id="content">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
-        <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
-        <div class="rd-shell rd-hero-content">
-            <p class="rd-kicker">دهانات وتشطيبات في الرياض</p>
-            <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
-            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'دهانات وكسوات وتشطيبات داخلية وخارجية في الرياض. استكشف الخامات، جهّز مقاساتك، وتواصل معنا لتقييم مشروعك.')); ?></p>
-            <div class="rd-actions">
-                <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
-                <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
+        <div class="rd-shell rd-hero-layout">
+            <div class="rd-hero-content">
+                <p class="rd-kicker">مرايا حسب المقاس في الرياض</p>
+                <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تفصيل عادي ومعتّقة')); ?></h1>
+                <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'تفصيل مرايا عادية ومعتّقة للجدران والمداخل، بألواح طولية أو تقسيمات هندسية تناسب مساحتك.')); ?></p>
+                <div class="rd-actions">
+                    <a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', 'mirrors', rd_url('contact'))); ?>">اطلب عرض سعر</a>
+                    <a class="rd-button rd-button-light" href="#rd-mirror-gallery">شاهد الصور</a>
+                </div>
+            </div>
+            <div class="rd-hero-gallery" id="rd-mirror-gallery" data-gallery role="group" aria-label="صور تفصيل المرايا العادية والمعتّقة">
+                <?php $is_cover = true; ?>
+                <?php foreach ($mirror_photos as $filename => $caption): ?>
+                    <?php $photo = rd_asset($filename); ?>
+                    <a <?php if ($is_cover): ?>class="rd-hero-cover"<?php endif; ?> href="<?php echo esc_url($photo); ?>" data-gallery-image data-caption="<?php echo esc_attr($caption); ?>">
+                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($caption); ?>" <?php if ($is_cover): ?>fetchpriority="high"<?php else: ?>loading="lazy"<?php endif; ?> decoding="async">
+                    </a>
+                    <?php $is_cover = false; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="rd-hero-caption">صورة توضيحية لتصميم مجلس بلمسات خشبية</div>
     </section>
 
     <div class="rd-jump"><div class="rd-shell">

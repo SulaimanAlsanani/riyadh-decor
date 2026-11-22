@@ -133,6 +133,7 @@ function rd_request_form($selected = '') {
         <label>نوع الخدمة
             <select required name="service">
                 <option value="">اختر الخدمة</option>
+                <option value="تفصيل مرايا عادية ومعتّقة" data-service-key="mirrors" <?php selected($selected, 'mirrors'); ?>>تفصيل مرايا عادية ومعتّقة</option>
                 <?php foreach (rd_services() as $slug => $service): ?>
                     <option value="<?php echo esc_attr($service['name']); ?>" data-service-key="<?php echo esc_attr($slug); ?>" <?php selected($selected, $slug); ?>><?php echo esc_html($service['name']); ?></option>
                 <?php endforeach; ?>
