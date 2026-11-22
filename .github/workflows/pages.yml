@@ -33,6 +33,7 @@ jobs:
           npm run build -- "$PAGES_URL"
           node scripts/check-export.mjs
           node scripts/preview.mjs
+          printf '%s\n' "$GITHUB_SHA" > web-preview/revision.txt
       - name: Update the browser preview
         run: |
           git config user.name 'github-actions[bot]'
