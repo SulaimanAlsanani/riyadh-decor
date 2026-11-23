@@ -75,9 +75,9 @@ function rd_wa($message = '') {
     return 'https://wa.me/' . ($digits ?: '966505455984') . ($message ? '?text=' . rawurlencode($message) : '');
 }
 
-function rd_category_link($slug) {
+function rd_category_link($slug, $fallback = true) {
     $term = get_term_by('slug', $slug, 'category');
-    return $term ? get_category_link($term->term_id) : rd_url('guides');
+    return $term && $term->count > 0 ? get_category_link($term->term_id) : ($fallback ? rd_url('guides') : '');
 }
 
 function rd_guides($limit = 6, $slug = '', $page = 1) {

@@ -99,7 +99,10 @@ while (have_posts()) :
     <?php rd_page_top('أدلة الدهانات والديكور', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
     <div class="rd-shell rd-section">
         <div class="rd-pills"><?php foreach ($services as $key => $item): ?>
-            <a href="<?php echo esc_url(rd_category_link($key)); ?>"><?php echo esc_html($item['short']); ?></a>
+            <?php $category_url = rd_category_link($key, false); ?>
+            <?php if ($category_url): ?>
+                <a href="<?php echo esc_url($category_url); ?>"><?php echo esc_html($item['short']); ?></a>
+            <?php endif; ?>
         <?php endforeach; ?></div>
         <?php get_search_form(); ?>
         <?php $number = max(1, absint($_GET['guide_page'] ?? 1)); $query = rd_guides(6, '', $number); ?>
