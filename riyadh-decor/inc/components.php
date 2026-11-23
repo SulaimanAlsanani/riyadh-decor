@@ -64,7 +64,7 @@ function rd_heading($title, $intro = '', $link = '', $label = '') {
 
 function rd_service_cards($services) {
     ?>
-    <div class="rd-cards">
+    <div class="rd-cards<?php echo count($services) === 1 ? ' rd-service-card-single' : ''; ?>">
         <?php foreach ($services as $slug => $service): ?>
             <article class="rd-card">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
@@ -129,6 +129,7 @@ function rd_faq($items) {
 
 function rd_request_form($selected = '') {
     ?>
+    <?php $services = rd_services(); ?>
     <form class="rd-form" method="post" data-request data-whatsapp="<?php echo esc_url(rd_wa()); ?>">
         <fieldset data-request-fields disabled>
         <div class="rd-form-row">
@@ -137,8 +138,8 @@ function rd_request_form($selected = '') {
         </div>
         <label>نوع الخدمة
             <select required name="service">
-                <option value="">اختر الخدمة</option>
-                <?php foreach (rd_services() as $slug => $service): ?>
+                <?php if (count($services) > 1): ?><option value="">اختر الخدمة</option><?php endif; ?>
+                <?php foreach ($services as $slug => $service): ?>
                     <option value="<?php echo esc_attr($service['name']); ?>" data-service-key="<?php echo esc_attr($slug); ?>" <?php selected($selected, $slug); ?>><?php echo esc_html($service['name']); ?></option>
                 <?php endforeach; ?>
             </select>

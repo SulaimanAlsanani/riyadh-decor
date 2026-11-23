@@ -2,13 +2,12 @@
     <div class="rd-shell rd-footer-grid">
         <div>
             <a class="rd-footer-brand" href="<?php echo esc_url(rd_url()); ?>"><img src="<?php echo esc_url(rd_logo_url()); ?>" alt="" width="68" height="68"><strong>ديكورات الرياض</strong></a>
-            <p>دهانات، ديكورات وتشطيبات للمنازل والفلل في الرياض.</p>
+            <p>تفصيل مرايا عادية ومعتّقة للمنازل والفلل في الرياض.</p>
         </div>
         <div>
             <h2>روابط سريعة</h2>
             <a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات</a>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض الأفكار</a>
-            <a href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة والمقالات</a>
             <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a>
         </div>
         <div>

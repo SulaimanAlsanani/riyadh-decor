@@ -87,7 +87,9 @@ for (const map of maps.filter((path) => /wp-sitemap-(posts|taxonomies)-/.test(pa
 const guidesPages = Math.ceil(articlePaths.size / 6);
 for (let p = 2; p <= guidesPages; p++) routes.set(`/guides/page/${p}/`, `/guides/?guide_page=${p}`);
 routes.set('/search/', '/?s=riyadh-decor-internal-placeholder');
-if (routes.size < 50) throw new Error(`The export found only ${routes.size} WordPress routes`);
+for (const required of ['/services/', '/services/mirrors/', '/gallery/', '/contact/']) {
+    if (!routes.has(required)) throw new Error(`The WordPress sitemap is missing ${required}`);
+}
 
 for (const [path, source] of routes) {
     const $ = load(await (await read(source)).text());

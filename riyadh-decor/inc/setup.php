@@ -63,19 +63,6 @@ function rd_seed_content() {
         }
     }
 
-    foreach ([
-        'interior-painting' => 'دهانات داخلية',
-        'exterior-painting' => 'دهانات خارجية',
-        'repainting' => 'تجديد الدهانات',
-    ] as $slug => $title) {
-        $id = rd_insert_page($slug, $title, $sections['services'], [
-            '_rd_specialty' => 'painting', '_rd_kind' => 'paint-variant',
-        ]);
-        if (is_wp_error($id)) {
-            return $id;
-        }
-    }
-
     if (get_option('show_on_front') === 'posts' && get_post_meta($home, '_rd_owned', true)) {
         update_option('show_on_front', 'page');
         update_option('page_on_front', $home);

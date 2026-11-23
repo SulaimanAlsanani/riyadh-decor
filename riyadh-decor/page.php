@@ -14,7 +14,7 @@ while (have_posts()) :
     <div class="rd-shell rd-section">
         <?php rd_image_gallery($service['portfolio'], $slug); ?>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
-        <div class="rd-related"><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>">تفاصيل الخدمة</a><a href="<?php echo esc_url(rd_category_link($slug)); ?>">أدلة التخصص</a></div>
+        <div class="rd-related"><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>">تفاصيل الخدمة</a></div>
         <?php rd_end_cta('أعجبتك إحدى الأفكار؟', $slug); ?>
     </div>
 <?php elseif ($service): ?>
@@ -23,13 +23,6 @@ while (have_posts()) :
         <div class="rd-service-layout">
             <div>
                 <h2>خيارات التصميم والتشطيب</h2>
-                <?php if ($kind === 'paint-variant'):
-                    $paint_variants = [
-                        'interior-painting' => 'تبدأ الدهانات الداخلية باختيار تشطيب ملائم للغرفة ومراجعة الإضاءة وأماكن حماية الأثاث.',
-                        'exterior-painting' => 'تتطلب أعمال الواجهات معاينة ارتفاع السطح وحالته وتأثره بالطقس قبل تحديد نظام الطلاء.',
-                        'repainting' => 'في التجديد، تُفحص الطبقات السابقة والرطوبة والتقشر لتحديد ما يحتاج إزالة أو معالجة.',
-                    ];
-                    ?><p><?php echo esc_html($paint_variants[$section] ?? ''); ?></p><?php endif; ?>
                 <ul><?php foreach ($service['choices'] as $choice): ?><li><?php echo esc_html($choice); ?></li><?php endforeach; ?></ul>
                 <h2>ماذا تجهّز قبل طلب العرض؟</h2>
                 <ul><?php foreach ($service['checks'] as $check): ?><li><?php echo esc_html($check); ?></li><?php endforeach; ?></ul>
@@ -40,7 +33,6 @@ while (have_posts()) :
                 <?php if (has_post_thumbnail()) { the_post_thumbnail('large', ['loading' => 'eager']); } else { rd_image($service['image'], ['loading' => 'eager', 'alt' => $service['alt']]); } ?>
                 <div class="rd-related">
                     <a href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استعرض معرض الخامات</a>
-                    <a href="<?php echo esc_url(rd_category_link($slug)); ?>">اقرأ أدلة التخصص</a>
                 </div>
             </div>
         </div>
@@ -51,52 +43,23 @@ while (have_posts()) :
                 <?php rd_image_gallery($service['portfolio'], $slug); ?>
             </section>
         <?php endif; ?>
-        <?php if ($slug === 'painting' && $kind !== 'paint-variant'): ?>
-            <section class="rd-service-portfolio" aria-label="صور الدهانات والتشطيبات">
-                <?php rd_heading('صور الدهانات والتشطيبات', 'أمثلة توضيحية لألوان المجالس وغرف النوم والواجهات.'); ?>
-                <?php rd_image_gallery($service['portfolio'], $slug); ?>
-                <div class="rd-film-section">
-                    <div class="rd-film-text">
-                        <h3>شاهد أثر الخامة والإضاءة</h3>
-                        <p>قرّب الصورة لملاحظة ملمس الدهان، اتجاه الخشب، وتدرج الإضاءة في المجلس.</p>
-                        <a class="rd-text-link" href="<?php echo esc_url(rd_url('paint-colors')); ?>">دليل اختيار اللون</a>
-                    </div>
-                    <div class="rd-film" data-film>
-                        <video muted loop playsinline preload="none" poster="<?php echo esc_url(rd_asset('majlis-sm.webp')); ?>" aria-label="مشهد بصري توضيحي لخامات المجلس">
-                            <source src="<?php echo esc_url(rd_asset('majlis-motion.mp4')); ?>" type="video/mp4">
-                        </video>
-                        <button class="rd-button rd-button-light" type="button" hidden data-film-toggle>شغّل المشهد</button>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
         <h2>أسئلة شائعة</h2>
         <?php rd_faq($service['faq']); ?>
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
     </div>
 <?php elseif ($section === 'services'): ?>
-    <?php rd_page_top('خدمات الدهانات والديكور', 'تعرّف على الخامات وخيارات التشطيب، واستعرض الأدلة والصور المرتبطة بكل تخصص.'); ?>
+    <?php rd_page_top('الخدمات', 'تفصيل مرايا عادية ومعتّقة حسب المقاس.'); ?>
     <div class="rd-shell rd-section">
-        <div class="rd-related">
-            <?php foreach (['interior-painting' => 'دهانات داخلية', 'exterior-painting' => 'دهانات خارجية', 'repainting' => 'تجديد الدهانات'] as $key => $label): ?>
-                <a href="<?php echo esc_url(rd_url('services/' . $key)); ?>"><?php echo esc_html($label); ?></a>
-            <?php endforeach; ?>
-        </div>
         <?php rd_service_cards($services); ?>
-        <?php rd_end_cta(); ?>
     </div>
 <?php elseif ($section === 'gallery'): ?>
-    <?php rd_page_top('معرض أفكار الديكور', 'استعرض أمثلة تصميمية للخامات والألوان. افتح أي صورة أو اختر معرضًا لتخصص محدد.'); ?>
+    <?php rd_page_top('معرض المرايا', 'استعرض تصاميم المرايا العادية والمعتّقة وافتح أي صورة لمعاينة تفاصيلها.'); ?>
     <div class="rd-shell rd-section">
-        <?php rd_image_gallery(array_keys(rd_media())); ?>
-        <h2>معارض حسب التخصص</h2>
-        <div class="rd-pills"><?php foreach ($services as $key => $item): ?>
-            <a href="<?php echo esc_url(rd_url('gallery/' . $key)); ?>"><?php echo esc_html($item['short']); ?></a>
-        <?php endforeach; ?></div>
-        <?php rd_end_cta(); ?>
+        <?php rd_image_gallery($services['mirrors']['portfolio'], 'mirrors'); ?>
+        <?php rd_end_cta('اطلب عرض سعر للمرايا', 'mirrors'); ?>
     </div>
 <?php elseif ($section === 'guides'): ?>
-    <?php rd_page_top('أدلة الدهانات والديكور', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
+    <?php rd_page_top('الأدلة والمقالات', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
     <div class="rd-shell rd-section">
         <div class="rd-pills"><?php foreach ($services as $key => $item): ?>
             <?php $category_url = rd_category_link($key, false); ?>
@@ -134,17 +97,13 @@ while (have_posts()) :
     <div class="rd-shell rd-section rd-prose">
         <?php if ($section === 'about'): ?>
             <h2>خيارات تشطيب للمنازل والفلل</h2>
-            <p>ديكورات الرياض لخدمات الدهانات والجبس بورد وديكورات الشاشات والكسوات والأرضيات. نقدّم خيارات تُراجع بحسب المقاسات وحالة الموقع والنتيجة المطلوبة.</p>
+            <p>ديكورات الرياض لتفصيل المرايا العادية والمعتّقة حسب المقاس. نراجع خيارات التشطيب والتقسيمات بحسب المساحة.</p>
             <h2>ابدأ من وصف المساحة</h2><p>اذكر مكان المشروع وما الذي تريد تغييره. صور الموقع والمقاسات تساعد في تحديد نطاق العمل ومناقشة الخامات والموعد.</p>
             <h2>عن صور المعرض</h2><p>يحتوي الموقع على صور توضيحية للأفكار والتشطيبات. تطبّق الخامات والتصاميم حسب قياس المكان والعينات المعتمدة.</p>
         <?php elseif ($section === 'project-planning'): ?>
             <h2>قبل المعاينة</h2><p>صوّر الأسطح في إضاءة واضحة، وقس عرض الجدران وارتفاعها، وحدد فتحات الكهرباء والمكيفات والأثاث القائم.</p>
             <h2>قبل اعتماد العرض</h2><p>اطلب تحديد المساحات وطريقة التجهيز والخامات الداخلة في العرض والمدة المتوقعة وطريقة مراجعة التنفيذ.</p>
             <h2>قبل الاستلام</h2><p>راجع العينات المتفق عليها والمظهر في الإضاءة الفعلية. اختبر المفاتيح والأبواب عندما يكون العمل متصلًا بها، وسجّل ملاحظاتك.</p>
-        <?php elseif ($section === 'paint-colors'): ?>
-            <h2>ابدأ من العناصر الثابتة</h2><p>قارن اللون مع البلاط والخشب والأقمشة التي ستبقى في المكان. تساعد الخلفية القريبة في ملاحظة درجة الدفء.</p>
-            <h2>جرّب في إضاءة مختلفة</h2><p>ضع عينة على جدارين متعاكسين وراجعها صباحًا ومساءً. اختبر المظهر بجانب الإنارة الجدارية وبعيدًا عنها.</p>
-            <h2>سجّل مواصفات العينة</h2><p>دوّن رقم اللون ونوع التشطيب وموضع التطبيق قبل شراء الدهان أو طلب التنفيذ.</p>
         <?php elseif ($section === 'privacy-policy'): ?>
             <h2>بيانات الطلب</h2><p>يجهّز النموذج نص الرسالة داخل المتصفح. تنتقل البيانات إلى واتساب عند اختيار فتح المحادثة، وتُرسل عندما تضغط زر الإرسال في واتساب.</p>
             <h2>صور ومعلومات المشروع</h2><p>أرسل فقط الصور والمعلومات التي تحتاج لمشاركتها لمناقشة العرض. تخضع المحادثة لاستخدام واتساب وإعداداته.</p>
