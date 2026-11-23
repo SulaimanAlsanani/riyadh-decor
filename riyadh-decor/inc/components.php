@@ -1,15 +1,20 @@
 <?php
 defined('ABSPATH') || exit;
 
+function rd_media_filename($key) {
+    return str_ends_with($key, '.jpg') ? $key : $key . '.webp';
+}
+
 function rd_image($key, $attributes = []) {
     $media = rd_media();
-    if (!isset($media[$key])) {
+    $mirror = rd_mirror_media()[$key] ?? null;
+    if (!isset($media[$key]) && !$mirror) {
         return;
     }
-    $attributes += ['alt' => $media[$key], 'loading' => 'lazy', 'decoding' => 'async'];
-    $width = $key === 'majlis' ? 1440 : 504;
-    $height = $key === 'majlis' ? 960 : 504;
-    printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset($key . '.webp')), $width, $height);
+    $attributes += ['alt' => $mirror[0] ?? $media[$key], 'loading' => 'lazy', 'decoding' => 'async'];
+    $dimensions = ['majlis' => [1440, 960], 'painting-service' => [864, 576]];
+    [$width, $height] = $mirror ? [$mirror[1], $mirror[2]] : ($dimensions[$key] ?? [504, 504]);
+    printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset(rd_media_filename($key))), $width, $height);
     if ($key === 'majlis') {
         printf(' srcset="%s 768w, %s 1440w" sizes="%s"', esc_url(rd_asset('majlis-sm.webp')), esc_url(rd_asset('majlis.webp')), esc_attr($attributes['sizes'] ?? '(max-width: 740px) 95vw, 50vw'));
     }
@@ -64,7 +69,7 @@ function rd_service_cards($services) {
             <article class="rd-card">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
                 <div class="rd-card-body">
-                    <h3><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['name']); ?></a></h3>
+                    <h3><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
                     <p><?php echo esc_html($service['intro']); ?></p>
                     <a class="rd-text-link" href="<?php echo esc_url(rd_url('services/' . $slug)); ?>">تفاصيل الخدمة<span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
                 </div>
@@ -76,12 +81,12 @@ function rd_service_cards($services) {
 
 function rd_image_gallery($keys, $specialty = '') {
     $service = rd_services()[$specialty] ?? null;
-    $media = rd_media();
+    $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_mirror_media());
     ?>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
             <figure class="rd-photo">
-                <a href="<?php echo esc_url(rd_asset($key . '.webp')); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?></a>
+                <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?></a>
                 <figcaption>
                     <div><?php echo esc_html($media[$key]); ?></div>
                     <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : ''))); ?>" rel="noopener" target="_blank">استفسر عن الفكرة</a>
@@ -133,7 +138,6 @@ function rd_request_form($selected = '') {
         <label>نوع الخدمة
             <select required name="service">
                 <option value="">اختر الخدمة</option>
-                <option value="تفصيل مرايا عادية ومعتّقة" data-service-key="mirrors" <?php selected($selected, 'mirrors'); ?>>تفصيل مرايا عادية ومعتّقة</option>
                 <?php foreach (rd_services() as $slug => $service): ?>
                     <option value="<?php echo esc_attr($service['name']); ?>" data-service-key="<?php echo esc_attr($slug); ?>" <?php selected($selected, $slug); ?>><?php echo esc_html($service['name']); ?></option>
                 <?php endforeach; ?>

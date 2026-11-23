@@ -1,18 +1,6 @@
 <?php
 get_header();
 $services = rd_services();
-$mirror_photos = [
-    'mirror-bronze-door.jpg' => 'مرايا برونزية بألواح طولية وباب مدمج',
-    'mirror-antiqued-panels.jpg' => 'مرايا معتّقة ذهبية بألواح طولية',
-    'mirror-corner-panels.jpg' => 'مرايا برونزية تغطّي زاوية وأبواب خزائن',
-    'mirror-living-room-grid.jpg' => 'جدار مرايا برونزية بتقسيمات مستطيلة',
-    'mirror-backlit-black-frame.jpg' => 'مرآة بإطار أسود وإضاءة خلفية',
-    'mirror-black-frame.jpg' => 'مرآة جدارية بتقسيمات سوداء',
-    'mirror-bronze-tiles.jpg' => 'جدار بلاطات مرايا برونزية',
-    'mirror-backlit-organic.jpg' => 'مرايا بأشكال عضوية مع إضاءة خلفية',
-    'mirror-diagonal-wall.jpg' => 'جدار مرايا بخطوط هندسية مائلة',
-    'mirror-sculpted-pieces.jpg' => 'قطع مرايا غير منتظمة بحواف منحنية',
-];
 ?>
 <main id="content">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
@@ -43,23 +31,6 @@ $mirror_photos = [
                 <a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['short']); ?></a>
             <?php endforeach; ?>
         </div>
-        <div class="rd-mirror-collection" aria-labelledby="rd-mirror-title">
-            <div class="rd-section-head">
-                <div>
-                    <h3 id="rd-mirror-title">تفصيل عادي ومعتّقة</h3>
-                    <p>مرايا حسب المقاس للجدران والمداخل، بألواح طولية أو تقسيمات هندسية.</p>
-                </div>
-                <a class="rd-button rd-button-line" href="<?php echo esc_url(add_query_arg('service', 'mirrors', rd_url('contact'))); ?>">اطلب عرض سعر</a>
-            </div>
-            <div class="rd-mirror-gallery" data-gallery role="group" aria-label="صور تفصيل المرايا العادية والمعتّقة">
-                <?php foreach ($mirror_photos as $filename => $caption): ?>
-                    <?php $photo = rd_asset($filename); ?>
-                    <a href="<?php echo esc_url($photo); ?>" data-gallery-image data-caption="<?php echo esc_attr($caption); ?>">
-                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($caption); ?>" loading="lazy" decoding="async">
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
     </section>
 
     <section class="rd-ideas rd-section" id="inspiration">
@@ -71,7 +42,7 @@ $mirror_photos = [
                     <button class="rd-button rd-button-line" type="button" data-rail-step="1">التالي</button>
                 </div>
                 <div class="rd-rail-track" data-rail-track tabindex="0" aria-label="صور أفكار الديكور">
-                    <?php foreach (['tv-walls','painting','gypsum','tiles','flooring','bedrooms'] as $slug): $service = $services[$slug]; ?>
+                    <?php foreach (['tv-walls','gypsum','tiles','flooring','bedrooms'] as $slug): $service = $services[$slug]; ?>
                         <a href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">
                             <?php rd_image($service['image'], ['alt' => '']); ?>
                             <span><?php echo esc_html($service['short']); ?></span>
@@ -84,20 +55,6 @@ $mirror_photos = [
                 <div class="rd-swatches" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                 <a class="rd-text-link" href="<?php echo esc_url(rd_url('paint-colors')); ?>">دليل اختيار اللون</a>
             </div>
-        </div>
-    </section>
-
-    <section class="rd-shell rd-section rd-film-section" aria-labelledby="rd-film-title">
-        <div class="rd-film-text">
-            <h2 id="rd-film-title">شاهد أثر الخامة والإضاءة</h2>
-            <p>قرّب الصورة لملاحظة ملمس الدهان، اتجاه الخشب، وتدرج الإضاءة في المجلس.</p>
-            <a class="rd-text-link" href="<?php echo esc_url(rd_url('gallery/painting')); ?>">استعرض أفكار الدهانات</a>
-        </div>
-        <div class="rd-film" data-film>
-            <video muted loop playsinline preload="none" poster="<?php echo esc_url(rd_asset('majlis-sm.webp')); ?>" aria-label="مشهد بصري توضيحي لخامات المجلس">
-                <source src="<?php echo esc_url(rd_asset('majlis-motion.mp4')); ?>" type="video/mp4">
-            </video>
-            <button class="rd-button rd-button-light" type="button" hidden data-film-toggle>شغّل المشهد</button>
         </div>
     </section>
 

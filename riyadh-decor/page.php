@@ -45,6 +45,31 @@ while (have_posts()) :
             </div>
         </div>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
+        <?php if ($slug === 'mirrors'): ?>
+            <section class="rd-service-portfolio" aria-label="صور تفصيل المرايا">
+                <?php rd_heading('صور المرايا العادية والمعتّقة', 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
+                <?php rd_image_gallery($service['portfolio'], $slug); ?>
+            </section>
+        <?php endif; ?>
+        <?php if ($slug === 'painting' && $kind !== 'paint-variant'): ?>
+            <section class="rd-service-portfolio" aria-label="صور الدهانات والتشطيبات">
+                <?php rd_heading('صور الدهانات والتشطيبات', 'أمثلة توضيحية لألوان المجالس وغرف النوم والواجهات.'); ?>
+                <?php rd_image_gallery($service['portfolio'], $slug); ?>
+                <div class="rd-film-section">
+                    <div class="rd-film-text">
+                        <h3>شاهد أثر الخامة والإضاءة</h3>
+                        <p>قرّب الصورة لملاحظة ملمس الدهان، اتجاه الخشب، وتدرج الإضاءة في المجلس.</p>
+                        <a class="rd-text-link" href="<?php echo esc_url(rd_url('paint-colors')); ?>">دليل اختيار اللون</a>
+                    </div>
+                    <div class="rd-film" data-film>
+                        <video muted loop playsinline preload="none" poster="<?php echo esc_url(rd_asset('majlis-sm.webp')); ?>" aria-label="مشهد بصري توضيحي لخامات المجلس">
+                            <source src="<?php echo esc_url(rd_asset('majlis-motion.mp4')); ?>" type="video/mp4">
+                        </video>
+                        <button class="rd-button rd-button-light" type="button" hidden data-film-toggle>شغّل المشهد</button>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
         <h2>أسئلة شائعة</h2>
         <?php rd_faq($service['faq']); ?>
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
