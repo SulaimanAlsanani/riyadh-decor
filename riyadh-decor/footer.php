@@ -2,7 +2,7 @@
     <div class="rd-shell rd-footer-grid">
         <div>
             <a class="rd-footer-brand" href="<?php echo esc_url(rd_url()); ?>"><img src="<?php echo esc_url(rd_logo_url()); ?>" alt="" width="68" height="68"><strong>ديكورات الرياض</strong></a>
-            <p>تفصيل مرايا عادية ومعتّقة للمنازل والفلل في الرياض.</p>
+            <p>تفصيل المرايا وديكور خلف السرير للمنازل والفلل في الرياض.</p>
         </div>
         <div>
             <h2>روابط سريعة</h2>

@@ -6,9 +6,9 @@ $services = rd_services();
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content">
-            <p class="rd-kicker">تفصيل المرايا في الرياض</p>
+            <p class="rd-kicker">ديكورات داخلية في الرياض</p>
             <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
-            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'مرايا عادية ومعتّقة تُفصّل حسب المقاس للجدران والمداخل.')); ?></p>
+            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'تفصيل مرايا عادية ومعتّقة للجدران والمداخل، وديكور خلف السرير حسب مقاس الغرفة.')); ?></p>
             <div class="rd-actions">
                 <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
                 <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
@@ -18,8 +18,8 @@ $services = rd_services();
     </section>
 
     <div class="rd-jump"><div class="rd-shell">
-        <a href="#services">تفصيل المرايا</a>
-        <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض المرايا</a>
+        <a href="#services">الخدمات</a>
+        <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض التصاميم</a>
         <a href="#steps">خطوات تجهيز المشروع</a>
     </div></div>
 
@@ -44,7 +44,7 @@ $services = rd_services();
             <p>اذكر المقاسات وحالة السطح والخامة اللي تفضّلها. تقدر ترفق صور المكان في واتساب بعد فتح المحادثة.</p>
             <?php rd_faq([
                 'كيف يتحدد عرض السعر؟' => 'يُراجع المقاس الفعلي وحالة الموقع والخامات ونطاق التجهيز والتوريد والتركيب لكل طلب.',
-                'متى أقدر أعتمد التشطيب؟' => 'بعد مقارنة عينات المرايا الصافية والمعتّقة في الإضاءة الفعلية للمكان.',
+                'متى أقدر أعتمد التشطيب؟' => 'بعد مقارنة عينات الخامات والتشطيبات في الإضاءة الفعلية للمكان.',
             ]); ?>
         </div>
         <?php rd_request_form(); ?>

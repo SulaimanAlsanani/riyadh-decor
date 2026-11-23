@@ -15,7 +15,7 @@
         <?php else: ?>
             <a class="rd-brand" href="<?php echo esc_url(rd_url()); ?>">
                 <img src="<?php echo esc_url(rd_asset('logo.png')); ?>" width="70" height="70" alt="شعار ديكورات الرياض">
-                <span>ديكورات الرياض<small>تفصيل مرايا</small></span>
+                <span>ديكورات الرياض<small>تصميم وتشطيب داخلي</small></span>
             </a>
         <?php endif; ?>
         <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation" hidden>القائمة</button>

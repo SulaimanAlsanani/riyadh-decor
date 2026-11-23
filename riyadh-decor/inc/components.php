@@ -7,13 +7,13 @@ function rd_media_filename($key) {
 
 function rd_image($key, $attributes = []) {
     $media = rd_media();
-    $mirror = rd_mirror_media()[$key] ?? null;
-    if (!isset($media[$key]) && !$mirror) {
+    $photo = rd_gallery_media()[$key] ?? null;
+    if (!isset($media[$key]) && !$photo) {
         return;
     }
-    $attributes += ['alt' => $mirror[0] ?? $media[$key], 'loading' => 'lazy', 'decoding' => 'async'];
+    $attributes += ['alt' => $photo[0] ?? $media[$key], 'loading' => 'lazy', 'decoding' => 'async'];
     $dimensions = ['majlis' => [1440, 960], 'painting-service' => [864, 576]];
-    [$width, $height] = $mirror ? [$mirror[1], $mirror[2]] : ($dimensions[$key] ?? [504, 504]);
+    [$width, $height] = $photo ? [$photo[1], $photo[2]] : ($dimensions[$key] ?? [504, 504]);
     printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset(rd_media_filename($key))), $width, $height);
     if ($key === 'majlis') {
         printf(' srcset="%s 768w, %s 1440w" sizes="%s"', esc_url(rd_asset('majlis-sm.webp')), esc_url(rd_asset('majlis.webp')), esc_attr($attributes['sizes'] ?? '(max-width: 740px) 95vw, 50vw'));
@@ -81,7 +81,7 @@ function rd_service_cards($services) {
 
 function rd_image_gallery($keys, $specialty = '') {
     $service = rd_services()[$specialty] ?? null;
-    $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_mirror_media());
+    $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_gallery_media());
     ?>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>

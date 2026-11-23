@@ -32,14 +32,14 @@ while (have_posts()) :
             <div class="rd-feature-image">
                 <?php if (has_post_thumbnail()) { the_post_thumbnail('large', ['loading' => 'eager']); } else { rd_image($service['image'], ['loading' => 'eager', 'alt' => $service['alt']]); } ?>
                 <div class="rd-related">
-                    <a href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استعرض معرض الخامات</a>
+                    <a href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استعرض معرض التصاميم</a>
                 </div>
             </div>
         </div>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
-        <?php if ($slug === 'mirrors'): ?>
-            <section class="rd-service-portfolio" aria-label="صور تفصيل المرايا">
-                <?php rd_heading('صور المرايا العادية والمعتّقة', 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
+        <?php if (!empty($service['portfolio'])): ?>
+            <section class="rd-service-portfolio" aria-label="<?php echo esc_attr($service['gallery_title']); ?>">
+                <?php rd_heading($service['gallery_title'], 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
                 <?php rd_image_gallery($service['portfolio'], $slug); ?>
             </section>
         <?php endif; ?>
@@ -48,15 +48,20 @@ while (have_posts()) :
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
     </div>
 <?php elseif ($section === 'services'): ?>
-    <?php rd_page_top('الخدمات', 'تفصيل مرايا عادية ومعتّقة حسب المقاس.'); ?>
+    <?php rd_page_top('الخدمات', 'تفصيل المرايا العادية والمعتّقة وديكور خلف السرير حسب المقاس.'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_cards($services); ?>
     </div>
 <?php elseif ($section === 'gallery'): ?>
-    <?php rd_page_top('معرض المرايا', 'استعرض تصاميم المرايا العادية والمعتّقة وافتح أي صورة لمعاينة تفاصيلها.'); ?>
+    <?php rd_page_top('معرض التصاميم', 'استعرض نماذج المرايا وديكور خلف السرير وافتح أي صورة لمعاينة تفاصيلها.'); ?>
     <div class="rd-shell rd-section">
-        <?php rd_image_gallery($services['mirrors']['portfolio'], 'mirrors'); ?>
-        <?php rd_end_cta('اطلب عرض سعر للمرايا', 'mirrors'); ?>
+        <?php foreach ($services as $service_slug => $item): ?>
+            <section class="rd-service-portfolio" aria-label="<?php echo esc_attr($item['gallery_title']); ?>">
+                <?php rd_heading($item['gallery_title'], '', rd_url('services/' . $service_slug), 'تفاصيل الخدمة'); ?>
+                <?php rd_image_gallery($item['portfolio'], $service_slug); ?>
+            </section>
+        <?php endforeach; ?>
+        <?php rd_end_cta(); ?>
     </div>
 <?php elseif ($section === 'guides'): ?>
     <?php rd_page_top('الأدلة والمقالات', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
@@ -97,7 +102,7 @@ while (have_posts()) :
     <div class="rd-shell rd-section rd-prose">
         <?php if ($section === 'about'): ?>
             <h2>خيارات تشطيب للمنازل والفلل</h2>
-            <p>ديكورات الرياض لتفصيل المرايا العادية والمعتّقة حسب المقاس. نراجع خيارات التشطيب والتقسيمات بحسب المساحة.</p>
+            <p>ديكورات الرياض لتفصيل المرايا العادية والمعتّقة وديكور الجدار خلف السرير حسب المقاس. نراجع خيارات التشطيب والتقسيمات بحسب المساحة.</p>
             <h2>ابدأ من وصف المساحة</h2><p>اذكر مكان المشروع وما الذي تريد تغييره. صور الموقع والمقاسات تساعد في تحديد نطاق العمل ومناقشة الخامات والموعد.</p>
             <h2>عن صور المعرض</h2><p>يحتوي الموقع على صور توضيحية للأفكار والتشطيبات. تطبّق الخامات والتصاميم حسب قياس المكان والعينات المعتمدة.</p>
         <?php elseif ($section === 'project-planning'): ?>
