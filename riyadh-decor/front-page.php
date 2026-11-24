@@ -8,7 +8,7 @@ $services = rd_services();
         <div class="rd-shell rd-hero-content">
             <p class="rd-kicker">ديكورات داخلية في الرياض</p>
             <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
-            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'تفصيل مرايا عادية ومعتّقة للجدران والمداخل، وديكور خلف السرير حسب مقاس الغرفة.')); ?></p>
+            <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'مرايا عادية ومعتّقة، وديكورات خلف السرير والتلفزيون تُفصّل حسب المقاس.')); ?></p>
             <div class="rd-actions">
                 <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
                 <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
