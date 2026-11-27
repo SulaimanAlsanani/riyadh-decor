@@ -65,11 +65,38 @@ function rd_heading($title, $intro = '', $link = '', $label = '') {
 function rd_service_cards($services, $section = 'services') {
     $is_gallery = $section === 'gallery';
     $link_label = $is_gallery ? 'عرض الصور' : 'تفاصيل الخدمة';
+    $group_labels = [];
+    $service_groups = [];
+    foreach (rd_service_groups() as $group => [$label, $slugs]) {
+        $matching = array_intersect($slugs, array_keys($services));
+        if (!$matching) continue;
+        $group_labels[$group] = $label;
+        foreach ($matching as $slug) {
+            $service_groups[$slug] = $group;
+        }
+    }
+    $grid_id = wp_unique_id('rd-service-grid-');
+    $total = count($services);
     ?>
-    <div class="rd-cards<?php echo count($services) === 1 ? ' rd-service-card-single' : ''; ?>">
+    <div data-service-list>
+    <?php if ($total > 1): ?>
+        <div class="rd-service-filters" data-service-filters hidden>
+            <label class="rd-service-search">
+                <span><?php echo $is_gallery ? 'ابحث في المعرض' : 'ابحث عن خدمة'; ?></span>
+                <input type="search" data-service-search aria-controls="<?php echo esc_attr($grid_id); ?>" placeholder="مثل باركيه أو مرايا">
+            </label>
+            <div class="rd-service-groups" role="group" aria-label="تصفية حسب نوع العمل">
+                <?php foreach (['all' => 'الكل'] + $group_labels as $group => $label): ?>
+                    <button type="button" data-service-group="<?php echo esc_attr($group); ?>" aria-pressed="<?php echo $group === 'all' ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr($grid_id); ?>"><?php echo esc_html($label); ?></button>
+                <?php endforeach; ?>
+            </div>
+            <p class="screen-reader-text" role="status" data-service-status></p>
+        </div>
+    <?php endif; ?>
+    <div id="<?php echo esc_attr($grid_id); ?>" class="rd-cards<?php echo $total === 1 ? ' rd-service-card-single' : ''; ?>">
         <?php foreach ($services as $slug => $service): ?>
             <?php $url = rd_url($section . '/' . $slug); ?>
-            <article class="rd-card">
+            <article class="rd-card" data-service-card="<?php echo esc_attr($service_groups[$slug] ?? ''); ?>" data-service-name="<?php echo esc_attr($service['name'] . ' ' . $service['short']); ?>">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url($url); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
                 <div class="rd-card-body">
                     <h3><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
@@ -78,6 +105,13 @@ function rd_service_cards($services, $section = 'services') {
                 </div>
             </article>
         <?php endforeach; ?>
+    </div>
+    <?php if ($total > 1): ?>
+        <div class="rd-service-empty" data-service-empty hidden>
+            <p>لا توجد نتائج مطابقة.</p>
+            <button class="rd-button rd-button-line" type="button" data-service-reset>عرض الكل</button>
+        </div>
+    <?php endif; ?>
     </div>
     <?php
 }

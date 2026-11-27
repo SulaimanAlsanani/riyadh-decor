@@ -61,6 +61,15 @@ function rd_services() {
     ] + rd_additional_services();
 }
 
+function rd_service_groups() {
+    return [
+        'decor' => ['الديكور الداخلي', ['mirrors', 'bedrooms', 'tv-walls', 'foam-trim', 'chipboard-decor', 'wallpaper']],
+        'wood-glass' => ['الأخشاب والزجاج', ['wood-partitions', 'carved-wood', 'tempered-glass', 'wardrobes']],
+        'finishing' => ['التشطيبات والترميم', ['suspended-ceilings', 'building-finishing', 'flooring', 'painting']],
+        'outdoor' => ['الأعمال الخارجية', ['rooftop-annexes', 'shades-and-screens']],
+    ];
+}
+
 function rd_mirror_media() {
     return [
         'mirror-bronze-door.jpg' => ['مرايا برونزية بألواح طولية وباب مدمج', 736, 920],
