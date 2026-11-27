@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.0.4
+Version: 1.0.5
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -79,6 +79,15 @@ summary { cursor:pointer; }
 .rd-section-head { display:flex; justify-content:space-between; align-items:end; gap:1rem; margin-block-end:1.55rem; }
 .rd-section-head p { color:var(--dim); margin-block-start:.38rem; max-width:610px; }
 .rd-section-head .rd-button { flex-shrink:0; }
+.rd-service-filters { display:flex; align-items:end; justify-content:space-between; flex-wrap:wrap; gap:.8rem 1.5rem; margin-block-end:1.35rem; }
+.rd-service-search { display:grid; gap:.24rem; width:min(100%,19rem); color:var(--deep); font-weight:700; }
+.rd-service-search input { width:100%; min-height:44px; padding:.4rem .7rem; border:1px solid #a8bab1; border-radius:8px; background:var(--white); color:var(--ink); font-weight:400; }
+.rd-service-groups { display:flex; flex-wrap:wrap; gap:.45rem; }
+.rd-service-groups button { min-height:44px; padding:.3rem .72rem; border:1px solid #bdd0c8; border-radius:8px; background:var(--white); color:var(--deep); font-size:.9rem; font-weight:700; }
+.rd-service-groups button:hover { background:var(--soft); }
+.rd-service-groups button[aria-pressed=true] { background:var(--green); border-color:var(--green); color:var(--white); }
+.rd-service-empty { padding:1.3rem; border:1px solid var(--line); border-radius:var(--radius); background:var(--white); }
+.rd-service-empty p { margin-block-end:.6rem; }
 .rd-cards, .rd-photo-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
 .rd-card, .rd-photo { margin:0; border:1px solid var(--line); border-radius:var(--radius); background:var(--white); overflow:hidden; min-width:0; }
 .rd-card-media, .rd-photo>a { display:block; overflow:hidden; background:#e9e3d9; }

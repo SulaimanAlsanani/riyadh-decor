@@ -32,7 +32,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=global-styles-inline-css */
 </style>
 
-<link rel="stylesheet" id="riyadh-decor-css" href="../wp-content/themes/riyadh-decor/style.css?ver=1.0.4" media="all">
+<link rel="stylesheet" id="riyadh-decor-css" href="../wp-content/themes/riyadh-decor/style.css?ver=1.0.5" media="all">
 
 <meta name="generator" content="WordPress 6.9.4">
 <link rel="canonical" href="https://sulaimanalsanani.github.io/riyadh-decor/gallery/">
@@ -89,8 +89,23 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
             <p>اختر الخدمة لتصفح صورها ومعاينة تفاصيلها.</p>        </div>
     </section>
         <div class="rd-shell rd-section">
-            <div class="rd-cards">
-                                <article class="rd-card">
+            <div data-service-list="">
+            <div class="rd-service-filters" data-service-filters="" hidden="">
+            <label class="rd-service-search">
+                <span>ابحث في المعرض</span>
+                <input type="search" data-service-search="" aria-controls="rd-service-grid-1" placeholder="مثل باركيه أو مرايا">
+            </label>
+            <div class="rd-service-groups" role="group" aria-label="تصفية حسب نوع العمل">
+                                    <button type="button" data-service-group="all" aria-pressed="true" aria-controls="rd-service-grid-1">الكل</button>
+                                    <button type="button" data-service-group="decor" aria-pressed="false" aria-controls="rd-service-grid-1">الديكور الداخلي</button>
+                                    <button type="button" data-service-group="wood-glass" aria-pressed="false" aria-controls="rd-service-grid-1">الأخشاب والزجاج</button>
+                                    <button type="button" data-service-group="finishing" aria-pressed="false" aria-controls="rd-service-grid-1">التشطيبات والترميم</button>
+                                    <button type="button" data-service-group="outdoor" aria-pressed="false" aria-controls="rd-service-grid-1">الأعمال الخارجية</button>
+                            </div>
+            <p class="screen-reader-text" role="status" data-service-status=""></p>
+        </div>
+        <div id="rd-service-grid-1" class="rd-cards">
+                                <article class="rd-card" data-service-card="decor" data-service-name="تفصيل عادي ومعتّقة المرايا">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="mirrors/index.html"><img src="../wp-content/themes/riyadh-decor/assets/mirror-backlit-organic.jpg" width="736" height="1104" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="mirrors/index.html">تفصيل عادي ومعتّقة</a></h3>
@@ -98,7 +113,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="mirrors/index.html">عرض الصور<span class="screen-reader-text">: المرايا</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="decor" data-service-name="ديكور خلف السرير خلفيات السرير">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="bedrooms/index.html"><img src="../wp-content/themes/riyadh-decor/assets/bedroom-cream-upholstery.jpg" width="736" height="971" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="bedrooms/index.html">ديكور خلف السرير</a></h3>
@@ -106,7 +121,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="bedrooms/index.html">عرض الصور<span class="screen-reader-text">: خلفيات السرير</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="decor" data-service-name="ديكورات خلفية التلفزيون خلفيات التلفزيون">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="tv-walls/index.html"><img src="../wp-content/themes/riyadh-decor/assets/tv-wall-backlit-wood.jpg" width="736" height="922" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="tv-walls/index.html">ديكورات خلفية التلفزيون</a></h3>
@@ -114,7 +129,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="tv-walls/index.html">عرض الصور<span class="screen-reader-text">: خلفيات التلفزيون</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="decor" data-service-name="إطارات فوم وتركيب نعلات الفايبر إطارات الفوم ونعلات الفايبر">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="foam-trim/index.html"><img src="../wp-content/themes/riyadh-decor/assets/foam-trim-04.jpg" width="734" height="410" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="foam-trim/index.html">إطارات فوم وتركيب نعلات الفايبر</a></h3>
@@ -122,7 +137,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="foam-trim/index.html">عرض الصور<span class="screen-reader-text">: إطارات الفوم ونعلات الفايبر</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="wood-glass" data-service-name="تركيب فواصل خشبية (بارتشن) الفواصل الخشبية">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="wood-partitions/index.html"><img src="../wp-content/themes/riyadh-decor/assets/wood-partitions-01.jpg" width="736" height="919" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="wood-partitions/index.html">تركيب فواصل خشبية (بارتشن)</a></h3>
@@ -130,7 +145,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="wood-partitions/index.html">عرض الصور<span class="screen-reader-text">: الفواصل الخشبية</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="finishing" data-service-name="تركيب جبس بورد وسمنت بورد وأسقف مستعارة الجبس والأسقف المستعارة">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="suspended-ceilings/index.html"><img src="../wp-content/themes/riyadh-decor/assets/suspended-ceilings-01.jpg" width="707" height="962" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="suspended-ceilings/index.html">تركيب جبس بورد وسمنت بورد وأسقف مستعارة</a></h3>
@@ -138,7 +153,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="suspended-ceilings/index.html">عرض الصور<span class="screen-reader-text">: الجبس والأسقف المستعارة</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="finishing" data-service-name="تشطيبات المباني والترميمات الداخلية التشطيبات والترميمات">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="building-finishing/index.html"><img src="../wp-content/themes/riyadh-decor/assets/building-finishing-04.jpg" width="736" height="981" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="building-finishing/index.html">تشطيبات المباني والترميمات الداخلية</a></h3>
@@ -146,7 +161,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="building-finishing/index.html">عرض الصور<span class="screen-reader-text">: التشطيبات والترميمات</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="wood-glass" data-service-name="توريد وتركيب الخشب المحفور الخشب المحفور">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="carved-wood/index.html"><img src="../wp-content/themes/riyadh-decor/assets/carved-wood-06.jpg" width="736" height="736" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="carved-wood/index.html">توريد وتركيب الخشب المحفور</a></h3>
@@ -154,7 +169,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="carved-wood/index.html">عرض الصور<span class="screen-reader-text">: الخشب المحفور</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="wood-glass" data-service-name="توريد وتركيب الزجاج السكريت الزجاج السكريت">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="tempered-glass/index.html"><img src="../wp-content/themes/riyadh-decor/assets/tempered-glass-05.jpg" width="736" height="1104" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="tempered-glass/index.html">توريد وتركيب الزجاج السكريت</a></h3>
@@ -162,7 +177,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="tempered-glass/index.html">عرض الصور<span class="screen-reader-text">: الزجاج السكريت</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="finishing" data-service-name="توريد وتركيب باركيه وأرضيات فينيل الباركيه والفينيل">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="flooring/index.html"><img src="../wp-content/themes/riyadh-decor/assets/flooring-04.jpg" width="736" height="1104" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="flooring/index.html">توريد وتركيب باركيه وأرضيات فينيل</a></h3>
@@ -170,7 +185,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="flooring/index.html">عرض الصور<span class="screen-reader-text">: الباركيه والفينيل</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="decor" data-service-name="توريد وتركيب بديل الشيبورد وديكوراته ديكورات بديل الشيبورد">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="chipboard-decor/index.html"><img src="../wp-content/themes/riyadh-decor/assets/chipboard-decor-03.jpg" width="720" height="1280" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="chipboard-decor/index.html">توريد وتركيب بديل الشيبورد وديكوراته</a></h3>
@@ -178,7 +193,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="chipboard-decor/index.html">عرض الصور<span class="screen-reader-text">: ديكورات بديل الشيبورد</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="outdoor" data-service-name="توريد وتركيب ساندوتش بانل وملاحق سطح زجاجية ملاحق السطح وساندوتش بانل">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="rooftop-annexes/index.html"><img src="../wp-content/themes/riyadh-decor/assets/rooftop-annexes-02.jpg" width="736" height="736" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="rooftop-annexes/index.html">توريد وتركيب ساندوتش بانل وملاحق سطح زجاجية</a></h3>
@@ -186,7 +201,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="rooftop-annexes/index.html">عرض الصور<span class="screen-reader-text">: ملاحق السطح وساندوتش بانل</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="outdoor" data-service-name="توريد وتركيب سواتر ومظلات السواتر والمظلات">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="shades-and-screens/index.html"><img src="../wp-content/themes/riyadh-decor/assets/shades-and-screens-03.jpg" width="735" height="975" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="shades-and-screens/index.html">توريد وتركيب سواتر ومظلات</a></h3>
@@ -194,7 +209,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="shades-and-screens/index.html">عرض الصور<span class="screen-reader-text">: السواتر والمظلات</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="decor" data-service-name="توريد وتركيب ورق جدران وطباعة ثلاثية الأبعاد ورق الجدران وطباعة 3D">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="wallpaper/index.html"><img src="../wp-content/themes/riyadh-decor/assets/wallpaper-06.jpg" width="736" height="736" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="wallpaper/index.html">توريد وتركيب ورق جدران وطباعة ثلاثية الأبعاد</a></h3>
@@ -202,7 +217,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="wallpaper/index.html">عرض الصور<span class="screen-reader-text">: ورق الجدران وطباعة 3D</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="wood-glass" data-service-name="تفصيل دواليب ملابس غرف النوم دواليب الملابس">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="wardrobes/index.html"><img src="../wp-content/themes/riyadh-decor/assets/wardrobes-01.jpg" width="736" height="981" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="wardrobes/index.html">تفصيل دواليب ملابس غرف النوم</a></h3>
@@ -210,7 +225,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     <a class="rd-text-link" href="wardrobes/index.html">عرض الصور<span class="screen-reader-text">: دواليب الملابس</span></a>
                 </div>
             </article>
-                                <article class="rd-card">
+                                <article class="rd-card" data-service-card="finishing" data-service-name="دهانات داخلية وخارجية وإيبوكسي الدهانات والإيبوكسي">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="painting/index.html"><img src="../wp-content/themes/riyadh-decor/assets/painting-10.jpg" width="736" height="981" alt="" loading="lazy" decoding="async"></a>
                 <div class="rd-card-body">
                     <h3><a href="painting/index.html">دهانات داخلية وخارجية وإيبوكسي</a></h3>
@@ -219,6 +234,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                 </div>
             </article>
             </div>
+            <div class="rd-service-empty" data-service-empty="" hidden="">
+            <p>لا توجد نتائج مطابقة.</p>
+            <button class="rd-button rd-button-line" type="button" data-service-reset="">عرض الكل</button>
+        </div>
+        </div>
                 <aside class="rd-cta">
         <div><h2>تبي تعرف وش يناسب مساحتك؟</h2><p>شارك الحي والمقاسات وصور المساحة عشان نناقش نطاق العمل.</p></div>
         <a class="rd-button rd-button-solid" href="../contact/index.html">جهّز طلبك</a>
@@ -256,7 +276,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/riyadh-decor/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
-<script src="../wp-content/themes/riyadh-decor/assets/site.js?ver=1.0.4" id="riyadh-decor-js"></script>
+<script src="../wp-content/themes/riyadh-decor/assets/site.js?ver=1.0.5" id="riyadh-decor-js"></script>
 
 
 

@@ -31,6 +31,58 @@ if (menuToggle && navigation) {
     });
 }
 
+function normalizeServiceSearch(text) {
+    return text.trim().toLocaleLowerCase('ar')
+        .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
+        .replace(/[أإآٱ]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ة/g, 'ه');
+}
+
+for (const list of document.querySelectorAll('[data-service-list]')) {
+    const filters = list.querySelector('[data-service-filters]');
+    if (!filters) continue;
+
+    const search = filters.querySelector('[data-service-search]');
+    const groups = [...filters.querySelectorAll('[data-service-group]')];
+    const status = filters.querySelector('[data-service-status]');
+    const empty = list.querySelector('[data-service-empty]');
+    const cards = [...list.querySelectorAll('[data-service-card]')].map((card) => ({
+        element: card,
+        group: card.dataset.serviceCard,
+        text: normalizeServiceSearch(card.dataset.serviceName + ' ' + card.querySelector('.rd-card-body').textContent),
+    }));
+    let activeGroup = 'all';
+
+    const update = () => {
+        const words = normalizeServiceSearch(search.value).split(/\s+/).filter(Boolean);
+        let count = 0;
+        for (const { element, group, text } of cards) {
+            const matchesGroup = activeGroup === 'all' || group === activeGroup;
+            const visible = matchesGroup && words.every((word) => text.includes(word));
+            element.hidden = !visible;
+            if (visible) count++;
+        }
+        empty.hidden = count > 0;
+        status.textContent = count ? 'عدد النتائج: ' + count.toLocaleString('ar-SA') : 'لا توجد نتائج مطابقة.';
+    };
+
+    for (const button of groups) {
+        button.addEventListener('click', () => {
+            activeGroup = button.dataset.serviceGroup;
+            for (const item of groups) item.setAttribute('aria-pressed', String(item === button));
+            update();
+        });
+    }
+    search.addEventListener('input', update);
+    empty.querySelector('[data-service-reset]').addEventListener('click', () => {
+        search.value = '';
+        groups[0].click();
+        groups[0].focus();
+    });
+    filters.hidden = false;
+}
+
 for (const form of document.querySelectorAll('[data-request]')) {
     const review = form.querySelector('[data-request-review]');
     const send = form.querySelector('[data-request-send]');
