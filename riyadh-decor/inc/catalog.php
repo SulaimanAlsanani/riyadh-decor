@@ -2,6 +2,8 @@
 /** Original starter content. Each specialty has its own service, gallery and article category. */
 defined('ABSPATH') || exit;
 
+require_once __DIR__ . '/service-catalog.php';
+
 function rd_services() {
     return [
         'mirrors' => [
@@ -56,7 +58,7 @@ function rd_services() {
             ],
             'guides' => [],
         ],
-    ];
+    ] + rd_additional_services();
 }
 
 function rd_mirror_media() {
@@ -101,7 +103,8 @@ function rd_tv_wall_media() {
 }
 
 function rd_gallery_media() {
-    return rd_mirror_media() + rd_bedroom_media() + rd_tv_wall_media();
+    static $media;
+    return $media ??= rd_mirror_media() + rd_bedroom_media() + rd_tv_wall_media() + array_merge(...array_values(rd_additional_galleries()));
 }
 
 function rd_media() {

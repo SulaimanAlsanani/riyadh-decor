@@ -48,19 +48,14 @@ while (have_posts()) :
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
     </div>
 <?php elseif ($section === 'services'): ?>
-    <?php rd_page_top('الخدمات', 'تفصيل المرايا العادية والمعتّقة وديكورات خلف السرير والتلفزيون حسب المقاس.'); ?>
+    <?php rd_page_top('الخدمات', 'خدمات الديكور والتشطيبات الداخلية والخارجية في الرياض.'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_cards($services); ?>
     </div>
 <?php elseif ($section === 'gallery'): ?>
-    <?php rd_page_top('معرض التصاميم', 'استعرض نماذج المرايا وديكورات خلف السرير والتلفزيون، وافتح أي صورة لمعاينة تفاصيلها.'); ?>
+    <?php rd_page_top('معرض التصاميم', 'اختر الخدمة لتصفح صورها ومعاينة تفاصيلها.'); ?>
     <div class="rd-shell rd-section">
-        <?php foreach ($services as $service_slug => $item): ?>
-            <section class="rd-service-portfolio" aria-label="<?php echo esc_attr($item['gallery_title']); ?>">
-                <?php rd_heading($item['gallery_title'], '', rd_url('services/' . $service_slug), 'تفاصيل الخدمة'); ?>
-                <?php rd_image_gallery($item['portfolio'], $service_slug); ?>
-            </section>
-        <?php endforeach; ?>
+        <?php rd_service_cards($services, 'gallery'); ?>
         <?php rd_end_cta(); ?>
     </div>
 <?php elseif ($section === 'guides'): ?>
@@ -102,7 +97,7 @@ while (have_posts()) :
     <div class="rd-shell rd-section rd-prose">
         <?php if ($section === 'about'): ?>
             <h2>خيارات تشطيب للمنازل والفلل</h2>
-            <p>ديكورات الرياض لتفصيل المرايا العادية والمعتّقة وديكورات خلف السرير والتلفزيون حسب المقاس. نراجع خيارات التشطيب والتقسيمات بحسب المساحة.</p>
+            <p>يقدم ديكورات الرياض خدمات الديكور والتشطيبات الداخلية والخارجية للمنازل والفلل. نراجع خيارات الخامات والتقسيمات بحسب المساحة ونطاق المشروع.</p>
             <h2>ابدأ من وصف المساحة</h2><p>اذكر مكان المشروع وما الذي تريد تغييره. صور الموقع والمقاسات تساعد في تحديد نطاق العمل ومناقشة الخامات والموعد.</p>
             <h2>عن صور المعرض</h2><p>يحتوي الموقع على صور توضيحية للأفكار والتشطيبات. تطبّق الخامات والتصاميم حسب قياس المكان والعينات المعتمدة.</p>
         <?php elseif ($section === 'project-planning'): ?>

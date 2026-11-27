@@ -62,16 +62,19 @@ function rd_heading($title, $intro = '', $link = '', $label = '') {
     <?php
 }
 
-function rd_service_cards($services) {
+function rd_service_cards($services, $section = 'services') {
+    $is_gallery = $section === 'gallery';
+    $link_label = $is_gallery ? 'عرض الصور' : 'تفاصيل الخدمة';
     ?>
     <div class="rd-cards<?php echo count($services) === 1 ? ' rd-service-card-single' : ''; ?>">
         <?php foreach ($services as $slug => $service): ?>
+            <?php $url = rd_url($section . '/' . $slug); ?>
             <article class="rd-card">
-                <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
+                <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url($url); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
                 <div class="rd-card-body">
-                    <h3><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
+                    <h3><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
                     <p><?php echo esc_html($service['intro']); ?></p>
-                    <a class="rd-text-link" href="<?php echo esc_url(rd_url('services/' . $slug)); ?>">تفاصيل الخدمة<span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
+                    <a class="rd-text-link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($link_label); ?><span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
                 </div>
             </article>
         <?php endforeach; ?>
