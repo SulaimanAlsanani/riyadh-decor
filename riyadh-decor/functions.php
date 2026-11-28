@@ -122,6 +122,10 @@ function rd_description() {
             'gallery' => 'معرض صور لخدمات الديكور والتشطيبات الداخلية والخارجية في الرياض.',
             'guides' => 'أدلة ديكورات الرياض لاختيار الخامات والألوان وتجهيز المقاسات ومراجعة جودة التشطيب.',
             'contact' => 'اتصل بديكورات الرياض أو جهّز طلب عرض سعر وأرسله عبر واتساب.',
+            'about' => 'تعرف على مجالات ديكورات الرياض للديكور الداخلي والخارجي والتشطيبات للمنازل والفلل.',
+            'project-planning' => 'دليل تجهيز مشروع الديكور: المقاسات والصور والخامات ونطاق العمل ومراجعة التسليم.',
+            'materials-colors' => 'دليل عملي لاختيار خامات الديكور والألوان ومقارنة العينات حسب الإضاءة واستخدام المساحة.',
+            'privacy-policy' => 'كيفية تجهيز بيانات طلب عرض السعر ومشاركتها عبر واتساب.',
         ];
         return $descriptions[$current->post_name] ?? '';
     }
@@ -141,6 +145,7 @@ add_action('wp_head', function () {
         printf("<meta property=\"og:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
         $current = get_queried_object();
         $specialty = $current instanceof WP_Post ? get_post_meta($current->ID, '_rd_specialty', true) : '';
+        if (is_singular('post') && $current instanceof WP_Post) $specialty = rd_service_for_post($current->ID);
         $service = rd_services()[$specialty] ?? null;
         $image = $service ? rd_asset(rd_media_filename($service['image'])) : rd_asset('majlis.webp');
         $canonical = is_front_page() ? home_url('/') : ($current instanceof WP_Post ? get_permalink($current) : '');
@@ -163,3 +168,11 @@ add_action('wp_head', function () {
         echo '<script type="application/ld+json">' . wp_json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) . "</script>\n";
     }
 }, 5);
+
+function rd_editorial_links($slug) {
+    $query = rd_guides(3, $slug);
+    if (!$query->have_posts()) return;
+    echo '<section class="rd-editorial-links" aria-label="أدلة التخصص">';
+    rd_heading('اقرأ قبل اختيار التصميم', 'دليل متخصص يساعدك على مقارنة الخيارات وتجهيز طلبك.');
+    echo '<div class="rd-cards">'; rd_guide_cards($query); echo '</div></section>';
+}

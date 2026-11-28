@@ -70,7 +70,7 @@ try {
    if(capture) await page.screenshot({path:'qa-report/'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:false});
  }
  for(const width of [390,768,1440]){
-   for(const path of ['', 'services/', 'gallery/', 'services/mirrors/', 'gallery/mirrors/', 'contact/']) await verify(path,width,900,true);
+   for(const path of ['', 'services/', 'gallery/', 'services/mirrors/', 'gallery/mirrors/', 'contact/', 'guides/', 'materials-colors/', 'mirrors-guide-1/']) await verify(path,width,900,true);
  }
  for(const section of ['services','gallery']){
    for(const entry of await readdir(join(root,section),{withFileTypes:true})) if(entry.isDirectory()) await verify(section+'/'+entry.name+'/',1440,900);

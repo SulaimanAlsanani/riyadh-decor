@@ -46,7 +46,11 @@ function rd_seed_content() {
         if (is_wp_error($term)) {
             return $term;
         }
-        foreach ($service['guides'] as $index => [$title, $first, $second]) {
+        $editorial = rd_editorial()[$slug] ?? null;
+        $guides = $service['guides'];
+        if ($editorial) $guides[] = array_slice($editorial,0,4);
+        foreach ($guides as $index => $guide) {
+            [$title, $first, $second] = $guide;
             $article_slug = $slug . '-guide-' . ($index + 1);
             if (get_page_by_path($article_slug, OBJECT, 'post')) {
                 continue;
@@ -54,7 +58,7 @@ function rd_seed_content() {
             $id = wp_insert_post([
                 'post_title' => $title, 'post_name' => $article_slug, 'post_type' => 'post',
                 'post_status' => 'publish', 'post_excerpt' => $first, 'comment_status' => 'closed',
-                'post_content' => '<h2>قبل البدء</h2><p>' . esc_html($first) . '</p><h2>ما الذي تراجعه؟</h2><p>' . esc_html($second) . '</p>',
+                'post_content' => '<h2>قبل البدء</h2><p>' . esc_html($first) . '</p><h2>ما الذي تراجعه؟</h2><p>' . esc_html($second) . '</p>' . (isset($guide[3]) ? '<h2>قبل اعتماد التنفيذ</h2><p>' . esc_html($guide[3]) . '</p>' : ''),
                 'post_category' => [(int) $term['term_id']], 'meta_input' => ['_rd_owned' => 1],
             ], true);
             if (is_wp_error($id)) {

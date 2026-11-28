@@ -72,10 +72,10 @@ $services = rd_services();
 
     <section class="rd-shell rd-home-banner rd-split-banner" aria-labelledby="rd-home-banner-title">
         <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
-        <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
+        <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">خلفية تلفزيون بتفاصيل تناسب مساحتك</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
     </section>
     <section class="rd-shell rd-section rd-material-stories" aria-labelledby="rd-material-title">
-        <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات وأفكار لكل مساحة</h2></div></div>
+        <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات تُكمل هوية كل مساحة</h2></div></div>
         <div class="rd-material-grid">
         <?php foreach (['wood-partitions'=>'دفء الخشب وتوازن المساحات','flooring'=>'أرضيات تكمل هوية المكان','shades-and-screens'=>'راحة المساحات الخارجية'] as $slug => $headline): ?>
             <article class="rd-material-story">
@@ -87,10 +87,10 @@ $services = rd_services();
     </section>
     <section class="rd-shell rd-room-banner" aria-labelledby="rd-room-title">
         <div class="rd-room-photos"><?php rd_image($services['bedrooms']['image'], ['alt'=>'']); ?><?php rd_image($services['mirrors']['image'], ['alt'=>'']); ?></div>
-        <div class="rd-room-copy"><span class="rd-gallery-kicker">تفاصيل شخصية</span><h2 id="rd-room-title">غرفة تعكس ذوقك</h2><p>استكشف خلفيات السرير والمرايا حسب المقاس، واختر الخامات والتفاصيل التي تناسب مساحتك.</p><div class="rd-actions"><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/bedrooms')); ?>">خلفيات السرير</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery/mirrors')); ?>">المرايا</a></div></div>
+        <div class="rd-room-copy"><span class="rd-gallery-kicker">تفاصيل شخصية</span><h2 id="rd-room-title">غرفة تعكس ذوقك، بتفاصيل حسب المقاس</h2><p>استكشف خلفيات السرير والمرايا حسب المقاس، واختر الخامات والتفاصيل التي تناسب مساحتك.</p><div class="rd-actions"><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/bedrooms')); ?>">خلفيات السرير</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery/mirrors')); ?>">المرايا</a></div></div>
     </section>
     <section class="rd-shell rd-section rd-content-guide" aria-label="دليل تجهيز المشروع">
-        <?php rd_heading('قبل أن تبدأ مشروع الديكور', 'جهّز المعلومات التي تساعدك على مقارنة الخيارات والحصول على عرض واضح.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
+        <?php rd_heading('خطط لمشروع الديكور قبل التنفيذ', 'جهّز المعلومات التي تساعدك على مقارنة الخيارات والحصول على عرض واضح.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <div class="rd-advice-grid">
             <article><h3>المقاسات والصور</h3><p>صوّر المكان وحدّد أبعاده ومواقع الأبواب والمقابس.</p></article>
             <article><h3>الخامات والألوان</h3><p>اختر أفكارك من المعرض وقارن العينات في إضاءة المكان.</p></article>

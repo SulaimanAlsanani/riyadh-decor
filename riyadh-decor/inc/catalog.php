@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 require_once __DIR__ . '/service-catalog.php';
 require_once __DIR__ . '/service-advice.php';
+require_once __DIR__ . '/editorial.php';
 
 function rd_services() {
     return [
@@ -134,6 +135,6 @@ function rd_sections() {
     return [
         'services' => 'الخدمات', 'gallery' => 'المعرض', 'guides' => 'الأدلة والمقالات',
         'about' => 'من نحن', 'contact' => 'تواصل معنا', 'project-planning' => 'تجهيز المشروع',
-        'privacy-policy' => 'سياسة الخصوصية',
+        'materials-colors' => 'دليل الخامات والألوان', 'privacy-policy' => 'سياسة الخصوصية',
     ];
 }

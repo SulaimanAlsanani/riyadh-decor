@@ -56,6 +56,8 @@ for (const selector of ['.rd-home-intro', '.rd-home-banner img', '#design-galler
     if (!home(selector).length) errors.push('Homepage missing ' + selector);
 }
 if (home('#services [data-service-card]').length < 16) errors.push('Homepage service catalog incomplete');
+const index = JSON.parse(await readFile(join(output,'search-index.json'),'utf8'));
+if(index.filter(x=>/guide-1\/$/.test(x.path)).length < 16) errors.push('Missing specialist articles');
 const fonts = await readFile(join(output, 'wp-content/themes/riyadh-decor/assets/fonts.css'), 'utf8');
 for (const match of fonts.matchAll(/url\(([^)]+)\)/g)) {
     const file = match[1].replace(/['"]/g, '');
