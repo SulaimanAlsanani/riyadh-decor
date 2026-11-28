@@ -35,6 +35,7 @@ try {
    await page.waitForFunction(()=>Array.from(document.images).filter(i=>i.getAttribute('src')).every(i=>i.complete),{},{timeout:20000});
    const result=await page.evaluate(()=>({images:[...document.images].filter(i=>i.getAttribute('src')).length,broken:[...document.images].filter(i=>i.getAttribute('src')&&!i.naturalWidth).map(i=>i.src),overflow:document.documentElement.scrollWidth>innerWidth+2,h1:document.querySelectorAll('h1').length,loadMs:Math.round(performance.getEntriesByType('navigation')[0]?.loadEventEnd||0)}));
    report.pages.push({path,width,...result});
+   if (result.broken.length || result.overflow || result.h1 !== 1) await page.screenshot({path:'qa-report/failure-'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:true});
    assert.equal(result.h1,1,path);
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
