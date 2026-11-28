@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.0.8
+Version: 1.0.9
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -331,4 +331,53 @@ html { scroll-padding-top:148px; }
  .rd-footer-grid { gap:20px 12px; }
  .rd-footer-grid>div:first-child { grid-column:1/-1; }
  .rd-contact-method { padding:14px; }
+}
+
+/* Visual rhythm and responsive image composition */
+:root { --section-space:clamp(44px,6vw,84px); }
+.rd-section { padding-block:var(--section-space); }
+body { line-height:1.75; }
+h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
+.rd-hero { min-height:clamp(490px,66vh,690px); }
+.rd-hero::after { background:linear-gradient(270deg,#092b27fa 0%,#092b27e0 27%,#092b2770 58%,#092b270d 100%); }
+.rd-hero-content h1 { font-size:clamp(2.8rem,5.3vw,5rem); }
+.rd-home-intro { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:clamp(20px,4vw,48px); padding-block:44px 0; }
+.rd-home-intro p { color:var(--dim); }
+.rd-home-intro-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.rd-home-intro-links a { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:14px; background:white; border:1px solid var(--line); border-radius:12px; text-decoration:none; font-weight:700; }
+.rd-home-intro-links a:hover { border-color:var(--green); color:var(--green); }
+.rd-section-head { margin-block-end:clamp(16px,3vw,28px); }
+.rd-service-card-grid .rd-card-media img { aspect-ratio:16/10; object-position:center 48%; }
+.rd-service-card-grid .rd-card-body { padding:clamp(15px,2vw,22px); }
+.rd-service-card-grid .rd-card-body h3 { line-height:1.5; }
+.rd-service-card-grid .rd-card-body p { font-size:.95rem; }
+.rd-featured-gallery { gap:clamp(10px,1.5vw,20px); }
+.rd-gallery-tile { min-height:clamp(230px,24vw,320px); }
+.rd-gallery-tile img { object-position:center 45%; }
+.rd-home-banner { position:relative; isolation:isolate; overflow:hidden; display:grid; align-items:center; min-height:340px; margin-block-start:var(--section-space); border-radius:var(--radius); color:white; background:var(--deep); }
+.rd-home-banner>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; z-index:-2; }
+.rd-home-banner::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(270deg,#092b27fa,#092b27d9 36%,#092b2722 100%); }
+.rd-home-banner-content { max-width:600px; padding:clamp(24px,5vw,60px); }
+.rd-home-banner-content h2 { margin-block:10px; }
+.rd-home-banner-content p { max-width:450px; margin-block-end:20px; }
+.rd-steps li { padding:18px; border:1px solid var(--line); border-block-start:3px solid var(--green); border-radius:12px; background:white; }
+.rd-home-request { padding-block-start:24px; }
+.rd-home-request .rd-form { box-shadow:0 10px 32px #103e380c; }
+@media(max-width:780px) {
+ .rd-home-intro { grid-template-columns:minmax(0,1fr); padding-block-start:30px; }
+ .rd-home-banner { min-height:300px; }
+ .rd-gallery-tile { min-height:230px; }
+ .rd-hero::after { background:linear-gradient(0deg,#092b27fa 0%,#092b27b0 40%,#092b2733 100%); }
+}
+@media(max-width:510px) {
+ .rd-hero { min-height:520px; }
+ .rd-hero-content h1 { font-size:clamp(2.45rem,10vw,3.5rem); }
+ .rd-home-intro-links a { padding:10px; font-size:.86rem; }
+ .rd-gallery-tile { min-height:190px; }
+ .rd-home-banner { min-height:320px; }
+ .rd-home-banner::after { background:linear-gradient(0deg,#092b27fa,#092b27c0 55%,#092b2740); }
+ .rd-steps { gap:10px; }
+ .rd-steps li { padding:12px; }
+ .rd-steps h3 { font-size:1rem; }
+ .rd-steps p { font-size:.87rem; }
 }

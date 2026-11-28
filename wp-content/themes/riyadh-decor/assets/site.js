@@ -55,7 +55,9 @@ for (const list of document.querySelectorAll('[data-service-list]')) {
         group: card.dataset.serviceCard,
         text: normalizeServiceSearch(card.dataset.serviceName + ' ' + card.querySelector('.rd-card-body').textContent),
     }));
-    let activeGroup = 'all';
+    const requestedGroup = new URLSearchParams(location.search).get('group');
+    let activeGroup = groups.some(button => button.dataset.serviceGroup === requestedGroup) ? requestedGroup : 'all';
+    for (const button of groups) button.setAttribute('aria-pressed', String(button.dataset.serviceGroup === activeGroup));
 
     const update = () => {
         const words = normalizeServiceSearch(search.value).split(/\s+/).filter(Boolean);
