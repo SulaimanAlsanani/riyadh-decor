@@ -125,7 +125,7 @@ function rd_description() {
         }
         $space = rd_space_content()[$current->post_name] ?? rd_library_content()[$current->post_name] ?? null;
         if ($current->post_name === 'solutions') return 'حلول الديكور والتشطيبات في الرياض: الخصوصية والتخزين وتنسيق الألوان والأحواش ومقارنة عروض الأسعار.';
-        if ($current->post_name === 'project-guides') return 'أدلة تجهيز وتنفيذ واستلام مشاريع الديكور والتشطيبات في الرياض.';
+        if ($current->post_name === 'project-guides') return 'اثنا عشر دليلًا لتجهيز مشاريع الديكور في الرياض، من رفع المقاسات والميزانية والتعاقد إلى استلام التشطيبات والعناية بها.';
         if ($current->post_name === 'property-types') return 'أفكار ديكور وتجهيز العقارات السكنية والتجارية في الرياض حسب المساحة والخامات ونطاق العمل.';
         if ($current->post_name === 'design-styles') return 'موسوعة ستة أنماط للديكور في الرياض: المودرن والكلاسيك والنيو كلاسيك والمعاصر والبسيط والعربي المعاصر.';
         if ($current->post_name === 'material-library') return 'مكتبة اثنتي عشرة خامة وثماني مقارنات للتشطيبات والديكور في الرياض، مع أدلة الاختيار والتركيب والعناية.';

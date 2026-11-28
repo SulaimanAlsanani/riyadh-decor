@@ -82,17 +82,20 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const slug of ["measurement-planning","renovation-sequence","contract-scope","sample-approval","site-readiness","aftercare-planning","bedroom-solutions","tv-wall-solutions","renovation-solutions"]){await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.ok(await page.locator('.rd-space-services article').count()>=3);}
+ report.interactions.push('project and needs-first editorial coverage');
  for(const slug of ["dining-room-decor","hallway-decor","home-office-decor","staircase-decor","rooftop-decor","palace-decor","rest-house-decor","office-decor","retail-decor","restaurant-decor"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.equal(await page.locator('.rd-space-banner-v25 img').count(),1);assert.ok(await page.locator('.rd-space-services article').count()>=3);}
  report.interactions.push('expanded room and property content');
  for(const slug of ["solutions","privacy-solutions","storage-solutions","wall-solutions","compare-ceilings","compare-wall-panels","color-palette","light-and-color","courtyard-planning","outdoor-privacy","contractor-selection","quotation-review"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);}
  await page.goto(base+'solutions/');
- assert.equal(await page.locator('.rd-space-card').count(),11);
+ assert.equal(await page.locator('#solution-catalog .rd-space-card').count(),10);
  await page.goto(base+'search/?s='+encodeURIComponent('مقارنة عروض أسعار الديكور'));
  await page.locator('#rd-search-results a[href*="quotation-review"]').waitFor();
  report.interactions.push('solutions library and expanded search');
  for(const path of ["project-guides/","lighting-planning/","wall-preparation/","budget-planning/","handover-checklist/","maintenance-guide/","small-space-planning/"]) { await verify(path,390,900,true); await verify(path,1440,900,true); }
  await page.goto(base+'project-guides/');
- assert.equal(await page.locator('.rd-space-card').count(),6);
+ assert.equal(await page.locator('#project-guide-catalog .rd-space-card').count(),12);
+ assert.equal(await page.locator('#contract-guides .rd-space-card').count(),2);
  await page.goto(base+'lighting-planning/');
  assert.equal(await page.locator('.rd-space-services article').count(),3);
  report.interactions.push('project guidance library and service links');

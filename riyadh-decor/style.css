@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 2.6.0
+Version: 2.7.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -801,3 +801,6 @@ h3 { font-weight:var(--rd-weight-bold); }
 
 /* V2.6 editorial encyclopedia */
 .rd-encyclopedia{margin-block:30px;padding-block:12px}.rd-encyclopedia h2{border-inline-start:4px solid #086e64;padding-inline-start:12px}.rd-encyclopedia .rd-space-card img{aspect-ratio:16/10;object-fit:cover}.rd-encyclopedia .rd-space-card:focus-visible{outline-offset:-4px}.rd-encyclopedia .rd-space-card>div{padding:16px}@media(max-width:780px){.rd-encyclopedia .rd-space-card>div{padding:10px}}
+
+/* V2.7 needs-first commercial guidance */
+.rd-solution-banner{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:#103e38;color:#fff;border-radius:14px;margin-block:0 32px}.rd-solution-banner>div{padding:clamp(20px,4vw,48px);align-self:center}.rd-solution-banner h2,.rd-solution-banner p{color:inherit}.rd-solution-banner img{width:100%;height:100%;aspect-ratio:16/10;object-fit:cover}.rd-library-content #contract-guides{margin-block:32px}.rd-library-content #contract-guides .rd-space-grid{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:780px){.rd-solution-banner{grid-template-columns:1fr}.rd-solution-banner img{height:auto}.rd-library-content #contract-guides .rd-space-grid{grid-template-columns:1fr}}
