@@ -114,6 +114,9 @@ function rd_description() {
         if (isset($services[$specialty])) {
             return $services[$specialty]['intro'];
         }
+        $space = rd_space_content()[$current->post_name] ?? null;
+        if ($space) return $space['intro'];
+        if ($current->post_name === 'spaces') return 'أفكار ديكور المجالس والصالات وغرف النوم والمداخل والأعمال الخارجية وتجديد المنازل في الرياض.';
         $description = wp_trim_words(wp_strip_all_tags(get_the_excerpt($current)), 28, '…');
         if ($description !== '') {
             return $description;
@@ -180,3 +183,5 @@ function rd_editorial_links($slug) {
 }
 
 add_action('wp_head', function(){ if(!is_page()) return; $id=get_queried_object_id(); if(get_post_meta($id,'_rd_kind',true)!=='service') return; $key=get_post_meta($id,'_rd_specialty',true); $s=rd_services()[$key]??null; if(!$s)return; $data=['@context'=>'https://schema.org','@type'=>'Service','name'=>$s['name'],'description'=>$s['intro'],'url'=>get_permalink($id),'areaServed'=>['@type'=>'City','name'=>'الرياض'],'provider'=>['@id'=>home_url('/#business')]]; echo '<script type="application/ld+json">'.wp_json_encode($data,JSON_HEX_TAG|JSON_HEX_AMP|JSON_UNESCAPED_UNICODE).'</script>'; });
+
+function rd_space_cards($items){ ?> <div class="rd-space-grid"><?php foreach($items as $key=>$item): ?><a class="rd-space-card" href="<?php echo esc_url(rd_url($key)); ?>"><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['title']); ?></h3><p><?php echo esc_html($item['intro']); ?></p><span class="rd-text-link">استكشف الأفكار ←</span></div></a><?php endforeach; ?></div><?php }

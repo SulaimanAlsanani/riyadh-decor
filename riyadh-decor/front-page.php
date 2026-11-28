@@ -66,6 +66,10 @@ $services = rd_services();
 <label for="rd-quick-service">نوع الخدمة</label><select id="rd-quick-service" name="service" required><option value="">اختر من الخدمات</option><?php foreach ($services as $slug => $service): ?><option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($service['short']); ?></option><?php endforeach; ?></select><button type="submit" class="rd-button rd-button-solid">متابعة طلب السعر</button>
 </form></section>
     <section class="rd-shell rd-journey-tools"><div><h2>ابدأ مشروعك بثلاث خطوات واضحة</h2><p>اختر الخدمة، جهّز المقاسات، وقارن الخامات قبل طلب العرض.</p></div><div class="rd-related"><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة</a><a href="<?php echo esc_url(rd_url('estimate')); ?>">تجهيز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div></section>
+    <section class="rd-shell rd-section rd-home-spaces" id="spaces">
+        <?php rd_heading('ديكور لكل مساحة في منزلك','اختر المكان الذي ترغب في تطويره واستكشف الخدمات والتصاميم المناسبة.',rd_url('spaces'),'جميع المساحات والأدلة'); rd_space_cards(array_slice(rd_space_content(),0,6,true)); ?>
+        <div class="rd-related"><?php foreach(array_slice(rd_space_content(),6,null,true) as $key=>$item): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($item['title']); ?></a><?php endforeach; ?></div>
+    </section>
     <section class="rd-shell rd-section" id="services">
         <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.', rd_url('services'), 'جميع الخدمات'); ?>
         <?php rd_service_cards($services); ?>

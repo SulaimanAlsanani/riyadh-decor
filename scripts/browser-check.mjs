@@ -76,6 +76,13 @@ try {
  for(const section of ['services','gallery']){
    for(const entry of await readdir(join(root,section),{withFileTypes:true})) if(entry.isDirectory()) await verify(section+'/'+entry.name+'/',1440,900);
  }
+ for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
+ await verify('spaces/',1440,900,true);
+ await page.goto(base+'spaces/');
+ assert.equal(await page.locator('.rd-space-card').count(),10);
+ await page.goto(base+'bedroom-decor/');
+ assert.equal(await page.locator('.rd-space-services article').count(),5);
+ report.interactions.push('space catalog and complementary links');
  await page.goto(base);
  assert.equal(await page.locator('.rd-split-banner img').count(),1);
  assert.equal(await page.locator('.rd-visual-categories a').count(),4);

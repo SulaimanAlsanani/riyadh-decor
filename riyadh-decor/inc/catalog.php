@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 require_once __DIR__ . '/service-catalog.php';
 require_once __DIR__ . '/service-advice.php';
 require_once __DIR__ . '/editorial.php';
+require_once __DIR__ . '/spaces.php';
 
 function rd_services() {
     return [
@@ -135,6 +136,6 @@ function rd_sections() {
     return [
         'services' => 'الخدمات', 'gallery' => 'المعرض', 'guides' => 'الأدلة والمقالات',
         'about' => 'من نحن', 'contact' => 'تواصل معنا', 'project-planning' => 'تجهيز المشروع',
-        'materials-colors' => 'دليل الخامات والألوان', 'service-finder'=>'اختيار الخدمة', 'estimate'=>'تجهيز تقدير التكلفة', 'faq'=>'الأسئلة الشائعة', 'privacy-policy' => 'سياسة الخصوصية',
-    ];
+        'materials-colors' => 'دليل الخامات والألوان', 'service-finder'=>'اختيار الخدمة', 'estimate'=>'تجهيز تقدير التكلفة', 'faq'=>'الأسئلة الشائعة', 'privacy-policy' => 'سياسة الخصوصية', 'spaces'=>'الديكور حسب المساحة',
+    ] + array_map(static fn($item) => $item['title'], rd_space_content());
 }

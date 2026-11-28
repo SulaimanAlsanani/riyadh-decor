@@ -62,6 +62,20 @@ while (have_posts()) :
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
         <?php rd_related_services($slug); ?>
     </div>
+<?php elseif ($section === 'spaces' || isset(rd_space_content()[$section])): ?>
+    <?php $space_catalog=rd_space_content(); $space=$space_catalog[$section]??null; rd_page_top(get_the_title(), $space ? $space['intro'] : 'استكشف الديكور حسب مساحة المنزل، ثم قارن أنماط التصميم والخامات وجهّز مشروعك.', $space?'spaces':'', $space?'الديكور حسب المساحة':''); ?>
+    <div class="rd-shell rd-section rd-space-content">
+        <?php if (!$space): ?>
+            <?php rd_heading('اختر المساحة التي تريد تطويرها'); rd_space_cards(array_slice($space_catalog,0,6,true)); ?>
+            <?php rd_heading('أدلة التصميم والخامات'); rd_space_cards(array_slice($space_catalog,6,null,true)); ?>
+        <?php else: ?>
+            <section class="rd-space-feature"><?php rd_image($space['image'],['loading'=>'eager']); ?><div><span class="rd-gallery-kicker">دليل ديكورات الرياض</span><h2>خطط للتصميم قبل التنفيذ</h2><ul><?php foreach($space['points'] as $point): ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?></ul><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز مقاسات المشروع</a></div></section>
+            <?php rd_heading('خدمات تناسب هذه الفكرة', 'راجع تفاصيل كل خدمة وصور الخامات قبل اختيار نطاق العمل.'); ?>
+            <div class="rd-space-services"><?php foreach($space['services'] as $key): if(!isset($services[$key]))continue; $item=$services[$key]; ?><article><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><p><?php echo esc_html($item['intro']); ?></p><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">تفاصيل الخدمة</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">معرض الصور</a></div></div></article><?php endforeach; ?></div>
+            <div class="rd-related"><a href="<?php echo esc_url(rd_url('spaces')); ?>">جميع المساحات والأدلة</a><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">اختيار الخامات والألوان</a><a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a></div>
+        <?php endif; ?>
+        <?php rd_end_cta(); ?>
+    </div>
 <?php elseif ($section === 'services'): ?>
     <?php rd_page_top('الخدمات', 'خدمات الديكور والتشطيبات الداخلية والخارجية في الرياض.'); ?>
     <div class="rd-shell rd-section">
