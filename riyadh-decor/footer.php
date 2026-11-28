@@ -9,7 +9,7 @@
             <h2>روابط سريعة</h2>
             <a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات</a>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض الأفكار</a>
-            <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a>
+            <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a><a href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة والمقالات</a>
         </div>
         <div>
             <h2>مجالات العمل</h2>

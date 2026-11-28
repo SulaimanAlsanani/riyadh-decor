@@ -70,7 +70,7 @@ try {
    if(capture) await page.screenshot({path:'qa-report/'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:false});
  }
  for(const width of [390,768,1440]){
-   for(const path of ['', 'services/', 'gallery/', 'services/mirrors/', 'gallery/mirrors/', 'contact/', 'guides/', 'materials-colors/', 'mirrors-guide-1/']) await verify(path,width,900,true);
+   for(const path of ['', 'services/', 'gallery/', 'services/mirrors/', 'gallery/mirrors/', 'contact/', 'guides/', 'materials-colors/', 'mirrors-guide-1/', 'about/', 'faq/', 'service-finder/', 'estimate/']) await verify(path,width,900,true);
  }
  for(const section of ['services','gallery']){
    for(const entry of await readdir(join(root,section),{withFileTypes:true})) if(entry.isDirectory()) await verify(section+'/'+entry.name+'/',1440,900);
@@ -95,6 +95,18 @@ try {
  await Promise.all([page.waitForURL('**/contact/?service=mirrors'),page.locator('[data-quick-quote] button').click()]);
  assert.equal(await page.locator('[data-request] select option:checked').getAttribute('data-service-key'),'mirrors');
  report.interactions.push('homepage quick quote navigation');
+ await page.goto(base+'service-finder/');
+ await page.locator('[data-finder-space]').selectOption('outdoor');
+ assert.equal(await page.locator('[data-finder-card]:visible').count(),3);
+ await page.goto(base+'estimate/');
+ await page.locator('[data-estimate] [name=service]').selectOption('flooring');
+ await page.locator('[name=length]').fill('4');
+ await page.locator('[name=width]').fill('3');
+ await page.locator('[name=quantity]').fill('2');
+ await page.locator('[data-estimate] button').click();
+ await page.waitForURL('**/contact/?**');
+ assert.ok((await page.locator('[data-request] [name=details]').inputValue()).includes('24.00'));
+ report.interactions.push('service finder and measurement estimate transfer');
  await page.goto(base+'services/?group=decor');
  await page.locator('[data-service-filters]').waitFor({state:'visible'});
  assert.equal(await page.locator('[data-service-group="decor"]').getAttribute('aria-pressed'),'true');

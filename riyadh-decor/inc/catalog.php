@@ -135,6 +135,6 @@ function rd_sections() {
     return [
         'services' => 'الخدمات', 'gallery' => 'المعرض', 'guides' => 'الأدلة والمقالات',
         'about' => 'من نحن', 'contact' => 'تواصل معنا', 'project-planning' => 'تجهيز المشروع',
-        'materials-colors' => 'دليل الخامات والألوان', 'privacy-policy' => 'سياسة الخصوصية',
+        'materials-colors' => 'دليل الخامات والألوان', 'service-finder'=>'اختيار الخدمة', 'estimate'=>'تجهيز تقدير التكلفة', 'faq'=>'الأسئلة الشائعة', 'privacy-policy' => 'سياسة الخصوصية',
     ];
 }

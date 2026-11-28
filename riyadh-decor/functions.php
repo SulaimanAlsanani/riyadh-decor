@@ -126,6 +126,7 @@ function rd_description() {
             'project-planning' => 'دليل تجهيز مشروع الديكور: المقاسات والصور والخامات ونطاق العمل ومراجعة التسليم.',
             'materials-colors' => 'دليل عملي لاختيار خامات الديكور والألوان ومقارنة العينات حسب الإضاءة واستخدام المساحة.',
             'privacy-policy' => 'كيفية تجهيز بيانات طلب عرض السعر ومشاركتها عبر واتساب.',
+            'faq'=>'إجابات عن خدمات الديكور والتشطيبات وطلبات الأسعار والخامات في الرياض.', 'estimate'=>'جهز مقاسات مشروع الديكور في الرياض واطلب تقدير تكلفة حسب الخامة ونطاق العمل.', 'service-finder'=>'اختر خدمة الديكور المناسبة لمساحتك في الرياض وتصفح التصاميم.'
         ];
         return $descriptions[$current->post_name] ?? '';
     }
@@ -176,3 +177,5 @@ function rd_editorial_links($slug) {
     rd_heading('اقرأ قبل اختيار التصميم', 'دليل متخصص يساعدك على مقارنة الخيارات وتجهيز طلبك.');
     echo '<div class="rd-cards">'; rd_guide_cards($query); echo '</div></section>';
 }
+
+add_action('wp_head', function(){ if(!is_page()) return; $id=get_queried_object_id(); if(get_post_meta($id,'_rd_kind',true)!=='service') return; $key=get_post_meta($id,'_rd_specialty',true); $s=rd_services()[$key]??null; if(!$s)return; $data=['@context'=>'https://schema.org','@type'=>'Service','name'=>$s['name'],'description'=>$s['intro'],'url'=>get_permalink($id),'areaServed'=>['@type'=>'City','name'=>'الرياض'],'provider'=>['@id'=>home_url('/#business')]]; echo '<script type="application/ld+json">'.wp_json_encode($data,JSON_HEX_TAG|JSON_HEX_AMP|JSON_UNESCAPED_UNICODE).'</script>'; });

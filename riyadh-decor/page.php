@@ -75,6 +75,7 @@ while (have_posts()) :
 <?php elseif ($section === 'guides'): ?>
     <?php rd_page_top('الأدلة والمقالات', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
     <div class="rd-shell rd-section">
+        <section class="rd-blog-feature"><?php rd_image('majlis',['alt'=>'']); ?><div><h2>أفكار عملية قبل بدء مشروعك</h2><p>أدلة متخصصة تساعدك في اختيار التشطيبات وتنسيق المساحات.</p><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('materials-colors')); ?>">دليل الخامات والألوان</a></div></section>
         <div class="rd-pills"><?php foreach ($services as $key => $item): ?>
             <?php $category_url = rd_category_link($key, false); ?>
             <?php if ($category_url): ?>
@@ -95,6 +96,37 @@ while (have_posts()) :
         </div>
         <p class="screen-reader-text" data-guide-status aria-live="polite"></p>
     </div>
+<?php elseif ($section === 'service-finder' || $section === 'estimate'): ?>
+    <?php rd_page_top(get_the_title(), $section === 'estimate' ? 'احسب المساحة التقريبية وجهّز بيانات العرض؛ لا يتم احتساب سعر دون مواصفات معتمدة.' : 'اختر المساحة التي تريد تطويرها لتظهر لك الخدمات المرتبطة بها.'); ?>
+    <div class="rd-shell rd-section">
+        <?php if ($section === 'service-finder'): ?>
+        <section class="rd-tool-panel" data-finder>
+            <h2>أين تريد تنفيذ الديكور؟</h2>
+            <label>المساحة<select data-finder-space><option value="all">جميع المساحات</option><option value="living">المجلس والصالة</option><option value="bedroom">غرفة النوم</option><option value="outdoor">الحوش والسطح</option><option value="renovation">التشطيب والترميم</option></select></label>
+            <p data-finder-status role="status"></p>
+            <div class="rd-finder-grid">
+            <?php $spaces = ['living'=>['mirrors','tv-walls','wood-partitions','carved-wood','foam-trim','flooring','chipboard-decor','wallpaper','suspended-ceilings','painting','tempered-glass'], 'bedroom'=>['mirrors','bedrooms','wardrobes','flooring','wallpaper','painting','foam-trim'], 'outdoor'=>['rooftop-annexes','shades-and-screens','tempered-glass'], 'renovation'=>['building-finishing','suspended-ceilings','flooring','painting','tempered-glass']]; foreach ($services as $key=>$item): $tags=[]; foreach($spaces as $space=>$keys) if(in_array($key,$keys,true)) $tags[]=$space; ?>
+                <article data-finder-card="<?php echo esc_attr(implode(' ',$tags)); ?>"><?php rd_image($item['image'], ['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">التفاصيل</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">الصور</a></div></div></article>
+            <?php endforeach; ?>
+            </div>
+        </section>
+        <?php else: ?>
+        <form class="rd-form rd-tool-panel" data-estimate action="<?php echo esc_url(rd_url('contact')); ?>" method="get">
+            <h2>بيانات المشروع الأولية</h2><label>الخدمة<select name="service" required><option value="">اختر الخدمة</option><?php foreach ($services as $key=>$item): ?><option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item['short']); ?></option><?php endforeach; ?></select></label>
+            <div class="rd-form-row"><label>الطول بالمتر<input name="length" type="number" min=".1" max="1000" step=".1" required></label><label>العرض أو الارتفاع بالمتر<input name="width" type="number" min=".1" max="1000" step=".1" required></label></div>
+            <label>عدد المساحات المتماثلة<input name="quantity" type="number" min="1" max="100" step="1" value="1" required></label>
+            <div class="rd-estimate-result" role="status" data-estimate-result>أدخل المقاسات لمعرفة المساحة التقريبية.</div>
+            <p>المساحة الهندسية ليست كمية التوريد أو سعر التنفيذ؛ تختلف وحدة التسعير والهدر والتجهيز حسب الخدمة.</p>
+            <button class="rd-button rd-button-solid" type="submit">متابعة طلب التقدير</button>
+        </form>
+        <?php endif; ?>
+    </div>
+<?php elseif ($section === 'faq'): ?>
+    <?php rd_page_top('الأسئلة الشائعة', 'إجابات عن تجهيز الطلب والخامات ونطاق العمل في الرياض.'); ?>
+    <div class="rd-shell rd-section rd-prose">
+        <?php rd_faq(['كيف أطلب عرض سعر؟'=>'اختر الخدمة وأرسل الحي والمقاسات والصور عبر نموذج التواصل.','هل الصور في الموقع أعمال منفذة؟'=>'الصور نماذج توضيحية للأفكار والخامات؛ لا تُعرض باعتبارها إثباتاً لمشروع منفذ.','كيف يتحدد السعر؟'=>'حسب المقاسات والخامة وحالة الموقع ونطاق التوريد والتركيب.','هل يمكن اختيار لون خاص؟'=>'تُراجع العينات المتاحة وتُقارن في إضاءة الموقع.','كيف أعرف الخدمة المناسبة؟'=>'استخدم دليل اختيار الخدمة حسب المساحة.','هل يشمل العرض جميع التجهيزات؟'=>'تُحدد البنود المشمولة والمستثناة قبل الاتفاق.','هل يمكن تحديد موعد التنفيذ؟'=>'تُناقش المدة بعد تحديد النطاق والخامات وحالة الموقع.','كيف أراجع التشطيب؟'=>'قارن التنفيذ بالعينة والمواصفات المتفق عليها وسجل الملاحظات.']); ?>
+        <div class="rd-related"><a href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختر الخدمة</a></div><?php rd_end_cta(); ?>
+    </div>
 <?php elseif ($section === 'contact'): ?>
     <?php rd_page_top('تواصل مع ديكورات الرياض', 'صف لنا موقع المشروع والمساحة والخامات المطلوبة لتبدأ من طلب واضح.'); ?>
     <section class="rd-shell rd-section rd-request-section rd-contact-layout">
@@ -110,7 +142,7 @@ while (have_posts()) :
     <?php rd_page_top(get_the_title()); ?>
     <div class="rd-shell rd-section rd-prose">
         <?php if ($section === 'about'): ?>
-            <h2>خيارات تشطيب للمنازل والفلل</h2>
+            <div class="rd-about-feature"><?php rd_image('majlis', ['alt'=>'مجلس بتفاصيل خشبية','loading'=>'eager']); ?><div><span class="rd-gallery-kicker">ديكورات الرياض</span><h2>خيارات تشطيب للمنازل والفلل</h2><p>من اختيار الفكرة إلى تحديد الخامات والمقاسات.</p></div></div>
             <p>يقدم ديكورات الرياض خدمات الديكور والتشطيبات الداخلية والخارجية للمنازل والفلل. نراجع خيارات الخامات والتقسيمات بحسب المساحة ونطاق المشروع.</p>
             <h2>ابدأ من وصف المساحة</h2><p>اذكر مكان المشروع وما الذي تريد تغييره. صور الموقع والمقاسات تساعد في تحديد نطاق العمل ومناقشة الخامات والموعد.</p>
             <h2>مجالات العمل</h2><p>تجمع خدماتنا بين الديكور الداخلي والأخشاب والزجاج والتشطيبات والأعمال الخارجية. يمكنك استكشاف كل تخصص ومراجعة نماذج الخامات قبل تحديد الطلب.</p><h2>كيف تبدأ معنا؟</h2><p>حدد نوع العمل والحي والمقاسات، ثم شارك صور المساحة. تُراجع تفاصيل النطاق والخامات والموعد وفق طبيعة الطلب قبل الاتفاق.</p><div class="rd-related"><a href="<?php echo esc_url(rd_url('services')); ?>">استكشف الخدمات</a><a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض التصاميم</a></div><h2>عن صور المعرض</h2><p>يحتوي الموقع على صور توضيحية للأفكار والتشطيبات. تطبّق الخامات والتصاميم حسب قياس المكان والعينات المعتمدة.</p>

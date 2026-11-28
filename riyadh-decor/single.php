@@ -5,6 +5,7 @@
         <article class="rd-shell rd-section rd-prose">
             <?php if (has_post_thumbnail()): ?><div class="rd-article-image"><?php the_post_thumbnail('large'); ?></div><?php elseif ($service && isset(rd_services()[$service])): ?><div class="rd-article-image"><?php rd_image(rd_services()[$service]['image']); ?></div><?php endif; ?>
             <?php the_content(); ?>
+            <?php if ($service): ?><aside class="rd-blog-feature"><?php rd_image(rd_services()[$service]['image'],['alt'=>'']); ?><div><h2>حوّل الفكرة إلى طلب واضح</h2><p>تصفح التصاميم ثم شارك المقاسات والخامة التي تناسب مشروعك.</p><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/'.$service)); ?>">استكشف المعرض</a></div></aside><?php endif; ?>
             <?php if ($service): ?>
                 <div class="rd-related">
                     <a href="<?php echo esc_url(rd_url('services/' . $service)); ?>">تفاصيل الخدمة</a>
