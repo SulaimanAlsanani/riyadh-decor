@@ -254,6 +254,19 @@ if (guideList && guidePages && guideStatus) {
             const nextPage = new DOMParser().parseFromString(await response.text(), 'text/html');
             const nextItems = Array.from(nextPage.querySelectorAll('[data-guide-list] article'));
             if (!nextItems.length) throw new Error('Guide page is empty');
+            for (const item of nextItems) {
+                for (const element of item.querySelectorAll('[href],[src],[srcset]')) {
+                    for (const attr of ['href','src']) {
+                        const value = element.getAttribute(attr);
+                        if (value) element.setAttribute(attr, new URL(value, response.url).href);
+                    }
+                    const srcset = element.getAttribute('srcset');
+                    if (srcset) element.setAttribute('srcset', srcset.split(',').map(candidate => {
+                        const [url, size] = candidate.trim().split(/\s+/, 2);
+                        return [new URL(url, response.url).href, size].filter(Boolean).join(' ');
+                    }).join(', '));
+                }
+            }
             guideList.append(...nextItems);
             const nextLink = nextPage.querySelector('[data-guide-more]');
             if (nextLink) {
