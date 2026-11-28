@@ -49,6 +49,8 @@ try {
  }
  await page.goto(base);
  assert.equal(await page.locator('.rd-split-banner img').count(),1);
+ assert.equal(await page.locator('.rd-visual-categories a').count(),4);
+ assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-footer-lead a').count(),1);
  await page.goto(base+'services/?group=decor');
  await page.locator('[data-service-filters]').waitFor({state:'visible'});

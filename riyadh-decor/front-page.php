@@ -2,7 +2,7 @@
 get_header();
 $services = rd_services();
 ?>
-<main id="content">
+<main id="content" class="rd-luxury-home">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content"><div class="rd-hero-copy">
@@ -27,14 +27,18 @@ $services = rd_services();
 
     <section class="rd-shell rd-home-intro" aria-label="مجالات الديكور والتشطيب">
         <div><span class="rd-gallery-kicker">مساحات بتفاصيل متناسقة</span><h2>من الفكرة إلى تفاصيل المكان</h2><p>استكشف خيارات الديكور الداخلي والتشطيب والأعمال الخارجية بحسب احتياجك.</p></div>
-        <div class="rd-home-intro-links">
+        <div class="rd-home-intro-links rd-visual-categories">
             <?php foreach (rd_service_groups() as $group => [$label, $slugs]): ?>
-                <a href="<?php echo esc_url(add_query_arg('group', $group, rd_url('services'))); ?>"><?php echo esc_html($label); ?> <span aria-hidden="true">←</span></a>
+                <?php $cover = ['decor'=>'bedrooms','wood-glass'=>'wood-partitions','finishing'=>'flooring','outdoor'=>'shades-and-screens'][$group] ?? $slugs[0]; ?>
+                <a href="<?php echo esc_url(add_query_arg('group', $group, rd_url('services'))); ?>">
+                    <?php rd_image($services[$cover]['image'], ['alt'=>'']); ?>
+                    <span class="rd-category-copy"><strong><?php echo esc_html($label); ?></strong><small><?php echo esc_html(number_format_i18n(count(array_intersect($slugs,array_keys($services))))); ?> خدمات <span aria-hidden="true">←</span></small></span>
+                </a>
             <?php endforeach; ?>
         </div>
     </section>
     <section class="rd-shell rd-section" id="services">
-        <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.'); ?>
+        <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.', rd_url('services'), 'جميع الخدمات'); ?>
         <?php rd_service_cards($services); ?>
     </section>
 
@@ -62,7 +66,7 @@ $services = rd_services();
 
     <section class="rd-shell rd-home-banner rd-split-banner" aria-labelledby="rd-home-banner-title">
         <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
-        <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a></div>
+        <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
     </section>
     <section class="rd-shell rd-section rd-home-steps" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
@@ -76,7 +80,7 @@ $services = rd_services();
 
     <section class="rd-shell rd-section rd-request-section rd-home-request" id="request">
         <div>
-            <h2>خلّنا نراجع تفاصيل مشروعك</h2>
+            <span class="rd-gallery-kicker">خطوتك الأولى</span><h2>خلّنا نراجع تفاصيل مشروعك</h2>
             <p>اذكر المقاسات وحالة السطح والخامة اللي تفضّلها. تقدر ترفق صور المكان في واتساب بعد فتح المحادثة.</p>
             <?php rd_faq([
                 'كيف يتحدد عرض السعر؟' => 'يُراجع المقاس الفعلي وحالة الموقع والخامات ونطاق التجهيز والتوريد والتركيب لكل طلب.',
