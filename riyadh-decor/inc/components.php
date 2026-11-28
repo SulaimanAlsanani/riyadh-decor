@@ -131,10 +131,10 @@ function rd_image_gallery($keys, $specialty = '') {
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
             <figure class="rd-photo">
-                <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?></a>
+                <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?><span class="rd-photo-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M10.5 7v7M7 10.5h7"/></svg></span></a>
                 <figcaption>
-                    <div><?php echo esc_html($media[$key]); ?></div>
-                    <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : ''))); ?>" rel="noopener" target="_blank">استفسر عن الفكرة</a>
+                    <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div>
+                    <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : ''))); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
                 </figcaption>
             </figure>
         <?php endforeach; ?>

@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.1
+Version: 1.2.2
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -477,4 +477,36 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
  .rd-footer-lead { align-items:stretch; flex-direction:column; gap:12px; padding-block:22px; }
  .rd-footer-lead .rd-button { justify-content:center; }
  .rd-split-banner .rd-home-banner-content { padding:22px; }
+}
+
+/* V1.2.2 — service and gallery visual system */
+.rd-service-card-grid { gap:clamp(12px,1.6vw,22px); }
+.rd-service-card-grid .rd-card-media { margin:8px 8px 0; border-radius:10px; }
+.rd-service-card-grid .rd-card-media img { aspect-ratio:4/3; }
+.rd-service-card-grid .rd-card-body { padding:16px 18px 18px; gap:4px; }
+.rd-service-card-grid .rd-category { color:var(--green); background:var(--soft); padding:3px 9px; border-radius:6px; font-size:.76rem; }
+.rd-card-actions { gap:8px; padding-top:12px; }
+.rd-card-actions .rd-text-link { min-height:44px; }
+.rd-card-quote { border-color:#c6d8ce; }
+.rd-detail-heading { display:flex; align-items:center; gap:10px; font-size:clamp(1.2rem,2vw,1.65rem); }
+.rd-detail-heading span { display:inline-grid; place-items:center; flex-shrink:0; width:38px; height:38px; border-radius:9px; background:var(--soft); color:var(--green); font-size:.9rem; font-weight:800; }
+.rd-detail-layout ul { padding-inline-start:24px; }
+.rd-detail-layout ul li::marker { color:var(--green); }
+.rd-feature-image img { border-radius:14px; }
+.rd-photo-grid { gap:clamp(10px,1.5vw,20px); }
+.rd-photo-grid .rd-photo>a { position:relative; }
+.rd-photo-zoom { position:absolute; inset-inline-end:10px; inset-block-end:10px; background:#092b27e8; color:white; width:36px; height:36px; display:grid; place-items:center; border-radius:9px; pointer-events:none; }
+.rd-photo-caption { font-weight:700; line-height:1.6; }
+.rd-photo figcaption .rd-text-link { display:inline-flex; align-items:center; gap:6px; min-height:44px; font-size:.87rem; }
+.rd-related-tile>span { gap:8px; }
+.rd-button { min-height:44px; }
+@media(max-width:510px) {
+ .rd-service-card-grid .rd-card-body { padding:12px 14px 14px; }
+ .rd-service-card-grid .rd-card-media { margin:6px 6px 0; }
+ .rd-detail-layout>div:first-child { padding:14px; }
+ .rd-detail-heading span { width:32px; height:32px; }
+ .rd-photo-grid .rd-photo figcaption { padding:8px; }
+ .rd-photo-zoom { width:30px; height:30px; inset-inline-end:6px; inset-block-end:6px; }
+ .rd-photo-zoom svg { width:17px; height:17px; }
+ .rd-photo figcaption .rd-text-link { font-size:.76rem; }
 }

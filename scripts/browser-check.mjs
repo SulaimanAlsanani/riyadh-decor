@@ -71,6 +71,7 @@ try {
  assert.ok(await page.locator('.rd-mega a:visible').count()>=16);
  report.interactions.push('mobile menu and mega menu');
  await page.goto(base+'gallery/mirrors/');
+ assert.ok(await page.locator('.rd-photo-zoom').count()>0);
  await page.locator('[data-gallery-image]').first().click();
  await page.locator('dialog[open]').waitFor();
  await page.locator('dialog [data-next]').click();

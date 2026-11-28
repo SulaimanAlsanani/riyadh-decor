@@ -24,11 +24,11 @@ while (have_posts()) :
         <?php rd_service_actions($slug); ?>
         <div class="rd-service-layout rd-detail-layout">
             <div>
-                <h2>خيارات التصميم والتشطيب</h2>
+                <h2 class="rd-detail-heading"><span aria-hidden="true">01</span> خيارات التصميم والتشطيب</h2>
                 <ul><?php foreach ($service['choices'] as $choice): ?><li><?php echo esc_html($choice); ?></li><?php endforeach; ?></ul>
-                <h2>ماذا تجهّز قبل طلب العرض؟</h2>
+                <h2 class="rd-detail-heading"><span aria-hidden="true">02</span> ماذا تجهّز قبل طلب العرض؟</h2>
                 <ul><?php foreach ($service['checks'] as $check): ?><li><?php echo esc_html($check); ?></li><?php endforeach; ?></ul>
-                <h2>عوامل تحديد التكلفة</h2>
+                <h2 class="rd-detail-heading"><span aria-hidden="true">03</span> عوامل تحديد التكلفة</h2>
                 <p><?php echo esc_html($service['price']); ?></p>
             </div>
             <div class="rd-feature-image">
