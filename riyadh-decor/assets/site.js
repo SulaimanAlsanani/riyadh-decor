@@ -319,3 +319,10 @@ for (const button of document.querySelectorAll('[data-share-design]')) {
         }
     });
 }
+
+/* Mobile quote shortcut: visible only when the actual quote form is off-screen. */
+const quoteShortcut = document.querySelector('[data-mobile-quote]');
+const quoteTarget = document.querySelector('#request');
+if (quoteShortcut && quoteTarget && 'IntersectionObserver' in window) {
+ new IntersectionObserver(([entry])=>{quoteShortcut.hidden=entry.isIntersecting;},{threshold:0.1}).observe(quoteTarget);
+}

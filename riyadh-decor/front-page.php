@@ -2,7 +2,7 @@
 get_header();
 $services = rd_services();
 ?>
-<main id="content" class="rd-luxury-home rd-home-v13">
+<main id="content" class="rd-luxury-home rd-home-v13 rd-home-v14">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content"><div class="rd-hero-copy">
@@ -10,7 +10,7 @@ $services = rd_services();
             <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
             <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'ديكورات حسب المقاس، وأعمال تشطيب وترميم للمنازل والفلل في الرياض.')); ?></p>
             <div class="rd-actions">
-                <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
+                <a class="rd-button rd-button-solid" href="#rd-quick-title">اطلب عرض سعر</a>
                 <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
             </div>
         </div>
@@ -60,6 +60,11 @@ $services = rd_services();
         </div>
     </section>
 
+    <section class="rd-shell rd-quick-quote" aria-labelledby="rd-quick-title">
+<div><span class="rd-gallery-kicker">ابدأ من هنا</span><h2 id="rd-quick-title">ما الخدمة التي تحتاجها؟</h2><p>اختر الخدمة وانتقل مباشرة إلى طلب عرض السعر.</p></div>
+<form action="<?php echo esc_url(rd_url('contact')); ?>" method="get" class="rd-quick-form" data-quick-quote>
+<label for="rd-quick-service">نوع الخدمة</label><select id="rd-quick-service" name="service" required><option value="">اختر من الخدمات</option><?php foreach ($services as $slug => $service): ?><option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($service['short']); ?></option><?php endforeach; ?></select><button type="submit" class="rd-button rd-button-solid">متابعة طلب السعر</button>
+</form></section>
     <section class="rd-shell rd-section" id="services">
         <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.', rd_url('services'), 'جميع الخدمات'); ?>
         <?php rd_service_cards($services); ?>
@@ -105,5 +110,6 @@ $services = rd_services();
         </div>
         <?php rd_request_form(); ?>
     </section>
+<a class="rd-mobile-quote rd-button rd-button-solid" data-mobile-quote href="#rd-quick-title" hidden>اطلب عرض سعر <span aria-hidden="true">←</span></a>
 </main>
 <?php get_footer(); ?>

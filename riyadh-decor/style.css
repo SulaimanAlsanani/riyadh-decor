@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.3.1
+Version: 1.4.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -679,4 +679,29 @@ h3 { font-weight:var(--rd-weight-bold); }
 @media(max-width:510px) {
  .rd-footer { padding-block-end:90px; }
  .rd-dialog { max-height:92dvh; overflow:auto; }
+}
+
+/* V1.4.0 — conversion and compact commercial layout */
+.rd-home-v14 .rd-hero { min-height:clamp(490px,65vh,690px); }
+.rd-home-v14 .rd-hero-copy h1 { max-width:620px; }
+.rd-home-v14 .rd-hero-copy { padding-block:12px; }
+.rd-home-v14 .rd-visual-categories a>img { aspect-ratio: 5/4; }
+.rd-quick-quote { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center; margin-block:var(--section-space) 0; background:var(--white); border:1px solid var(--line); border-radius:var(--rd-card-radius); padding:clamp(20px,3vw,36px); }
+.rd-quick-quote h2 { font-size:clamp(1.4rem,2.4vw,2rem); }
+.rd-quick-quote p { color:var(--dim); }
+.rd-quick-form { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; align-items:end; }
+.rd-quick-form label { grid-column:1/-1; font-weight:700; font-size:var(--rd-text-sm); }
+.rd-quick-form select { min-width:0; min-height:44px; border:1px solid var(--rd-field-border); border-radius:var(--rd-control-radius); background:white; color:var(--ink); padding:8px; }
+.rd-home-v14 .rd-service-card-grid .rd-card-media img { aspect-ratio: 5/4; }
+.rd-home-v14 .rd-material-story>img { aspect-ratio: 16/10; }
+.rd-mobile-quote { display:none; }
+@media(max-width:780px) {
+ .rd-quick-quote { grid-template-columns:1fr; gap:12px; }
+ .rd-home-v14 .rd-hero { min-height:510px; }
+}
+@media(max-width:510px) {
+ .rd-quick-form { grid-template-columns:1fr; }
+ .rd-home-v14 .rd-material-story>img { aspect-ratio:auto; }
+ .rd-mobile-quote:not([hidden]) { display:flex; position:fixed; z-index:6; inset-inline-start:10px; bottom:max(10px,env(safe-area-inset-bottom)); font-size:.8rem; padding-inline:10px; }
+ body:has(.rd-mobile-quote:not([hidden])) .rd-float { bottom:64px; }
 }

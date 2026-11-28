@@ -11,7 +11,8 @@ function rd_image($key, $attributes = []) {
     if (!isset($media[$key]) && !$photo) {
         return;
     }
-    $attributes += ['alt' => $photo[0] ?? $media[$key], 'loading' => 'lazy', 'decoding' => 'async'];
+    $attributes += ['alt' => $photo[0] ?? $media[$key], 'loading' => 'lazy', 'decoding' => 'async', 'fetchpriority' => 'auto'];
+    if ($attributes['loading'] === 'lazy' && $attributes['fetchpriority'] === 'auto') $attributes['fetchpriority'] = 'low';
     $dimensions = ['majlis' => [1440, 960], 'painting-service' => [864, 576]];
     [$width, $height] = $photo ? [$photo[1], $photo[2]] : ($dimensions[$key] ?? [504, 504]);
     printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset(rd_media_filename($key))), $width, $height);
