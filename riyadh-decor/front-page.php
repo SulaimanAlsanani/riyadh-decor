@@ -103,7 +103,7 @@ $services = rd_services();
             <li><h3>راجع المقاسات والخامات</h3><p>تُراجع حالة الأسطح وتُقارن العينات وتفاصيل التشطيب.</p></li>
             <li><h3>اعتمد نطاق التنفيذ</h3><p>وضّح بنود العرض، وما يدخل في التجهيز والتركيب، والمدة المتوقعة.</p></li>
             <li><h3>راجع التشطيب عند التسليم</h3><p>عاين الأعمال حسب المواصفات المتفق عليها وسجّل الملاحظات.</p></li>
-        </ol><div class="rd-actions rd-planning-links"><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('service-finder')); ?>">ساعدني في اختيار الخدمة</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز المقاسات</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div>
+        </ol><div class="rd-actions rd-planning-links"><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('solutions')); ?>">حلول الديكور حسب احتياجك</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز المشاريع</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('service-finder')); ?>">ساعدني في اختيار الخدمة</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز المقاسات</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div>
     </section>
 
     <section class="rd-shell rd-section rd-request-section rd-home-request" id="request">

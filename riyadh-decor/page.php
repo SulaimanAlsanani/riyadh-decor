@@ -57,16 +57,16 @@ while (have_posts()) :
         </section>
         <?php endif; ?>
         <h2 id="service-faq">أسئلة شائعة</h2>
-        <?php $editorial = rd_editorial()[$slug] ?? null; rd_faq($service['faq'] + ($editorial ? [$editorial[4] => $editorial[5], 'ما الذي يؤثر في تكلفة هذه الخدمة؟' => $service['price']] : [])); ?>
+        <?php $editorial = rd_editorial()[$slug] ?? null; rd_faq($service['faq'] + ($editorial ? [$editorial[4] => $editorial[5], 'ما الذي يؤثر في تكلفة هذه الخدمة؟' => $service['price']] : []) + (rd_extra_faq()[$slug] ?? [])); ?>
         <?php rd_editorial_links($slug); ?>
-        <?php $project_guides=array_filter(rd_library_content(),static fn($item)=>$item['parent']==='project-guides' && in_array($slug,$item['services'],true)); if($project_guides): ?><section class="rd-project-references"><?php rd_heading('أدلة تساعدك في تجهيز هذه الخدمة','مراجعة الخامات والتجهيز والاستلام قبل اعتماد العمل.',rd_url('project-guides'),'جميع أدلة المشاريع'); rd_space_cards(array_slice($project_guides,0,3,true)); ?></section><?php endif; ?>
+        <?php $project_guides=array_filter(rd_library_content(),static fn($item)=>in_array($item['parent'],['project-guides','solutions'],true) && in_array($slug,$item['services'],true)); if($project_guides): ?><section class="rd-project-references"><?php rd_heading('أدلة تساعدك في تجهيز هذه الخدمة','مراجعة الخامات والتجهيز والاستلام قبل اعتماد العمل.',rd_url('solutions'),'حلول الديكور'); rd_space_cards(array_slice($project_guides,0,3,true)); ?></section><?php endif; ?>
         <?php rd_related_services($slug); ?>
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
     </div>
-<?php elseif (in_array($section,['property-types','project-guides'],true) || isset(rd_library_content()[$section])): ?>
-    <?php $library=rd_library_content(); $entry=$library[$section]??null; rd_page_top(get_the_title(),$entry?$entry['intro']:($section==='project-guides'?'أدلة عملية للتجهيز والمقارنة والاستلام والعناية بالتشطيبات في الرياض.':'أفكار وتجهيز وتجديد الفلل والشقق في الرياض.'),$entry?$entry['parent']:'spaces',$entry?rd_sections()[$entry['parent']]:'الديكور حسب المساحة'); ?>
+<?php elseif (in_array($section,['property-types','project-guides','solutions'],true) || isset(rd_library_content()[$section])): ?>
+    <?php $library=rd_library_content(); $entry=$library[$section]??null; rd_page_top(get_the_title(),$entry?$entry['intro']:($section==='solutions'?'حلول عملية للخصوصية والتخزين والألوان والتشطيبات والأعمال الخارجية في الرياض.':($section==='project-guides'?'أدلة عملية للتجهيز والمقارنة والاستلام والعناية بالتشطيبات في الرياض.':'أفكار وتجهيز وتجديد الفلل والشقق في الرياض.')),$entry?$entry['parent']:'spaces',$entry?rd_sections()[$entry['parent']]:'الديكور حسب المساحة'); ?>
     <div class="rd-shell rd-section rd-library-content">
-      <?php if(!$entry): rd_heading($section==='project-guides'?'خطط لمشروعك خطوة بخطوة':'اختر نوع العقار'); rd_space_cards(array_filter($library,static fn($item)=>$item['parent']===$section)); else: ?>
+      <?php if(!$entry): rd_heading($section==='solutions'?'اختر الحل المناسب لاحتياجك':($section==='project-guides'?'خطط لمشروعك خطوة بخطوة':'اختر نوع العقار')); rd_space_cards(array_filter($library,static fn($item)=>$item['parent']===$section)); else: ?>
         <section class="rd-space-feature"><?php rd_image($entry['image'],['loading'=>'eager']); ?><div><span class="rd-gallery-kicker">دليل الاختيار</span><h2>ما الذي تراجعه قبل الاعتماد؟</h2><ul><?php foreach($entry['points'] as $point): ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?></ul><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز طلب التقدير</a></div></section>
         <?php rd_heading('الخدمات والتصاميم المرتبطة'); ?>
         <div class="rd-space-services"><?php foreach($entry['services'] as $key): $item=$services[$key]??null;if(!$item)continue; ?><article><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><p><?php echo esc_html($item['intro']); ?></p><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">تفاصيل الخدمة</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">معرض الصور</a></div></div></article><?php endforeach; ?></div>

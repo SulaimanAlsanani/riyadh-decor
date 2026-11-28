@@ -113,7 +113,7 @@ for (const [path, source] of routes) {
     $('link[rel="https://api.w.org/"],link[rel="wlwmanifest"],link[rel="EditURI"],link[rel="shortlink"],link[rel="pingback"],link[rel="alternate"][type],link[rel="dns-prefetch"],a[href*="/feed/"],script#wp-emoji-settings,script#wp-emoji-settings + script,script#wp-emoji-loader,style#wp-emoji-styles-inline-css').remove();
     $('link[rel="alternate"][href*="/wp-json/"],script[src*="s.w.org"]').remove();
 
-    if (articlePaths.has(path) || path.startsWith('/services/') && path !== '/services/') {
+    if (articlePaths.has(path) || (path.startsWith('/services/') && path !== '/services/') || $('#content .rd-space-content,#content .rd-library-content').length) {
         const title = $('#content h1').first().text().trim();
         const excerpt = $('meta[name="description"]').attr('content') || $('#content p').first().text().trim();
         articles.push({ path, title, excerpt, text: $('#content').text().replace(/\s+/g, ' ').trim() });

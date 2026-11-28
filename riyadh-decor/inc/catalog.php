@@ -7,6 +7,7 @@ require_once __DIR__ . '/service-advice.php';
 require_once __DIR__ . '/editorial.php';
 require_once __DIR__ . '/spaces.php';
 require_once __DIR__ . '/library.php';
+require_once __DIR__ . '/service-faq-extra.php';
 
 function rd_services() {
     return [
@@ -138,5 +139,5 @@ function rd_sections() {
         'services' => 'الخدمات', 'gallery' => 'المعرض', 'guides' => 'الأدلة والمقالات',
         'about' => 'من نحن', 'contact' => 'تواصل معنا', 'project-planning' => 'تجهيز المشروع',
         'materials-colors' => 'دليل الخامات والألوان', 'service-finder'=>'اختيار الخدمة', 'estimate'=>'تجهيز تقدير التكلفة', 'faq'=>'الأسئلة الشائعة', 'privacy-policy' => 'سياسة الخصوصية', 'spaces'=>'الديكور حسب المساحة',
-    ] + ['property-types'=>'الديكور حسب نوع العقار','project-guides'=>'أدلة تجهيز وتنفيذ المشاريع'] + array_map(static fn($item) => $item['title'], rd_space_content()) + array_map(static fn($item) => $item['title'], rd_library_content());
+    ] + ['property-types'=>'الديكور حسب نوع العقار','project-guides'=>'أدلة تجهيز وتنفيذ المشاريع','solutions'=>'حلول الديكور والتشطيبات'] + array_map(static fn($item) => $item['title'], rd_space_content()) + array_map(static fn($item) => $item['title'], rd_library_content());
 }

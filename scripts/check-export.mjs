@@ -55,11 +55,14 @@ const home = load(await readFile(join(output, 'index.html'), 'utf8'));
 for (const selector of ['.rd-home-intro', '.rd-home-banner img', '#design-gallery', '#request', '.rd-mega']) {
     if (!home(selector).length) errors.push('Homepage missing ' + selector);
 }
-if (home('#services [data-service-card]').length < 16) errors.push('Homepage service catalog incomplete');
+if(home('#services [data-service-card]').length!==6) errors.push('Homepage must contain six featured services');
+const serviceCatalog=load(await readFile(join(output,'services','index.html'),'utf8'));
+if(serviceCatalog('[data-service-card]').length!==16) errors.push('Full service catalog must contain all sixteen services');
 const index = JSON.parse(await readFile(join(output,'search-index.json'),'utf8'));
 if(index.filter(x=>/guide-1\/$/.test(x.path)).length < 16) errors.push('Missing specialist articles');
 for(const slug of ["spaces","majlis-decor","living-room-decor","bedroom-decor","entrance-decor","outdoor-decor","home-renovation","design-styles","material-library","decor-coordination","project-combinations"]) {try {const html=load(await readFile(join(output,slug,'index.html'),'utf8'));if(!html('.rd-space-content').length)errors.push('Missing space content: '+slug);}catch{errors.push('Missing space page: '+slug);}}
 for(const slug of ["property-types","material-wood","material-glass","material-flooring","material-paint","material-ceiling","material-wallcovering","compare-flooring","compare-walls","compare-partitions","style-modern","style-classic","style-neoclassic","villa-decor","apartment-decor","villa-renovation","apartment-renovation"]) {try {const html=load(await readFile(join(output,slug,'index.html'),'utf8'));if(!html('.rd-library-content').length||!html('meta[name=description]').attr('content'))errors.push('Missing library content or metadata: '+slug);}catch{errors.push('Missing library page: '+slug);}}
+for(const slug of ["solutions","privacy-solutions","storage-solutions","wall-solutions","compare-ceilings","compare-wall-panels","color-palette","light-and-color","courtyard-planning","outdoor-privacy","contractor-selection","quotation-review","project-guides","lighting-planning","wall-preparation","budget-planning","handover-checklist","maintenance-guide","small-space-planning"]) {const html=load(await readFile(join(output,slug,'index.html'),'utf8'));if(!html('.rd-library-content').length||!html('meta[name=description]').attr('content')||!index.some(x=>x.path==='/'+slug+'/'))errors.push('Missing guide content, SEO or search entry: '+slug);}
 const heroOriginal=await readFile('riyadh-decor/assets/majlis.webp');
 const heroOptimized=await readFile('riyadh-decor/assets/majlis-desktop-opt.webp');
 if(heroOptimized.length>=heroOriginal.length)errors.push('Hero optimization did not reduce bytes');

@@ -66,6 +66,7 @@ try {
    assert.equal(result.h1,1,path);
    if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('[data-related-service]').count(),3,path+' complementary services');
    if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('.rd-service-advice article').count(),4,path+' content guide');
+   if(/^services\/[^/]+\/$/.test(path)) assert.ok(await page.locator('.rd-faq details').count()>=4,path+' expanded FAQ');
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
    await page.evaluate(async()=>{await Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>i.decode()));});
@@ -79,6 +80,12 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const slug of ["solutions","privacy-solutions","storage-solutions","wall-solutions","compare-ceilings","compare-wall-panels","color-palette","light-and-color","courtyard-planning","outdoor-privacy","contractor-selection","quotation-review"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);}
+ await page.goto(base+'solutions/');
+ assert.equal(await page.locator('.rd-space-card').count(),11);
+ await page.goto(base+'search/?s='+encodeURIComponent('مقارنة عروض أسعار الديكور'));
+ await page.locator('#rd-search-results a[href*="quotation-review"]').waitFor();
+ report.interactions.push('solutions library and expanded search');
  for(const path of ["project-guides/","lighting-planning/","wall-preparation/","budget-planning/","handover-checklist/","maintenance-guide/","small-space-planning/"]) { await verify(path,390,900,true); await verify(path,1440,900,true); }
  await page.goto(base+'project-guides/');
  assert.equal(await page.locator('.rd-space-card').count(),6);
