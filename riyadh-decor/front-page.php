@@ -23,6 +23,14 @@ $services = rd_services();
         <a href="#steps">خطوات تجهيز المشروع</a>
     </div></div>
 
+    <section class="rd-shell rd-home-intro" aria-label="مجالات الديكور والتشطيب">
+        <div><span class="rd-gallery-kicker">مساحات بتفاصيل متناسقة</span><h2>من الفكرة إلى تفاصيل المكان</h2><p>استكشف خيارات الديكور الداخلي والتشطيب والأعمال الخارجية بحسب احتياجك.</p></div>
+        <div class="rd-home-intro-links">
+            <?php foreach (rd_service_groups() as $group => [$label, $slugs]): ?>
+                <a href="<?php echo esc_url(add_query_arg('group', $group, rd_url('services'))); ?>"><?php echo esc_html($label); ?> <span aria-hidden="true">←</span></a>
+            <?php endforeach; ?>
+        </div>
+    </section>
     <section class="rd-shell rd-section" id="services">
         <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.'); ?>
         <?php rd_service_cards($services); ?>
@@ -50,6 +58,10 @@ $services = rd_services();
         </div>
     </section>
 
+    <section class="rd-shell rd-home-banner" aria-labelledby="rd-home-banner-title">
+        <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
+        <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a></div>
+    </section>
     <section class="rd-shell rd-section" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <ol class="rd-steps">
@@ -60,7 +72,7 @@ $services = rd_services();
         </ol>
     </section>
 
-    <section class="rd-shell rd-section rd-request-section" id="request">
+    <section class="rd-shell rd-section rd-request-section rd-home-request" id="request">
         <div>
             <h2>خلّنا نراجع تفاصيل مشروعك</h2>
             <p>اذكر المقاسات وحالة السطح والخامة اللي تفضّلها. تقدر ترفق صور المكان في واتساب بعد فتح المحادثة.</p>

@@ -50,6 +50,18 @@ async function validate(filename) {
     }
 }
 await visit(output);
+const home = load(await readFile(join(output, 'index.html'), 'utf8'));
+for (const selector of ['.rd-home-intro', '.rd-home-banner img', '#design-gallery', '#request', '.rd-mega']) {
+    if (!home(selector).length) errors.push('Homepage missing ' + selector);
+}
+if (home('#services [data-service-card]').length < 16) errors.push('Homepage service catalog incomplete');
+const fonts = await readFile(join(output, 'wp-content/themes/riyadh-decor/assets/fonts.css'), 'utf8');
+for (const match of fonts.matchAll(/url\(([^)]+)\)/g)) {
+    const file = match[1].replace(/['"]/g, '');
+    if (/^(https?:|data:)/.test(file)) continue;
+    try { if (!(await stat(join(output, 'wp-content/themes/riyadh-decor/assets', file))).isFile()) throw new Error(); checked++; }
+    catch { errors.push('Missing font: ' + file); }
+}
 if (checked < 200 || errors.length) {
     console.error([...new Set(errors)].slice(0, 35).join('\n'));
     process.exit(1);
