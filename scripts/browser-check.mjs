@@ -36,15 +36,15 @@ try {
      await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:100,downloadThroughput:200000,uploadThroughput:100000});
      await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});
      await perf.addInitScript(()=>{
-       window.rdPerf={lcp:null,cls:0,maxEventDuration:null};
+       window.rdPerf={lcp:null,cls:0,maxEventDuration:null,shifts:[]};
        let session=0,first=0,last=0;
        new PerformanceObserver(list=>{for(const e of list.getEntries())window.rdPerf.lcp=e.startTime;}).observe({type:'largest-contentful-paint',buffered:true});
-       new PerformanceObserver(list=>{for(const e of list.getEntries()){if(e.hadRecentInput)continue;if(session&&e.startTime-last<1000&&e.startTime-first<5000)session+=e.value;else{session=e.value;first=e.startTime;}last=e.startTime;window.rdPerf.cls=Math.max(window.rdPerf.cls,session);}}).observe({type:'layout-shift',buffered:true});
+       new PerformanceObserver(list=>{for(const e of list.getEntries()){if(e.hadRecentInput)continue;window.rdPerf.shifts.push({value:e.value,time:e.startTime,sources:e.sources.map(s=>({tag:s.node?.tagName,cls:typeof s.node?.className==='string'?s.node.className:'',previous:s.previousRect,current:s.currentRect}))});if(session&&e.startTime-last<1000&&e.startTime-first<5000)session+=e.value;else{session=e.value;first=e.startTime;}last=e.startTime;window.rdPerf.cls=Math.max(window.rdPerf.cls,session);}}).observe({type:'layout-shift',buffered:true});
        if(PerformanceObserver.supportedEntryTypes.includes('event'))new PerformanceObserver(list=>{for(const e of list.getEntries())if(e.interactionId)window.rdPerf.maxEventDuration=Math.max(window.rdPerf.maxEventDuration||0,e.duration);}).observe({type:'event',buffered:true,durationThreshold:16});
      });
      await perf.goto(base,{waitUntil:'load',timeout:60000});
      await perf.waitForTimeout(2000);
-     const initial=await perf.evaluate(()=>({lcpMs:window.rdPerf.lcp,cls:window.rdPerf.cls,ttfbMs:performance.getEntriesByType('navigation')[0].responseStart,transferBytes:performance.getEntriesByType('resource').reduce((n,r)=>n+r.transferSize,0),heroSource:document.querySelector('.rd-hero-image').currentSrc}));
+     const initial=await perf.evaluate(()=>({lcpMs:window.rdPerf.lcp,cls:window.rdPerf.cls,ttfbMs:performance.getEntriesByType('navigation')[0].responseStart,transferBytes:performance.getEntriesByType('resource').reduce((n,r)=>n+r.transferSize,0),heroSource:document.querySelector('.rd-hero-image').currentSrc,shifts:window.rdPerf.shifts,heroTiming:performance.getEntriesByName(document.querySelector('.rd-hero-image').currentSrc).map(r=>({start:r.startTime,end:r.responseEnd,bytes:r.transferSize}))}));
      if(width===390){await perf.locator('.rd-menu-toggle').click();await perf.keyboard.press('Escape');}else{await perf.locator('.rd-service-nav summary').click();await perf.keyboard.press('Escape');}
      await perf.waitForTimeout(500);
      const eventDuration=await perf.evaluate(()=>window.rdPerf.maxEventDuration);
@@ -94,7 +94,7 @@ try {
  assert.equal(await page.locator('#rd-quick-service option').count(),17);
  await page.locator('#rd-quick-service').selectOption('mirrors');
  await Promise.all([page.waitForURL('**/contact/?service=mirrors'),page.locator('[data-quick-quote] button').click()]);
- assert.equal(await page.locator('[data-request] select option:checked').getAttribute('data-service-key'),'mirrors');
+ assert.equal(await page.locator('[data-request] select[name=service] option:checked').getAttribute('data-service-key'),'mirrors');
  report.interactions.push('homepage quick quote navigation');
  await page.goto(base+'service-finder/');
  await page.locator('[data-finder-space]').selectOption('outdoor');
@@ -168,7 +168,7 @@ try {
  await form.locator('[name=stage]').selectOption('أجهز المقاسات');
  await form.locator('[name=details]').fill('طلب اختبار للمقاسات');
  assert.ok((await form.locator('[data-details-count]').textContent()).startsWith(String('طلب اختبار للمقاسات'.length)));
- assert.equal(await form.locator('select option:checked').getAttribute('data-service-key'),'mirrors');
+ assert.equal(await form.locator('select[name=service] option:checked').getAttribute('data-service-key'),'mirrors');
  await form.locator('button[type=submit]').click();
  const link=await form.locator('[data-request-send]').getAttribute('href');
  const wa=new URL(link);

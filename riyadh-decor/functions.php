@@ -15,7 +15,8 @@ add_action('after_setup_theme', function () {
 
 add_action('wp_enqueue_scripts', function () {
     $version = wp_get_theme()->get('Version');
-    wp_enqueue_style('riyadh-decor', get_stylesheet_uri(), [], $version);
+    wp_enqueue_style('rd-fonts', rd_asset('fonts.css'), [], $version);
+    wp_enqueue_style('riyadh-decor', get_stylesheet_uri(), ['rd-fonts'], $version);
     wp_enqueue_script('riyadh-decor', rd_asset('site.js'), [], $version, ['in_footer' => true, 'strategy' => 'defer']);
 });
 

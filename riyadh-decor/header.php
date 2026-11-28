@@ -3,6 +3,10 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php if (is_front_page()): ?>
+    <link rel="preload" as="image" href="<?php echo esc_url(rd_asset('majlis-sm.webp')); ?>" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="<?php echo esc_url(rd_asset('majlis.webp')); ?>" media="(min-width: 769px)" fetchpriority="high">
+    <?php endif; ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -19,8 +23,8 @@
                 <span>ديكورات الرياض<small>تصميم وتشطيب داخلي</small></span>
             </a>
         <?php endif; ?>
-        <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation" hidden><?php rd_icon('menu'); ?> القائمة</button>
-        <nav class="rd-navigation" id="rd-navigation" aria-label="القائمة الرئيسية">
+        <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation"><?php rd_icon('menu'); ?> القائمة</button>
+        <nav class="rd-navigation" id="rd-navigation" data-initial-menu aria-label="القائمة الرئيسية">
             <a href="<?php echo esc_url(rd_url()); ?>">الرئيسية</a>
             <details class="rd-service-nav">
                 <summary>الخدمات</summary>

@@ -14,6 +14,7 @@ if (menuToggle && navigation) {
     };
 
     setMenu(false);
+    navigation.removeAttribute("data-initial-menu");
     smallScreen.addEventListener('change', () => setMenu(false));
     menuToggle.addEventListener('click', () => setMenu(navigation.hidden));
     navigation.addEventListener('click', (event) => {

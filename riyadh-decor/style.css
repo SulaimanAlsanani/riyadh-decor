@@ -1,14 +1,14 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.7.0
+Version: 1.7.1
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-@import url("assets/fonts.css");
+
 :root {
     --ink:#102b28; --dim:#52625d; --green:#086e64; --deep:#103e38; --dark:#092b27;
     --orange:#f89922; --orange-hover:#ffc062; --cream:#faf8f3; --soft:#eef3ee; --line:#dce5dc;
@@ -751,3 +751,12 @@ h3 { font-weight:var(--rd-weight-bold); }
 .rd-header-v17 .rd-navigation { gap:clamp(6px,1vw,16px); }
 .rd-footer-v17 .rd-footer-grid h2:not(:first-child) { margin-top:16px; }
 @media(max-width:780px){.rd-service-value{align-items:stretch;flex-direction:column;padding:16px}.rd-home-v17 .rd-hero-copy{max-width:100%}.rd-gallery-tools{padding:12px}.rd-gallery-tools label{flex-basis:100%}}
+
+/* V1.7.1 — prevent the initial mobile navigation from changing document height. */
+.rd-menu-toggle { display:none; }
+@media(max-width:780px) {
+ .rd-header-v17 .rd-menu-toggle:not([hidden]) { display:inline-flex; }
+ .rd-header-v17 .rd-navigation[data-initial-menu] { display:none; }
+ .rd-header-v17 .rd-navigation:not([data-initial-menu]):not([hidden]) { position:absolute; inset-inline:0; top:100%; width:100%; background:white; box-shadow:0 12px 20px #092b2726; padding:12px; }
+ .rd-header-v17 .rd-header-inner { min-height:70px; flex-wrap:nowrap; }
+}
