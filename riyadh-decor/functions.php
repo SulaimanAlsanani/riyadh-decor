@@ -44,10 +44,17 @@ function rd_url($path = '') {
     if (!$path) {
         return home_url('/');
     }
-    static $cache = [];
+    static $cache = [], $index = null;
+    $path=trim($path,'/');
+    if ($index === null) {
+        $index=[];
+        foreach(get_pages(['post_status'=>'publish','number'=>0]) as $page) {
+            $index[get_page_uri($page)]=$page;
+        }
+    }
     if (!isset($cache[$path])) {
-        $page = get_page_by_path(trim($path, '/'));
-        $cache[$path] = $page && $page->post_status === 'publish' ? get_permalink($page) : home_url('/' . trim($path, '/') . '/');
+        $page=$index[$path]??null;
+        $cache[$path]=$page?get_permalink($page):home_url('/'.$path.'/');
     }
     return $cache[$path];
 }

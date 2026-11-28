@@ -27,9 +27,22 @@ function relative(from, outputPath) {
 }
 
 async function read(path) {
-    const response = await fetch(new URL(path, origin), { signal: AbortSignal.timeout(25000) });
-    if (!response.ok) throw new Error(`${response.status} ${path}`);
-    return response;
+    for (let attempt=1; attempt<=3; attempt++) {
+        try {
+            const response=await fetch(new URL(path,origin),{signal:AbortSignal.timeout(90000)});
+            if(!response.ok) {
+                if(response.status<500) throw Object.assign(new Error(`HTTP ${response.status}: ${path}`),{permanent:true});
+                throw new Error(`HTTP ${response.status}: ${path}`);
+            }
+            // Consume inside the timed retry, rather than returning a potentially stalled body.
+            const body=await response.arrayBuffer();
+            return new Response(body,{status:response.status,headers:response.headers});
+        } catch(error) {
+            console.error(`Export fetch attempt ${attempt}: ${path}: ${error.message}`);
+            if(error.permanent||attempt===3) throw new Error(`Export failed: ${path}`,{cause:error});
+            await new Promise(resolve=>setTimeout(resolve,attempt*1500));
+        }
+    }
 }
 
 async function save(path, body) {
@@ -91,7 +104,9 @@ for (const required of ['/services/', '/services/mirrors/', '/gallery/', '/conta
     if (!routes.has(required)) throw new Error(`The WordPress sitemap is missing ${required}`);
 }
 
+let routeNumber=0;
 for (const [path, source] of routes) {
+    console.log(`Rendering ${++routeNumber}/${routes.size}: ${path}`);
     const $ = load(await (await read(source)).text());
     if ($('#content h1').length !== 1) throw new Error(`Invalid page: ${source}`);
 

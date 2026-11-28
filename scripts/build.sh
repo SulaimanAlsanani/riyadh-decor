@@ -44,4 +44,9 @@ if [[ "$started" != true ]]; then
     cat "$build_dir/server.log"
     exit 1
 fi
-node scripts/export.mjs "$local_url" "$public_url"
+mkdir -p qa-report
+if ! node scripts/export.mjs "$local_url" "$public_url" 2>&1 | tee qa-report/export.log; then
+    cp "$build_dir/server.log" qa-report/playground-server.log
+    tail -n 100 "$build_dir/server.log" >&2
+    exit 1
+fi
