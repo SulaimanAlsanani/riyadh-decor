@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.9.2
+Version: 2.2.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -766,3 +766,26 @@ h3 { font-weight:var(--rd-weight-bold); }
 
 /* V1.9.0 editorial expansion */
 .rd-library-content .rd-space-feature,.rd-property-promo .rd-space-card{background:var(--white);border:1px solid var(--line)}.rd-library-content .rd-space-feature img{aspect-ratio:4/3;object-fit:cover}.rd-property-promo .rd-space-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rd-property-promo .rd-space-card img{aspect-ratio:16/9}.rd-library-content .rd-space-card,.rd-space-content .rd-space-card{min-width:0;overflow-wrap:anywhere}@media(max-width:510px){.rd-property-promo .rd-space-grid{gap:10px}.rd-library-content .rd-space-feature>div{padding:14px}}
+
+/* V2.0: commercial hierarchy; preserves responsive hero and image loading. */
+.rd-home-v20 .rd-section{padding-block:clamp(32px,4vw,60px)}
+.rd-home-v20 .rd-home-intro{padding-block:32px}
+.rd-home-v20 .rd-quick-quote{border-inline-start:4px solid var(--orange);margin-block:12px 24px}
+.rd-home-v20 .rd-split-banner{display:grid;grid-template-columns:1.05fr 1fr;min-height:320px;background:var(--dark);color:var(--white)}
+.rd-home-v20 .rd-split-banner>img{width:100%;height:100%;min-height:320px;object-fit:cover}
+.rd-home-v20 .rd-home-banner-content{padding:clamp(24px,4vw,52px);align-self:center}
+.rd-home-v20 .rd-home-banner-content h2{line-height:1.35}
+.rd-home-v20 .rd-room-banner{background:var(--soft);border:1px solid var(--line);margin-block:24px}
+.rd-home-v20 .rd-property-promo .rd-space-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.rd-home-v20 .rd-material-story,.rd-home-v20 .rd-space-card,.rd-home-v20 .rd-card{border-radius:var(--rd-card-radius)}
+.rd-planning-links{margin-block-start:18px;flex-wrap:wrap}
+.rd-photo-actions{flex-wrap:wrap;gap:8px}
+.rd-photo-actions .rd-card-quote{min-height:44px;display:inline-flex;align-items:center}
+.rd-header-v17 .rd-navigation{gap:clamp(6px,.65vw,12px)}
+@media(max-width:1100px) and (min-width:781px){.rd-nav-spaces{display:none}}
+@media(max-width:780px){.rd-home-v20 .rd-split-banner{grid-template-columns:1fr;min-height:0}.rd-home-v20 .rd-split-banner>img{min-height:0;height:auto;aspect-ratio:16/10}.rd-home-v20 .rd-property-promo .rd-space-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rd-home-v20 .rd-home-banner-content{padding:20px}.rd-planning-links .rd-button{flex:1 1 100%}}
+
+/* V2.1 project guidance */
+.rd-project-references{margin-block:32px}.rd-project-references .rd-space-card img{aspect-ratio:16/10}.rd-library-content .rd-space-feature li{margin-block:8px}.rd-library-content .rd-space-feature ul{padding-inline-start:22px}
+
+.rd-project-references .rd-space-card:focus-visible{outline-offset:-4px}.rd-planning-links{gap:10px}.rd-library-content .rd-space-feature ul{line-height:1.9}

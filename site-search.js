@@ -9,7 +9,7 @@ input.value = query;
 
 function normalize(value) {
     return value.toLowerCase().replace(/[\u064b-\u065f\u0670\u0640]/g, '')
-        .replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي');
+        .replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g,'ه');
 }
 
 async function search() {
@@ -26,6 +26,7 @@ async function search() {
             const content = normalize(item.title + ' ' + item.text);
             return words.every((word) => content.includes(word));
         });
+        entries.sort((a,b)=>{const score=item=>words.reduce((sum,w)=>sum+(normalize(item.title).includes(w)?3:0),0);return score(b)-score(a);});
         const overview = document.createElement('p');
         overview.textContent = entries.length ? `النتائج (${entries.length})` : 'ما وجدنا نتائج مطابقة.';
         const list = document.createElement('ul');
