@@ -2,7 +2,7 @@
 get_header();
 $services = rd_services();
 ?>
-<main id="content" class="rd-luxury-home rd-home-v13 rd-home-v14 rd-home-v17">
+<main id="content" class="rd-luxury-home rd-home-v13 rd-home-v14 rd-home-v17 rd-home-v20">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content"><div class="rd-hero-copy">
@@ -22,7 +22,7 @@ $services = rd_services();
     <div class="rd-jump"><div class="rd-shell">
         <a href="#services">الخدمات</a>
         <a href="#design-gallery">معرض التصاميم</a>
-        <a href="#steps">خطوات تجهيز المشروع</a>
+        <a href="#spaces">حسب المساحة</a><a href="#steps">خطوات المشروع</a>
         <a href="#request">طلب عرض سعر</a>
     </div></div>
 
@@ -37,6 +37,20 @@ $services = rd_services();
                 </a>
             <?php endforeach; ?>
         </div>
+    </section>
+    <section id="quick-quote" class="rd-shell rd-quick-quote" aria-labelledby="rd-quick-title">
+<div><span class="rd-gallery-kicker">ابدأ من هنا</span><h2 id="rd-quick-title">ما الخدمة التي تحتاجها؟</h2><p>اختر الخدمة وانتقل مباشرة إلى طلب عرض السعر.</p></div>
+<form action="<?php echo esc_url(rd_url('contact')); ?>" method="get" class="rd-quick-form" data-quick-quote>
+<label for="rd-quick-service">نوع الخدمة</label><select id="rd-quick-service" name="service" required><option value="">اختر من الخدمات</option><?php foreach ($services as $slug => $service): ?><option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($service['short']); ?></option><?php endforeach; ?></select><button type="submit" class="rd-button rd-button-solid">متابعة طلب السعر</button>
+</form></section>
+    <section class="rd-shell rd-section" id="services">
+        <?php rd_heading('خدمات مختارة للديكور والتشطيبات', 'ست خدمات مختارة للبدء؛ جميع الخدمات متاحة في الدليل الكامل.', rd_url('services'), 'جميع الخدمات'); ?>
+        <?php rd_service_cards(array_intersect_key($services,array_flip(['mirrors','bedrooms','tv-walls','wood-partitions','flooring','painting']))); ?>
+    </section>
+
+    <section class="rd-shell rd-home-banner rd-split-banner" aria-labelledby="rd-home-banner-title">
+        <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
+        <div class="rd-home-banner-content"><span class="rd-kicker">أفكار للصالات والمجالس</span><h2 id="rd-home-banner-title">خلفية تلفزيون بتفاصيل تناسب مساحتك</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service','tv-walls',rd_url('contact'))); ?>">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
     </section>
     <section class="rd-ideas rd-section" id="design-gallery" aria-labelledby="rd-gallery-title">
         <div class="rd-shell">
@@ -60,49 +74,26 @@ $services = rd_services();
         </div>
     </section>
 
-    <section id="quick-quote" class="rd-shell rd-quick-quote" aria-labelledby="rd-quick-title">
-<div><span class="rd-gallery-kicker">ابدأ من هنا</span><h2 id="rd-quick-title">ما الخدمة التي تحتاجها؟</h2><p>اختر الخدمة وانتقل مباشرة إلى طلب عرض السعر.</p></div>
-<form action="<?php echo esc_url(rd_url('contact')); ?>" method="get" class="rd-quick-form" data-quick-quote>
-<label for="rd-quick-service">نوع الخدمة</label><select id="rd-quick-service" name="service" required><option value="">اختر من الخدمات</option><?php foreach ($services as $slug => $service): ?><option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($service['short']); ?></option><?php endforeach; ?></select><button type="submit" class="rd-button rd-button-solid">متابعة طلب السعر</button>
-</form></section>
-    <section class="rd-shell rd-journey-tools"><div><h2>ابدأ مشروعك بثلاث خطوات واضحة</h2><p>اختر الخدمة، جهّز المقاسات، وقارن الخامات قبل طلب العرض.</p></div><div class="rd-related"><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة</a><a href="<?php echo esc_url(rd_url('estimate')); ?>">تجهيز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div></section>
     <section class="rd-shell rd-section rd-home-spaces" id="spaces">
         <?php rd_heading('ديكور لكل مساحة في منزلك','اختر المكان الذي ترغب في تطويره واستكشف الخدمات والتصاميم المناسبة.',rd_url('spaces'),'جميع المساحات والأدلة'); rd_space_cards(array_slice(rd_space_content(),0,6,true)); ?>
         <div class="rd-related"><?php foreach(array_slice(rd_space_content(),6,null,true) as $key=>$item): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($item['title']); ?></a><?php endforeach; ?></div>
-    </section>
-    <section class="rd-shell rd-section rd-property-promo">
-        <?php rd_heading('ديكور يناسب نوع عقارك','خطط لتجهيز أو تجديد الفيلا والشقة وفق الاستخدام الفعلي.',rd_url('property-types'),'جميع أدلة العقارات'); rd_space_cards(array_filter(rd_library_content(),static fn($item)=>$item['parent']==='property-types')); ?>
-    </section>
-    <section class="rd-shell rd-section" id="services">
-        <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.', rd_url('services'), 'جميع الخدمات'); ?>
-        <?php rd_service_cards($services); ?>
-    </section>
-
-    <section class="rd-shell rd-home-banner rd-split-banner" aria-labelledby="rd-home-banner-title">
-        <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
-        <div class="rd-home-banner-content"><span class="rd-kicker">أفكار للصالات والمجالس</span><h2 id="rd-home-banner-title">خلفية تلفزيون بتفاصيل تناسب مساحتك</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
-    </section>
-    <section class="rd-shell rd-section rd-material-stories" aria-labelledby="rd-material-title">
-        <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات تُكمل هوية كل مساحة</h2></div></div>
-        <div class="rd-material-grid">
-        <?php foreach (['wood-partitions'=>'دفء الخشب وتوازن المساحات','flooring'=>'أرضيات تكمل هوية المكان','shades-and-screens'=>'راحة المساحات الخارجية'] as $slug => $headline): ?>
-            <article class="rd-material-story">
-                <?php rd_image($services[$slug]['image'], ['alt'=>'']); ?>
-                <div><span class="rd-gallery-kicker"><?php echo esc_html($services[$slug]['short']); ?></span><h3><?php echo esc_html($headline); ?></h3><a class="rd-text-link" href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استكشف التصاميم <span aria-hidden="true">←</span></a></div>
-            </article>
-        <?php endforeach; ?>
-        </div>
     </section>
     <section class="rd-shell rd-room-banner" aria-labelledby="rd-room-title">
         <div class="rd-room-photos"><?php rd_image($services['bedrooms']['image'], ['alt'=>'']); ?><?php rd_image($services['mirrors']['image'], ['alt'=>'']); ?></div>
         <div class="rd-room-copy"><span class="rd-gallery-kicker">غرف النوم · المرايا والخلفيات</span><h2 id="rd-room-title">غرفة تعكس ذوقك، بتفاصيل حسب المقاس</h2><p>استكشف خلفيات السرير والمرايا حسب المقاس، واختر الخامات والتفاصيل التي تناسب مساحتك.</p><div class="rd-actions"><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/bedrooms')); ?>">خلفيات السرير</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery/mirrors')); ?>">المرايا</a></div></div>
     </section>
-    <section class="rd-shell rd-section rd-content-guide" aria-label="دليل تجهيز المشروع">
-        <?php rd_heading('خطط لمشروع الديكور قبل التنفيذ', 'جهّز المعلومات التي تساعدك على مقارنة الخيارات والحصول على عرض واضح.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
-        <div class="rd-advice-grid">
-            <article><h3>المقاسات والصور</h3><p>صوّر المكان وحدّد أبعاده ومواقع الأبواب والمقابس.</p></article>
-            <article><h3>الخامات والألوان</h3><p>اختر أفكارك من المعرض وقارن العينات في إضاءة المكان.</p></article>
-            <article><h3>نطاق العمل</h3><p>راجع بنود التجهيز والتوريد والتركيب وما يشمله عرض السعر.</p></article>
+    <section class="rd-shell rd-section rd-property-promo">
+        <?php rd_heading('ديكور يناسب نوع عقارك','خطط لتجهيز أو تجديد الفيلا والشقة وفق الاستخدام الفعلي.',rd_url('property-types'),'جميع أدلة العقارات'); rd_space_cards(array_filter(rd_library_content(),static fn($item)=>$item['parent']==='property-types')); ?>
+    </section>
+    <section class="rd-shell rd-section rd-material-stories" aria-labelledby="rd-material-title">
+        <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات وتفاصيل تُكمل هوية المكان</h2></div></div>
+        <div class="rd-material-grid">
+        <?php foreach (['wood-partitions'=>'دفء الخشب وتوازن المساحات','flooring'=>'أرضيات تكمل هوية المكان','shades-and-screens'=>'راحة المساحات الخارجية'] as $slug => $headline): ?>
+            <article class="rd-material-story">
+                <?php rd_image($services[$slug]['image'], ['alt'=>'']); ?>
+                <div><span class="rd-gallery-kicker"><?php echo esc_html($services[$slug]['short']); ?></span><h3><?php echo esc_html($headline); ?></h3><a class="rd-text-link" href="<?php echo esc_url(rd_url('material-library')); ?>">استكشف مكتبة الخامات <span aria-hidden="true">←</span></a></div>
+            </article>
+        <?php endforeach; ?>
         </div>
     </section>
     <section class="rd-shell rd-section rd-home-steps" id="steps">
@@ -112,7 +103,7 @@ $services = rd_services();
             <li><h3>راجع المقاسات والخامات</h3><p>تُراجع حالة الأسطح وتُقارن العينات وتفاصيل التشطيب.</p></li>
             <li><h3>اعتمد نطاق التنفيذ</h3><p>وضّح بنود العرض، وما يدخل في التجهيز والتركيب، والمدة المتوقعة.</p></li>
             <li><h3>راجع التشطيب عند التسليم</h3><p>عاين الأعمال حسب المواصفات المتفق عليها وسجّل الملاحظات.</p></li>
-        </ol>
+        </ol><div class="rd-actions rd-planning-links"><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('service-finder')); ?>">ساعدني في اختيار الخدمة</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز المقاسات</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div>
     </section>
 
     <section class="rd-shell rd-section rd-request-section rd-home-request" id="request">

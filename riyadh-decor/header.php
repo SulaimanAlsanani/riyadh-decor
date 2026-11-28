@@ -44,7 +44,7 @@
             </details>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">المعرض</a>
             <a href="<?php echo esc_url(rd_url('about')); ?>">من نحن</a>
-            <a class="rd-nav-guide" href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة</a>
+            <a class="rd-nav-spaces" href="<?php echo esc_url(rd_url('spaces')); ?>">حسب المساحة</a><a class="rd-nav-guide" href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة</a>
             <a class="rd-nav-search" href="<?php echo esc_url(rd_url('services')); ?>#content"><?php rd_icon('zoom'); ?><span>استكشف الخدمات</span></a>
             <a class="rd-mobile-contact" href="<?php echo esc_url(rd_url('contact')); ?>">تواصل معنا</a>
         </nav>

@@ -23,7 +23,7 @@ while (have_posts()) :
     <?php rd_page_top(get_the_title(), $service['intro'], 'services', 'الخدمات'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_actions($slug); ?>
-        <aside class="rd-service-value"><div><span class="rd-gallery-kicker">خطط لخدمتك في الرياض</span><h2>من اختيار التصميم إلى تحديد نطاق العمل</h2><p><?php echo esc_html($service['price']); ?></p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', $slug, rd_url('estimate'))); ?>">جهّز المقاسات</a></aside>
+        <aside class="rd-service-value"><div><span class="rd-gallery-kicker">خطط لخدمتك في الرياض</span><h2>من اختيار التصميم إلى تحديد نطاق العمل</h2><p>حدد المقاسات وحالة الموقع أولًا، ثم راجع الخامات ونطاق العمل قبل اعتماد العرض.</p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', $slug, rd_url('estimate'))); ?>">جهّز المقاسات</a></aside>
         <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-designs">صور التصاميم</a><a href="#service-guide">دليل الاختيار</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
         <div class="rd-service-layout rd-detail-layout" id="service-options">
             <div>
@@ -59,8 +59,8 @@ while (have_posts()) :
         <h2 id="service-faq">أسئلة شائعة</h2>
         <?php $editorial = rd_editorial()[$slug] ?? null; rd_faq($service['faq'] + ($editorial ? [$editorial[4] => $editorial[5], 'ما الذي يؤثر في تكلفة هذه الخدمة؟' => $service['price']] : [])); ?>
         <?php rd_editorial_links($slug); ?>
-        <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
         <?php rd_related_services($slug); ?>
+        <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
     </div>
 <?php elseif ($section === 'property-types' || isset(rd_library_content()[$section])): ?>
     <?php $library=rd_library_content(); $entry=$library[$section]??null; rd_page_top(get_the_title(),$entry?$entry['intro']:'أفكار وتجهيز وتجديد الفلل والشقق في الرياض.',$entry?$entry['parent']:'spaces',$entry?rd_sections()[$entry['parent']]:'الديكور حسب المساحة'); ?>

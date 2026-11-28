@@ -94,6 +94,9 @@ try {
  report.interactions.push('space catalog and complementary links');
  await page.goto(base);
  assert.equal(await page.locator('.rd-split-banner img').count(),1);
+ assert.equal(await page.locator('#services [data-service-card]').count(),6);
+ assert.equal(await page.locator('#quick-quote').count(),1);
+ assert.equal(await page.locator('.rd-home-v20').count(),1);
  assert.equal(await page.locator('.rd-visual-categories a').count(),4);
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-material-story img').count(),3);
@@ -112,6 +115,13 @@ try {
  await Promise.all([page.waitForURL('**/contact/?service=mirrors'),page.locator('[data-quick-quote] button').click()]);
  assert.equal(await page.locator('[data-request] select[name=service] option:checked').getAttribute('data-service-key'),'mirrors');
  report.interactions.push('homepage quick quote navigation');
+ await page.goto(base+'gallery/mirrors/');
+ const designQuote=page.locator('.rd-photo-actions .rd-card-quote').first();
+ await designQuote.click();
+ await page.waitForURL('**/contact/?**');
+ assert.ok((await page.locator('[data-request] [name=details]').inputValue()).includes('مرجع التصميم:'));
+ assert.equal(await page.locator('[data-request] select[name=service] option:checked').getAttribute('data-service-key'),'mirrors');
+ report.interactions.push('gallery design reference to quote');
  await page.goto(base+'service-finder/');
  await page.locator('[data-finder-space]').selectOption('outdoor');
  assert.equal(await page.locator('[data-finder-card]:visible').count(),3);

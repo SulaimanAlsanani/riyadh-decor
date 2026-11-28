@@ -119,11 +119,11 @@ function rd_description() {
         $services = rd_services();
         $specialty = get_post_meta($current->ID, '_rd_specialty', true);
         if (isset($services[$specialty])) {
-            return $services[$specialty]['intro'];
+            return $services[$specialty]['intro'] . ' في الرياض، تصفح التصاميم وجهّز طلب عرض السعر.';
         }
         $space = rd_space_content()[$current->post_name] ?? rd_library_content()[$current->post_name] ?? null;
         if ($current->post_name === 'property-types') return 'أفكار ديكور وتجهيز وتجديد الفلل والشقق في الرياض حسب المساحة والخامات ونطاق المشروع.';
-        if ($space) return $space['intro'];
+        if ($space) return $space['intro'] . ' دليل ديكورات الرياض.';
         if ($current->post_name === 'spaces') return 'أفكار ديكور المجالس والصالات وغرف النوم والمداخل والأعمال الخارجية وتجديد المنازل في الرياض.';
         $description = wp_trim_words(wp_strip_all_tags(get_the_excerpt($current)), 28, '…');
         if ($description !== '') {

@@ -147,7 +147,7 @@ function rd_image_gallery($keys, $specialty = '') {
                 <figcaption>
                     <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div>
                     <div class="rd-photo-actions">
-                    <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
+                    <?php if($service): ?><a class="rd-card-quote" href="<?php echo esc_url(add_query_arg(['service'=>$specialty,'design'=>$key],rd_url('contact'))); ?>">اطلب سعر هذا التصميم</a><?php endif; ?><a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
                     <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><?php rd_icon('share'); ?><span>مشاركة</span></button>
                     </div><span class="rd-share-status" role="status"></span>
                 </figcaption>
