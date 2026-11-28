@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.4
+Version: 1.2.5
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -563,4 +563,49 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
  .rd-material-story h3 { font-size:1rem; }
  .rd-photo-actions { flex-direction:column; align-items:stretch; }
  .rd-share-design { justify-content:center; }
+}
+
+/* V1.2.5 — semantic design tokens and shared component rules */
+:root {
+ --rd-font:"DIN Next Arabic","DIN Next LT Arabic",Almarai,Tahoma,Arial,sans-serif;
+ --rd-text-sm:.875rem; --rd-text-base:1rem; --rd-text-lg:1.125rem;
+ --rd-weight-normal:400; --rd-weight-bold:700; --rd-weight-heavy:800;
+ --rd-space-1:4px; --rd-space-2:8px; --rd-space-3:12px; --rd-space-4:16px; --rd-space-5:20px; --rd-space-6:24px;
+ --rd-control-height:44px; --rd-control-radius:9px; --rd-card-radius:14px;
+ --rd-focus:var(--orange); --rd-field-border:#a8bab1;
+ --rd-shadow:0 6px 22px #102b280b; --rd-motion:180ms ease;
+}
+body { font-family:var(--rd-font); font-size:var(--rd-text-base); font-weight:var(--rd-weight-normal); }
+h1,h2 { font-weight:var(--rd-weight-heavy); }
+h3 { font-weight:var(--rd-weight-bold); }
+.rd-button,.rd-card-quote,.rd-share-design,.rd-menu-toggle,.rd-service-groups button {
+ min-height:var(--rd-control-height); border-radius:var(--rd-control-radius);
+ font-weight:var(--rd-weight-bold); transition:background-color var(--rd-motion),color var(--rd-motion),border-color var(--rd-motion);
+}
+.rd-button { gap:var(--rd-space-2); }
+.rd-form input,.rd-form select,.rd-form textarea,.rd-search input,.rd-service-search input {
+ min-height:var(--rd-control-height); border-color:var(--rd-field-border); border-radius:var(--rd-control-radius);
+ font-size:var(--rd-text-base);
+}
+.rd-form input:focus,.rd-form select:focus,.rd-form textarea:focus,.rd-search input:focus,.rd-service-search input:focus {
+ border-color:var(--green); box-shadow:0 0 0 2px #086e6420;
+}
+.rd-card,.rd-photo,.rd-related-tile,.rd-material-story,.rd-visual-categories a { border-radius:var(--rd-card-radius); }
+.rd-card,.rd-photo,.rd-material-story { box-shadow:var(--rd-shadow); }
+.rd-card-actions,.rd-photo-actions,.rd-actions { gap:var(--rd-space-2); }
+.rd-icon { width:20px; height:20px; flex:none; vertical-align:middle; stroke-linecap:round; stroke-linejoin:round; }
+.rd-float a { min-height:var(--rd-control-height); display:flex; align-items:center; justify-content:center; gap:var(--rd-space-1); }
+.rd-share-design .rd-icon { width:18px;height:18px; }
+.rd-photo-zoom .rd-icon { width:20px;height:20px; }
+:focus-visible { outline-color:var(--rd-focus); }
+@media(max-width:510px) {
+ .rd-float a { font-size:var(--rd-text-sm); padding-inline:8px; }
+ .rd-float .rd-icon { width:17px;height:17px; }
+ .rd-card-actions { gap:var(--rd-space-2); }
+ .rd-photo-actions { gap:var(--rd-space-1); }
+ .rd-photo figcaption .rd-text-link,.rd-share-design { font-size:.8rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+ html { scroll-behavior:auto; }
+ .rd-button,.rd-card-quote,.rd-share-design,.rd-menu-toggle,.rd-service-groups button,.rd-card-media img,.rd-photo img,.rd-gallery-tile img { transition:none; }
 }
