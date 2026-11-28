@@ -158,7 +158,7 @@ if (typeof HTMLDialogElement !== 'undefined') {
         current = (index + items.length) % items.length;
         image.src = items[current].href;
         image.alt = items[current].dataset.caption;
-        caption.textContent = items[current].dataset.caption;
+        caption.textContent = (current + 1).toLocaleString('ar-SA') + ' / ' + items.length.toLocaleString('ar-SA') + ' — ' + items[current].dataset.caption;
     };
 
     for (const gallery of document.querySelectorAll('[data-gallery]')) {
