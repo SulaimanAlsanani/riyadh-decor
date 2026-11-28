@@ -97,12 +97,17 @@ try {
  assert.equal(await page.locator('.rd-space-services article').count(),3);
  report.interactions.push('project guidance library and service links');
  for(const path of ["property-types/","material-wood/","material-glass/","material-flooring/","material-paint/","material-ceiling/","material-wallcovering/","compare-flooring/","compare-walls/","compare-partitions/","style-modern/","style-classic/","style-neoclassic/","villa-decor/","apartment-decor/","villa-renovation/","apartment-renovation/"]) await verify(path,390,900);
+ for(const slug of ["style-contemporary","style-minimalist","style-modern-arabic","material-parquet","material-vinyl","material-cement-board","material-foam-fiber","material-carved-wood","material-sandwich-panel","compare-mirrors","compare-paint-sheen","compare-shades"]){await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.ok(await page.locator('.rd-space-services article').count()>=1);}
  await verify('material-library/',1440,900,true);
+ await verify('design-styles/',1440,900,true);
  await verify('property-types/',1440,900,true);
  await page.goto(base+'property-types/');
  assert.equal(await page.locator('.rd-space-card').count(),9);
  await page.goto(base+'material-library/');
- assert.equal(await page.locator('.rd-space-card').count(),9);
+ assert.equal(await page.locator('#material-guides .rd-space-card').count(),12);
+ assert.equal(await page.locator('#material-comparisons .rd-space-card').count(),8);
+ await page.goto(base+'design-styles/');
+ assert.equal(await page.locator('.rd-encyclopedia .rd-space-card').count(),6);
  report.interactions.push('material library and property guides');
  await page.goto(base+'spaces/');
  assert.equal(await page.locator('.rd-space-card').count(),15);
