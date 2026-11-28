@@ -85,6 +85,7 @@ function rd_service_cards($services, $section = 'services') {
                 <span><?php echo $is_gallery ? 'ابحث في المعرض' : 'ابحث عن خدمة'; ?></span>
                 <input type="search" data-service-search aria-controls="<?php echo esc_attr($grid_id); ?>" placeholder="مثل باركيه أو مرايا">
             </label>
+            <button class="rd-filter-clear" type="button" data-service-clear hidden>مسح البحث والفلاتر</button>
             <div class="rd-service-groups" role="group" aria-label="تصفية حسب نوع العمل">
                 <?php foreach (['all' => 'الكل'] + $group_labels as $group => $label): ?>
                     <button type="button" data-service-group="<?php echo esc_attr($group); ?>" aria-pressed="<?php echo $group === 'all' ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr($grid_id); ?>"><?php echo esc_html($label); ?></button>
@@ -104,7 +105,10 @@ function rd_service_cards($services, $section = 'services') {
                     <?php endif; ?>
                     <h3><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
                     <p><?php echo esc_html($service['intro']); ?></p>
-                    <a class="rd-text-link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($link_label); ?> <span aria-hidden="true">←</span><span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
+                    <div class="rd-card-actions">
+                        <a class="rd-text-link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($link_label); ?> <span aria-hidden="true">←</span><span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
+                        <?php if (!$is_gallery): ?><a class="rd-card-quote" href="<?php echo esc_url(add_query_arg('service', $slug, rd_url('contact'))); ?>">طلب سعر<span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a><?php endif; ?>
+                    </div>
                 </div>
             </article>
         <?php endforeach; ?>

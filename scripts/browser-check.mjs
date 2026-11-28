@@ -53,11 +53,14 @@ try {
  await page.locator('[data-service-group="all"]').click();
  await page.locator('[data-service-search]').fill('مرايا');
  assert.ok(await page.locator('[data-service-card]:visible').count()>0);
+ await page.locator('[data-service-clear]').click();
+ assert.equal(await page.locator('[data-service-search]').inputValue(),'');
  await page.locator('[data-service-search]').fill('zzzznotfound');
  assert.equal(await page.locator('[data-service-card]:visible').count(),0);
  await page.locator('[data-service-reset]').click();
  assert.ok(await page.locator('[data-service-card]:visible').count()>=16);
- report.interactions.push('category filters, search and reset');
+ assert.ok((await page.locator('.rd-card-quote').first().getAttribute('href')).includes('service='));
+ report.interactions.push('category filters, search, clear, reset and contextual quote links');
  await page.setViewportSize({width:390,height:844});
  await page.goto(base);
  await page.locator('.rd-menu-toggle').click();

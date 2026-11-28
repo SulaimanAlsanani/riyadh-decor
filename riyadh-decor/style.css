@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.1.1
+Version: 1.2.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -397,3 +397,39 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
 @media(prefers-reduced-motion:reduce) {
  .rd-gallery-tile img,.rd-service-card-grid .rd-card { transition:none; }
 }
+
+/* V1.2.0 — customer-oriented visual hierarchy */
+.rd-hero-content h1 { letter-spacing:normal; max-width:650px; line-height:1.22; }
+.rd-hero-content .rd-actions { gap:12px; }
+.rd-jump a { min-height:52px; display:flex; align-items:center; justify-content:center; }
+.rd-home-intro-links a { min-height:58px; }
+.rd-service-card-grid .rd-card { border-radius:14px; box-shadow:0 3px 12px #102b2808; }
+.rd-service-card-grid .rd-card-media img { aspect-ratio:4/3; }
+.rd-card-actions { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; width:100%; border-top:1px solid var(--line); padding-top:10px; margin-top:12px; }
+.rd-card-actions .rd-text-link { margin:0; flex:1; }
+.rd-card-quote { text-decoration:none; color:var(--deep); background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-size:.85rem; font-weight:700; min-height:44px; display:inline-flex; align-items:center; }
+.rd-card-quote:hover { background:var(--deep); color:white; }
+.rd-filter-clear { background:transparent; color:var(--green); border:0; min-height:44px; padding:6px 10px; text-decoration:underline; font-size:.9rem; }
+.rd-editorial-gallery { grid-auto-rows:minmax(220px,auto); }
+.rd-editorial-gallery .rd-gallery-tile { min-height:250px; }
+.rd-gallery-tile>span { background:linear-gradient(0deg,#092b2760,transparent); }
+.rd-home-request .rd-form { border:1px solid var(--line); }
+@media(min-width:1001px) {
+ .rd-editorial-gallery { grid-template-columns:repeat(4,minmax(0,1fr)); }
+ .rd-editorial-gallery .rd-gallery-tile:first-child,.rd-editorial-gallery .rd-gallery-tile:last-child { grid-column:span 2; }
+ .rd-editorial-gallery .rd-gallery-tile { min-height:280px; }
+}
+@media(max-width:780px) {
+ .rd-editorial-gallery { grid-auto-rows:auto; }
+ .rd-editorial-gallery .rd-gallery-tile { min-height:215px; }
+ .rd-service-filters { min-width:0; }
+}
+@media(max-width:510px) {
+ .rd-jump .rd-shell { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .rd-jump a { min-height:44px; border-block-end:1px solid #ffffff32; }
+ .rd-editorial-gallery .rd-gallery-tile { min-height:190px; }
+ .rd-card-actions .rd-card-quote { min-width:100px; justify-content:center; }
+ .rd-hero-content .rd-actions .rd-button { flex:1; text-align:center; justify-content:center; }
+ .rd-float { bottom:max(10px,env(safe-area-inset-bottom)); }
+}
+@media(prefers-reduced-motion:reduce) { .rd-service-card-grid .rd-card-media img { transition:none; } }

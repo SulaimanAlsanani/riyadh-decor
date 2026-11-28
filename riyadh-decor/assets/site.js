@@ -50,6 +50,7 @@ for (const list of document.querySelectorAll('[data-service-list]')) {
     const groups = [...filters.querySelectorAll('[data-service-group]')];
     const status = filters.querySelector('[data-service-status]');
     const empty = list.querySelector('[data-service-empty]');
+    const clear = filters.querySelector('[data-service-clear]');
     const cards = [...list.querySelectorAll('[data-service-card]')].map((card) => ({
         element: card,
         group: card.dataset.serviceCard,
@@ -69,6 +70,7 @@ for (const list of document.querySelectorAll('[data-service-list]')) {
             if (visible) count++;
         }
         empty.hidden = count > 0;
+        if (clear) clear.hidden = !search.value.trim() && activeGroup === 'all';
         status.textContent = count ? 'عدد النتائج: ' + count.toLocaleString('ar-SA') : 'لا توجد نتائج مطابقة.';
     };
 
@@ -80,6 +82,7 @@ for (const list of document.querySelectorAll('[data-service-list]')) {
         });
     }
     search.addEventListener('input', update);
+    clear?.addEventListener('click', () => { search.value = ''; groups[0].click(); search.focus(); });
     empty.querySelector('[data-service-reset]').addEventListener('click', () => {
         search.value = '';
         groups[0].click();

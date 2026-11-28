@@ -6,7 +6,7 @@ $services = rd_services();
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content">
-            <p class="rd-kicker">ديكورات داخلية في الرياض</p>
+            <p class="rd-kicker">ديكورات وتشطيبات · الرياض</p>
             <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
             <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'ديكورات حسب المقاس، وأعمال تشطيب وترميم للمنازل والفلل في الرياض.')); ?></p>
             <div class="rd-actions">
@@ -21,6 +21,7 @@ $services = rd_services();
         <a href="#services">الخدمات</a>
         <a href="#design-gallery">معرض التصاميم</a>
         <a href="#steps">خطوات تجهيز المشروع</a>
+        <a href="#request">طلب عرض سعر</a>
     </div></div>
 
     <section class="rd-shell rd-home-intro" aria-label="مجالات الديكور والتشطيب">
@@ -42,7 +43,7 @@ $services = rd_services();
                 <div><p class="rd-gallery-kicker">إلهام لمساحتك</p><h2 id="rd-gallery-title">تصفّح أفكار الديكور والتشطيبات</h2><p>نماذج تصاميم من معرض الصور، اختر منها ما يناسب ذوقك ومساحتك.</p></div>
                 <a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery')); ?>">جميع التصاميم</a>
             </div>
-            <div class="rd-featured-gallery">
+            <div class="rd-featured-gallery rd-editorial-gallery">
                 <?php foreach (['bedrooms', 'tv-walls', 'wood-partitions', 'flooring', 'suspended-ceilings', 'shades-and-screens'] as $slug):
                     if (!isset($services[$slug])) continue;
                     $service = $services[$slug];
