@@ -104,6 +104,7 @@ try {
  await page.locator('[name=length]').fill('4');
  await page.locator('[name=width]').fill('3');
  await page.locator('[name=quantity]').fill('2');
+ assert.ok((await page.locator('[data-estimate-result]').textContent()).includes('م²'));
  await page.locator('[data-estimate] button').click();
  await page.waitForURL('**/contact/?**');
  assert.ok((await page.locator('[data-request] [name=details]').inputValue()).includes('24.00'));
