@@ -118,12 +118,13 @@ while (have_posts()) :
     <?php rd_page_top('الأدلة والمقالات', 'اقرأ حسب نوع مشروعك، من تجهيز السطح واختيار الخامة إلى مراجعة التركيب.'); ?>
     <div class="rd-shell rd-section">
         <section class="rd-blog-feature"><?php rd_image('majlis',['alt'=>'']); ?><div><h2>أفكار عملية قبل بدء مشروعك</h2><p>أدلة متخصصة تساعدك في اختيار التشطيبات وتنسيق المساحات.</p><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('materials-colors')); ?>">دليل الخامات والألوان</a></div></section>
-        <div class="rd-pills"><?php foreach ($services as $key => $item): ?>
+        <section class="rd-knowledge-topics"><h2>تصفح مركز المعرفة حسب الموضوع</h2><div class="rd-knowledge-grid"><?php foreach(rd_knowledge_topics() as $key=>$label): $term=get_term_by('slug',$key,'category'); if(!$term)continue; ?><a href="<?php echo esc_url(get_category_link($term)); ?>"><strong><?php echo esc_html($label); ?></strong><span><?php echo esc_html(number_format_i18n($term->count)); ?> مقالات ←</span></a><?php endforeach; ?></div></section>
+        <details class="rd-knowledge-specialties"><summary>تصفح حسب تخصص الخدمة</summary><div class="rd-pills"><?php foreach ($services as $key => $item): ?>
             <?php $category_url = rd_category_link($key, false); ?>
             <?php if ($category_url): ?>
                 <a href="<?php echo esc_url($category_url); ?>"><?php echo esc_html($item['short']); ?></a>
             <?php endif; ?>
-        <?php endforeach; ?></div>
+        <?php endforeach; ?></div></details>
         <div class="rd-related"><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">دليل الخامات والألوان</a><a href="<?php echo esc_url(rd_url('project-planning')); ?>">دليل تجهيز المشروع</a></div>
         <?php get_search_form(); ?>
         <?php $number = max(1, absint($_GET['guide_page'] ?? 1)); $query = rd_guides(6, '', $number); ?>

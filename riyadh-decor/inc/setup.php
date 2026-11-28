@@ -67,6 +67,30 @@ function rd_seed_content() {
         }
     }
 
+    $topic_ids = [];
+    foreach(rd_knowledge_topics() as $key=>$label){
+        $term=term_exists($key,'category');
+        if(!$term)$term=wp_insert_term($label,'category',['slug'=>$key]);
+        if(is_wp_error($term))return $term;
+        $topic_ids[$key]=(int)$term['term_id'];
+    }
+    foreach(rd_knowledge_original_topics() as $service=>$topic){
+        $post=get_page_by_path($service.'-guide-1',OBJECT,'post');
+        if($post && get_post_meta($post->ID,'_rd_owned',true)){
+            $assigned=wp_set_post_categories($post->ID,[$topic_ids[$topic]],true);
+            if(is_wp_error($assigned))return $assigned;
+        }
+    }
+    foreach(rd_knowledge_articles() as $slug=>$item){
+        if(get_page_by_path($slug,OBJECT,'post'))continue;
+        $service_term=term_exists($item['service'],'category');
+        if(!$service_term||is_wp_error($service_term))return new WP_Error('rd_missing_service_category',$item['service']);
+        $content='';
+        foreach($item['paragraphs'] as $i=>$paragraph)$content.='<h2>'.esc_html(['ما الذي تحدده؟','ما الذي تراجعه؟','قبل الاعتماد'][$i]).'</h2><p>'.esc_html($paragraph).'</p>';
+        $id=wp_insert_post(['post_type'=>'post','post_status'=>'publish','post_name'=>$slug,'post_title'=>$item['title'],'post_excerpt'=>$item['paragraphs'][0],'post_content'=>$content,'comment_status'=>'closed','post_category'=>[(int)$service_term['term_id'],$topic_ids[$item['topic']]],'meta_input'=>['_rd_owned'=>1,'_rd_knowledge_guide'=>$item['guide']]],true);
+        if(is_wp_error($id))return $id;
+    }
+
     if (get_option('show_on_front') === 'posts' && get_post_meta($home, '_rd_owned', true)) {
         update_option('show_on_front', 'page');
         update_option('page_on_front', $home);

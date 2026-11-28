@@ -9,6 +9,7 @@ require_once __DIR__ . '/spaces.php';
 require_once __DIR__ . '/library.php';
 require_once __DIR__ . '/service-faq-extra.php';
 require_once __DIR__ . '/service-specifications.php';
+require_once __DIR__ . '/knowledge.php';
 
 function rd_services() {
     return [

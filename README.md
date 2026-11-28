@@ -45,3 +45,6 @@ python3 -m http.server 8080 --directory dist
 | V3.0.0 | التدقيق والاعتماد والنشر |
 
 لا تُعتمد مرحلة قبل نجاح البناء والروابط واختبارات المتصفح ومطابقة revision.txt. الصور الأصلية لا تستبدل، ولا تضاف ادعاءات أو أسعار غير موثقة.
+
+### V2.8 content counting
+The export logs published page/post routes separately from category archives, guide pagination and search. The target 178 is editorial, not raw export routes; preserving existing useful pages takes precedence over deleting pages to match the target. The knowledge center preserves 16 existing specialist article URLs and adds 48 unique articles under 8 editorial topics, while retaining specialty categories.

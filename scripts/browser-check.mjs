@@ -82,6 +82,12 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const slug of ["knowledge-majlis-focal-wall","knowledge-quiet-modern","knowledge-wood-edge","knowledge-paint-test-patch","knowledge-renovation-inventory","knowledge-quantity-sheet","knowledge-mirror-cleaning","knowledge-shade-orientation"]){await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.equal(await page.locator('.rd-article-guide').count(),1);}
+ await page.goto(base+'guides/');
+ assert.equal(await page.locator('.rd-knowledge-grid>a').count(),8);
+ await page.goto(base+'search/?s='+encodeURIComponent('تنظيم طلبات التغيير أثناء التشطيب'));
+ await page.locator('#rd-search-results a[href*="knowledge-change-orders"]').waitFor();
+ report.interactions.push('knowledge topics and article search');
  for(const slug of ["measurement-planning","renovation-sequence","contract-scope","sample-approval","site-readiness","aftercare-planning","bedroom-solutions","tv-wall-solutions","renovation-solutions"]){await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.ok(await page.locator('.rd-space-services article').count()>=3);}
  report.interactions.push('project and needs-first editorial coverage');
  for(const slug of ["dining-room-decor","hallway-decor","home-office-decor","staircase-decor","rooftop-decor","palace-decor","rest-house-decor","office-decor","retail-decor","restaurant-decor"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.equal(await page.locator('.rd-space-banner-v25 img').count(),1);assert.ok(await page.locator('.rd-space-services article').count()>=3);}

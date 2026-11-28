@@ -88,12 +88,14 @@ const sitemap = load(await (await read('/wp-sitemap.xml')).text(), { xml: true }
 const maps = sitemap('sitemap > loc').toArray().map((e) => new URL(sitemap(e).text()).pathname);
 const routes = new Map([['/', '/']]);
 const articlePaths = new Set();
+const editorialPaths = new Set(['/']);
 for (const map of maps.filter((path) => /wp-sitemap-(posts|taxonomies)-/.test(path))) {
     const submap = load(await (await read(map)).text(), { xml: true });
     for (const location of submap('url > loc').toArray()) {
         const path = new URL(submap(location).text()).pathname;
         routes.set(path, path);
         if (map.includes('posts-post-')) articlePaths.add(path);
+        if(map.includes('posts-post-')||map.includes('posts-page-'))editorialPaths.add(path);
     }
 }
 
@@ -116,7 +118,7 @@ for (const [path, source] of routes) {
     if (articlePaths.has(path) || (path.startsWith('/services/') && path !== '/services/') || $('#content .rd-space-content,#content .rd-library-content').length) {
         const title = $('#content h1').first().text().trim();
         const excerpt = $('meta[name="description"]').attr('content') || $('#content p').first().text().trim();
-        articles.push({ path, title, excerpt, text: $('#content').text().replace(/\s+/g, ' ').trim() });
+        articles.push({ path, title, excerpt, kind:articlePaths.has(path)?'article':'guide', text: $('#content').text().replace(/\s+/g, ' ').trim() });
     }
 
     if (path === '/search/') {
@@ -196,4 +198,5 @@ missing('head').append('<meta name="robots" content="noindex,follow">');
 missing('head').html(`<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>الصفحة غير موجودة | ديكورات الرياض</title><link rel="stylesheet" href="${absolute('/wp-content/themes/riyadh-decor/style.css')}">`);
 missing('body').html(`<main class="rd-shell rd-section"><h1>الصفحة غير موجودة</h1><p><a href="${absolute('/')}">العودة إلى الرئيسية</a></p></main>`);
 await save('/404.html', missing.html());
+console.log(`Editorial content audit: ${editorialPaths.size} published page/post routes, ${articlePaths.size} articles, target 178 (technical routes excluded).`);
 console.log(`Exported ${routes.size} routes, ${articles.length} searchable entries and ${assets.size} referenced assets.`);
