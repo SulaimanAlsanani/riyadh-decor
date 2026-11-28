@@ -75,15 +75,15 @@ $services = rd_services();
     </section>
 
     <section class="rd-shell rd-section rd-home-spaces" id="spaces">
-        <?php rd_heading('ديكور لكل مساحة في منزلك','اختر المكان الذي ترغب في تطويره واستكشف الخدمات والتصاميم المناسبة.',rd_url('spaces'),'جميع المساحات والأدلة'); rd_space_cards(array_slice(rd_space_content(),0,6,true)); ?>
-        <div class="rd-related"><?php foreach(array_slice(rd_space_content(),6,null,true) as $key=>$item): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($item['title']); ?></a><?php endforeach; ?></div>
+        <?php rd_heading('ديكور لكل مساحة في منزلك','اختر المكان الذي ترغب في تطويره واستكشف الخدمات والتصاميم المناسبة.',rd_url('spaces'),'جميع المساحات والأدلة'); rd_space_cards(array_slice(rd_room_catalog(),0,6,true)); ?>
+        <div class="rd-related"><?php foreach(array_diff_key(rd_space_content(),array_slice(rd_room_catalog(),0,6,true)) as $key=>$item): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($item['title']); ?></a><?php endforeach; ?></div>
     </section>
     <section class="rd-shell rd-room-banner" aria-labelledby="rd-room-title">
         <div class="rd-room-photos"><?php rd_image($services['bedrooms']['image'], ['alt'=>'']); ?><?php rd_image($services['mirrors']['image'], ['alt'=>'']); ?></div>
         <div class="rd-room-copy"><span class="rd-gallery-kicker">غرف النوم · المرايا والخلفيات</span><h2 id="rd-room-title">غرفة تعكس ذوقك، بتفاصيل حسب المقاس</h2><p>استكشف خلفيات السرير والمرايا حسب المقاس، واختر الخامات والتفاصيل التي تناسب مساحتك.</p><div class="rd-actions"><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/bedrooms')); ?>">خلفيات السرير</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery/mirrors')); ?>">المرايا</a></div></div>
     </section>
     <section class="rd-shell rd-section rd-property-promo">
-        <?php rd_heading('ديكور يناسب نوع عقارك','خطط لتجهيز أو تجديد الفيلا والشقة وفق الاستخدام الفعلي.',rd_url('property-types'),'جميع أدلة العقارات'); rd_space_cards(array_filter(rd_library_content(),static fn($item)=>$item['parent']==='property-types')); ?>
+        <?php rd_heading('ديكور يناسب نوع عقارك','خطط لتجهيز أو تجديد الفيلا والشقة وفق الاستخدام الفعلي.',rd_url('property-types'),'جميع أدلة العقارات'); rd_space_cards(array_slice(array_filter(rd_library_content(),static fn($item)=>$item['parent']==='property-types'),0,4,true)); ?>
     </section>
     <section class="rd-shell rd-section rd-material-stories" aria-labelledby="rd-material-title">
         <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات وتفاصيل تُكمل هوية المكان</h2></div></div>

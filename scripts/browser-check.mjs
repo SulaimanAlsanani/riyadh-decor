@@ -82,6 +82,8 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const slug of ["dining-room-decor","hallway-decor","home-office-decor","staircase-decor","rooftop-decor","palace-decor","rest-house-decor","office-decor","retail-decor","restaurant-decor"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.equal(await page.locator('.rd-space-banner-v25 img').count(),1);assert.ok(await page.locator('.rd-space-services article').count()>=3);}
+ report.interactions.push('expanded room and property content');
  for(const slug of ["solutions","privacy-solutions","storage-solutions","wall-solutions","compare-ceilings","compare-wall-panels","color-palette","light-and-color","courtyard-planning","outdoor-privacy","contractor-selection","quotation-review"]) {await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);}
  await page.goto(base+'solutions/');
  assert.equal(await page.locator('.rd-space-card').count(),11);
@@ -98,12 +100,12 @@ try {
  await verify('material-library/',1440,900,true);
  await verify('property-types/',1440,900,true);
  await page.goto(base+'property-types/');
- assert.equal(await page.locator('.rd-space-card').count(),4);
+ assert.equal(await page.locator('.rd-space-card').count(),9);
  await page.goto(base+'material-library/');
  assert.equal(await page.locator('.rd-space-card').count(),9);
  report.interactions.push('material library and property guides');
  await page.goto(base+'spaces/');
- assert.equal(await page.locator('.rd-space-card').count(),10);
+ assert.equal(await page.locator('.rd-space-card').count(),15);
  await page.goto(base+'bedroom-decor/');
  assert.equal(await page.locator('.rd-space-services article').count(),5);
  report.interactions.push('space catalog and complementary links');
