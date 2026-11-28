@@ -114,7 +114,8 @@ function rd_description() {
         if (isset($services[$specialty])) {
             return $services[$specialty]['intro'];
         }
-        $space = rd_space_content()[$current->post_name] ?? null;
+        $space = rd_space_content()[$current->post_name] ?? rd_library_content()[$current->post_name] ?? null;
+        if ($current->post_name === 'property-types') return 'أفكار ديكور وتجهيز وتجديد الفلل والشقق في الرياض حسب المساحة والخامات ونطاق المشروع.';
         if ($space) return $space['intro'];
         if ($current->post_name === 'spaces') return 'أفكار ديكور المجالس والصالات وغرف النوم والمداخل والأعمال الخارجية وتجديد المنازل في الرياض.';
         $description = wp_trim_words(wp_strip_all_tags(get_the_excerpt($current)), 28, '…');
@@ -152,7 +153,8 @@ add_action('wp_head', function () {
         $specialty = $current instanceof WP_Post ? get_post_meta($current->ID, '_rd_specialty', true) : '';
         if (is_singular('post') && $current instanceof WP_Post) $specialty = rd_service_for_post($current->ID);
         $service = rd_services()[$specialty] ?? null;
-        $image = $service ? rd_asset(rd_media_filename($service['image'])) : rd_asset('majlis.webp');
+        $editorial_page = $current instanceof WP_Post ? (rd_library_content()[$current->post_name] ?? rd_space_content()[$current->post_name] ?? null) : null;
+        $image = $service ? rd_asset(rd_media_filename($service['image'])) : ($editorial_page ? rd_asset(rd_media_filename($editorial_page['image'])) : rd_asset('majlis.webp'));
         $canonical = is_front_page() ? home_url('/') : ($current instanceof WP_Post ? get_permalink($current) : '');
         printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url($image));
         printf("<meta property=\"og:image:alt\" content=\"%s\">\n", esc_attr($service['alt'] ?? 'ديكورات الرياض'));

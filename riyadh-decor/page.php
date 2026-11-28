@@ -62,14 +62,25 @@ while (have_posts()) :
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
         <?php rd_related_services($slug); ?>
     </div>
+<?php elseif ($section === 'property-types' || isset(rd_library_content()[$section])): ?>
+    <?php $library=rd_library_content(); $entry=$library[$section]??null; rd_page_top(get_the_title(),$entry?$entry['intro']:'أفكار وتجهيز وتجديد الفلل والشقق في الرياض.',$entry?$entry['parent']:'spaces',$entry?rd_sections()[$entry['parent']]:'الديكور حسب المساحة'); ?>
+    <div class="rd-shell rd-section rd-library-content">
+      <?php if(!$entry): rd_space_cards(array_filter($library,static fn($item)=>$item['parent']==='property-types')); else: ?>
+        <section class="rd-space-feature"><?php rd_image($entry['image'],['loading'=>'eager']); ?><div><span class="rd-gallery-kicker">دليل الاختيار</span><h2>ما الذي تراجعه قبل الاعتماد؟</h2><ul><?php foreach($entry['points'] as $point): ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?></ul><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز طلب التقدير</a></div></section>
+        <?php rd_heading('الخدمات والتصاميم المرتبطة'); ?>
+        <div class="rd-space-services"><?php foreach($entry['services'] as $key): $item=$services[$key]??null;if(!$item)continue; ?><article><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><p><?php echo esc_html($item['intro']); ?></p><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">تفاصيل الخدمة</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">معرض الصور</a></div></div></article><?php endforeach; ?></div>
+        <?php rd_heading('أدلة مرتبطة'); rd_space_cards(array_slice(array_filter($library,static fn($item,$key)=>$item['parent']===$entry['parent'] && $key!==$section,ARRAY_FILTER_USE_BOTH),0,3,true)); ?>
+      <?php endif; rd_end_cta(); ?>
+    </div>
 <?php elseif ($section === 'spaces' || isset(rd_space_content()[$section])): ?>
     <?php $space_catalog=rd_space_content(); $space=$space_catalog[$section]??null; rd_page_top(get_the_title(), $space ? $space['intro'] : 'استكشف الديكور حسب مساحة المنزل، ثم قارن أنماط التصميم والخامات وجهّز مشروعك.', $space?'spaces':'', $space?'الديكور حسب المساحة':''); ?>
     <div class="rd-shell rd-section rd-space-content">
         <?php if (!$space): ?>
             <?php rd_heading('اختر المساحة التي تريد تطويرها'); rd_space_cards(array_slice($space_catalog,0,6,true)); ?>
-            <?php rd_heading('أدلة التصميم والخامات'); rd_space_cards(array_slice($space_catalog,6,null,true)); ?>
+            <?php rd_heading('أدلة التصميم والخامات'); rd_space_cards(array_slice($space_catalog,6,null,true)); ?><div class="rd-related"><a href="<?php echo esc_url(rd_url('property-types')); ?>">الديكور حسب نوع العقار</a></div>
         <?php else: ?>
             <section class="rd-space-feature"><?php rd_image($space['image'],['loading'=>'eager']); ?><div><span class="rd-gallery-kicker">دليل ديكورات الرياض</span><h2>خطط للتصميم قبل التنفيذ</h2><ul><?php foreach($space['points'] as $point): ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?></ul><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز مقاسات المشروع</a></div></section>
+            <?php if(in_array($section,['design-styles','material-library'],true)): rd_heading('تصفح الأدلة التفصيلية'); rd_space_cards(array_filter(rd_library_content(),static fn($item)=>$item['parent']===$section)); endif; ?>
             <?php rd_heading('خدمات تناسب هذه الفكرة', 'راجع تفاصيل كل خدمة وصور الخامات قبل اختيار نطاق العمل.'); ?>
             <div class="rd-space-services"><?php foreach($space['services'] as $key): if(!isset($services[$key]))continue; $item=$services[$key]; ?><article><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><p><?php echo esc_html($item['intro']); ?></p><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">تفاصيل الخدمة</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">معرض الصور</a></div></div></article><?php endforeach; ?></div>
             <div class="rd-related"><a href="<?php echo esc_url(rd_url('spaces')); ?>">جميع المساحات والأدلة</a><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">اختيار الخامات والألوان</a><a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a></div>

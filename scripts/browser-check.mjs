@@ -78,6 +78,14 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const path of ["property-types/","material-wood/","material-glass/","material-flooring/","material-paint/","material-ceiling/","material-wallcovering/","compare-flooring/","compare-walls/","compare-partitions/","style-modern/","style-classic/","style-neoclassic/","villa-decor/","apartment-decor/","villa-renovation/","apartment-renovation/"]) await verify(path,390,900);
+ await verify('material-library/',1440,900,true);
+ await verify('property-types/',1440,900,true);
+ await page.goto(base+'property-types/');
+ assert.equal(await page.locator('.rd-space-card').count(),4);
+ await page.goto(base+'material-library/');
+ assert.equal(await page.locator('.rd-space-card').count(),9);
+ report.interactions.push('material library and property guides');
  await page.goto(base+'spaces/');
  assert.equal(await page.locator('.rd-space-card').count(),10);
  await page.goto(base+'bedroom-decor/');

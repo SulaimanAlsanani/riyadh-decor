@@ -70,6 +70,9 @@ $services = rd_services();
         <?php rd_heading('ديكور لكل مساحة في منزلك','اختر المكان الذي ترغب في تطويره واستكشف الخدمات والتصاميم المناسبة.',rd_url('spaces'),'جميع المساحات والأدلة'); rd_space_cards(array_slice(rd_space_content(),0,6,true)); ?>
         <div class="rd-related"><?php foreach(array_slice(rd_space_content(),6,null,true) as $key=>$item): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($item['title']); ?></a><?php endforeach; ?></div>
     </section>
+    <section class="rd-shell rd-section rd-property-promo">
+        <?php rd_heading('ديكور يناسب نوع عقارك','خطط لتجهيز أو تجديد الفيلا والشقة وفق الاستخدام الفعلي.',rd_url('property-types'),'جميع أدلة العقارات'); rd_space_cards(array_filter(rd_library_content(),static fn($item)=>$item['parent']==='property-types')); ?>
+    </section>
     <section class="rd-shell rd-section" id="services">
         <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.', rd_url('services'), 'جميع الخدمات'); ?>
         <?php rd_service_cards($services); ?>
