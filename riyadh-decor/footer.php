@@ -1,4 +1,4 @@
-<footer class="rd-footer rd-polished-footer">
+<footer class="rd-footer rd-polished-footer rd-footer-v17">
     <div class="rd-shell rd-footer-lead rd-footer-v13"><div><h2>ابدأ بتفاصيل مساحتك</h2><p>تصفح التصاميم أو شاركنا متطلبات مشروعك في الرياض.</p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('contact')); ?>">اطلب عرض سعر</a><a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">استكشف المعرض</a></div>
     <div class="rd-shell rd-footer-grid">
         <div>
@@ -12,7 +12,7 @@
             <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a><a href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة والمقالات</a>
         </div>
         <div>
-            <h2>مجالات العمل</h2>
+            <h2>أدوات تجهيز المشروع</h2><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة</a><a href="<?php echo esc_url(rd_url('estimate')); ?>">تجهيز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">الخامات والألوان</a><h2>خدمات مختارة</h2>
             <?php foreach (['mirrors','bedrooms','tv-walls','flooring','painting'] as $key): if (!isset(rd_services()[$key])) continue; ?>
                 <a href="<?php echo esc_url(rd_url('services/' . $key)); ?>"><?php echo esc_html(rd_services()[$key]['short']); ?></a>
             <?php endforeach; ?>

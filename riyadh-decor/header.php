@@ -8,7 +8,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="rd-skip" href="#content">انتقل إلى المحتوى</a>
-<header class="rd-header rd-polished-header rd-header-v13">
+<header class="rd-header rd-polished-header rd-header-v13 rd-header-v17">
     <div class="rd-topbar"><div class="rd-shell"><span>الديكور والتشطيبات الداخلية والخارجية · الرياض</span><div><a href="<?php echo esc_url(rd_tel()); ?>"><bdi><?php echo esc_html(rd_phone()); ?></bdi></a><a href="<?php echo esc_url(rd_wa()); ?>" target="_blank" rel="noopener">واتساب</a></div></div></div>
     <div class="rd-shell rd-header-inner">
         <?php if (has_custom_logo()): ?>
@@ -35,11 +35,12 @@
                     <?php if ($remaining = array_diff_key($nav_services, $nav_seen)): ?>
                         <div class="rd-mega-group"><strong>خدمات أخرى</strong><?php foreach ($remaining as $slug => $service): ?><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>"><?php echo esc_html($service['short']); ?></a><?php endforeach; ?></div>
                     <?php endif; ?>
-                    <div class="rd-mega-bottom"><a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات ←</a><a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض التصاميم ←</a></div>
+                    <div class="rd-mega-bottom"><a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات ←</a><a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض التصاميم ←</a><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة ←</a></div>
                 </div>
             </details>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">المعرض</a>
             <a href="<?php echo esc_url(rd_url('about')); ?>">من نحن</a>
+            <a class="rd-nav-guide" href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة</a>
             <a class="rd-nav-search" href="<?php echo esc_url(rd_url('services')); ?>#content"><?php rd_icon('zoom'); ?><span>استكشف الخدمات</span></a>
             <a class="rd-mobile-contact" href="<?php echo esc_url(rd_url('contact')); ?>">تواصل معنا</a>
         </nav>

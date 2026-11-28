@@ -63,6 +63,7 @@ try {
    report.pages.push({path,width,...result});
    if (result.broken.length || result.overflow || result.h1 !== 1) await page.screenshot({path:'qa-report/failure-'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:true});
    assert.equal(result.h1,1,path);
+   if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('[data-related-service]').count(),3,path+' complementary services');
    if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('.rd-service-advice article').count(),4,path+' content guide');
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
@@ -134,6 +135,10 @@ try {
  await page.goto(base+'gallery/mirrors/');
  assert.ok(await page.locator('.rd-photo-zoom').count()>0);
  assert.ok(await page.locator('[data-share-design]:visible').count()>0);
+ await page.locator('[data-gallery-search]').fill('zzzznotfound');
+ assert.equal(await page.locator('.rd-photo:visible').count(),0);
+ await page.locator('[data-gallery-clear]').click();
+ assert.ok(await page.locator('.rd-photo:visible').count()>0);
  const designId=await page.locator('.rd-photo').first().getAttribute('id');
  assert.ok(designId.startsWith('design-'));
  await page.context().grantPermissions(['clipboard-read','clipboard-write']);
@@ -158,6 +163,8 @@ try {
  const form=page.locator('[data-request]');
  await form.locator('[name=customer]').fill('اختبار آلي');
  await form.locator('[name=area]').fill('الرياض');
+ await form.locator('[name=site_state]').selectOption('موقع جديد');
+ await form.locator('[name=stage]').selectOption('أجهز المقاسات');
  await form.locator('[name=details]').fill('طلب اختبار للمقاسات');
  assert.ok((await form.locator('[data-details-count]').textContent()).startsWith(String('طلب اختبار للمقاسات'.length)));
  assert.equal(await form.locator('select option:checked').getAttribute('data-service-key'),'mirrors');
@@ -166,6 +173,8 @@ try {
  const wa=new URL(link);
  assert.equal(wa.hostname,'wa.me');
  assert.ok(wa.searchParams.get('text').includes('طلب اختبار للمقاسات'));
+ assert.ok(wa.searchParams.get('text').includes('موقع جديد'));
+ assert.ok(wa.searchParams.get('text').includes('أجهز المقاسات'));
  report.interactions.push('prefilled quote and WhatsApp message, not sent');
  assert.deepEqual(report.errors,[]);
 } catch(e){report.errors.push(String(e.stack||e));process.exitCode=1;}

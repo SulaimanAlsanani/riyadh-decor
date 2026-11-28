@@ -128,6 +128,7 @@ function rd_image_gallery($keys, $specialty = '') {
     $service = rd_services()[$specialty] ?? null;
     $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_gallery_media());
     ?>
+    <div class="rd-gallery-tools" data-gallery-tools hidden><label>ابحث في تفاصيل الصور<input type="search" data-gallery-search placeholder="مثل إضاءة أو خشب"></label><button type="button" class="rd-button rd-button-line" data-gallery-clear>عرض الكل</button><p role="status" data-gallery-results></p></div>
     <p class="rd-gallery-count"><?php echo esc_html(number_format_i18n(count($keys))); ?> صورة · اضغط على أي صورة لتكبيرها</p>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
@@ -194,6 +195,7 @@ function rd_request_form($selected = '') {
                 <?php endforeach; ?>
             </select>
         </label>
+        <div class="rd-form-row"><label>حالة الموقع (اختياري)<select name="site_state"><option value="">اختر الحالة</option><option>موقع جديد</option><option>تجديد موقع قائم</option><option>ترميم أو إصلاح</option></select></label><label>مرحلة المشروع (اختياري)<select name="stage"><option value="">اختر المرحلة</option><option>أقارن التصاميم</option><option>أجهز المقاسات</option><option>جاهز لمناقشة التنفيذ</option></select></label></div>
         <label>تفاصيل المشروع والمقاسات
             <textarea name="details" required rows="4" maxlength="1000" placeholder="اذكر المساحة، المقاسات التقريبية، وحالة السطح أو الخامة المطلوبة"></textarea><small class="rd-details-count" data-details-count aria-live="off">0 / 1000</small>
         </label>
@@ -241,23 +243,15 @@ function rd_service_actions($slug, $gallery = false) {
 function rd_related_services($slug, $section = 'services') {
     $services = rd_services();
     $related = [];
-    foreach (rd_service_groups() as [$label, $slugs]) {
-        if (!in_array($slug, $slugs, true)) continue;
-        foreach ($slugs as $key) {
-            if ($key !== $slug && isset($services[$key])) $related[$key] = $services[$key];
-        }
-    }
-    foreach ($services as $key => $service) {
-        if ($key !== $slug && count($related) < 3) $related[$key] = $service;
-    }
-    $related = array_slice($related, 0, 3, true);
+    $map = ['mirrors'=>['bedrooms','tv-walls','foam-trim'],'bedrooms'=>['wardrobes','mirrors','painting'],'tv-walls'=>['chipboard-decor','suspended-ceilings','flooring'],'foam-trim'=>['painting','wallpaper','mirrors'],'wood-partitions'=>['flooring','carved-wood','tempered-glass'],'suspended-ceilings'=>['painting','tv-walls','building-finishing'],'building-finishing'=>['painting','flooring','suspended-ceilings'],'carved-wood'=>['wood-partitions','painting','mirrors'],'tempered-glass'=>['wood-partitions','rooftop-annexes','flooring'],'flooring'=>['painting','wardrobes','foam-trim'],'chipboard-decor'=>['tv-walls','wood-partitions','painting'],'rooftop-annexes'=>['tempered-glass','shades-and-screens','building-finishing'],'shades-and-screens'=>['rooftop-annexes','tempered-glass','building-finishing'],'wallpaper'=>['painting','foam-trim','bedrooms'],'wardrobes'=>['mirrors','bedrooms','flooring'],'painting'=>['foam-trim','wallpaper','building-finishing']];
+    foreach ($map[$slug] ?? [] as $key) if (isset($services[$key])) $related[$key]=$services[$key];
     if (!$related) return;
     ?>
     <section class="rd-related-section" aria-label="خدمات مرتبطة">
-        <?php rd_heading('خدمات قد تناسب مشروعك', '', rd_url($section), 'عرض الكل'); ?>
+        <?php rd_heading('خدمات تكمل مشروعك', '', rd_url($section), 'عرض الكل'); ?>
         <div class="rd-related-grid">
         <?php foreach ($related as $key => $item): ?>
-            <a class="rd-related-tile" href="<?php echo esc_url(rd_url($section . '/' . $key)); ?>">
+            <a class="rd-related-tile" data-related-service="<?php echo esc_attr($key); ?>" href="<?php echo esc_url(rd_url($section . '/' . $key)); ?>">
                 <?php rd_image($item['image'], ['alt' => '']); ?>
                 <span><?php echo esc_html($item['short']); ?> <span aria-hidden="true">←</span></span>
             </a>
