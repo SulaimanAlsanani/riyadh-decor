@@ -39,6 +39,7 @@ try {
    assert.equal(result.h1,1,path);
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
+   await page.evaluate(async()=>{await Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>i.decode()));});
    if(capture) await page.screenshot({path:'qa-report/'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:false});
  }
  for(const width of [390,768,1440]){
@@ -53,6 +54,9 @@ try {
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-material-story img').count(),3);
  assert.equal(await page.locator('.rd-room-photos img').count(),2);
+ await page.evaluate(async()=>{for(const img of document.images) if(img.getAttribute('src')) img.loading='eager';await document.fonts.ready;});
+ await page.waitForFunction(()=>[...document.images].filter(i=>i.getAttribute('src')).every(i=>i.complete&&i.naturalWidth>0),{},{timeout:30000});
+ await page.evaluate(async()=>{await Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>i.decode()));});
  await page.screenshot({path:'qa-report/home-full-desktop.png',fullPage:true});
  assert.equal(await page.locator('.rd-footer-lead a').count(),2);
  assert.equal(await page.locator('.rd-float .rd-icon').count(),2);
