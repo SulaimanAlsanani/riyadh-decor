@@ -97,6 +97,10 @@ for (const form of document.querySelectorAll('[data-request]')) {
     const send = form.querySelector('[data-request-send]');
     const submit = form.querySelector('[type="submit"]');
     const fields = form.querySelector('[data-request-fields]');
+    const detailsCount = form.querySelector('[data-details-count]');
+    const countDetails = () => { if (detailsCount) detailsCount.textContent = form.elements.details.value.length + ' / 1000'; };
+    form.elements.details.addEventListener('input',countDetails);
+    countDetails();
     const requestedService = new URLSearchParams(location.search).get('service');
     if (requestedService) {
         const option = Array.from(form.elements.service.options).find((item) => item.dataset.serviceKey === requestedService);
@@ -148,13 +152,14 @@ if (typeof HTMLDialogElement !== 'undefined') {
     lightbox.className = 'rd-dialog';
     lightbox.setAttribute('aria-label', 'عارض صور المعرض');
     lightbox.innerHTML = '<figure><img alt=""><figcaption></figcaption></figure>' +
-        '<div class="rd-dialog-controls"><button class="rd-button rd-button-light" type="button" data-prev>السابق</button>' +
+        '<div class="rd-dialog-thumbs" aria-label="صور المعرض"></div><div class="rd-dialog-controls"><button class="rd-button rd-button-light" type="button" data-prev>السابق</button>' +
         '<button class="rd-button rd-button-light" type="button" data-close>إغلاق</button>' +
         '<button class="rd-button rd-button-light" type="button" data-next>التالي</button></div>';
     document.body.append(lightbox);
     const image = lightbox.querySelector('img');
     const caption = lightbox.querySelector('figcaption');
     const close = lightbox.querySelector('[data-close]');
+    const thumbs = lightbox.querySelector('.rd-dialog-thumbs');
     let items = [];
     let current = 0;
     let source;
@@ -163,6 +168,7 @@ if (typeof HTMLDialogElement !== 'undefined') {
         current = (index + items.length) % items.length;
         image.src = items[current].href;
         image.alt = items[current].dataset.caption;
+        for (const [i,button] of Array.from(thumbs.children).entries()) button.setAttribute('aria-pressed',String(i===current));
         caption.textContent = (current + 1).toLocaleString('ar-SA') + ' / ' + items.length.toLocaleString('ar-SA') + ' — ' + items[current].dataset.caption;
     };
 
@@ -173,6 +179,7 @@ if (typeof HTMLDialogElement !== 'undefined') {
             event.preventDefault();
             source = link;
             items = Array.from(gallery.querySelectorAll('[data-gallery-image]'));
+            thumbs.replaceChildren(...items.map((item,index)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',item.dataset.caption);const thumb=document.createElement('img');thumb.src=item.querySelector('img').currentSrc || item.href;thumb.alt='';b.append(thumb);b.addEventListener('click',()=>show(index));return b;}));
             show(items.indexOf(link));
             lightbox.showModal();
             close.focus();
