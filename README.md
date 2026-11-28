@@ -48,3 +48,6 @@ python3 -m http.server 8080 --directory dist
 
 ### V2.8 content counting
 The export logs published page/post routes separately from category archives, guide pagination and search. The target 178 is editorial, not raw export routes; preserving existing useful pages takes precedence over deleting pages to match the target. The knowledge center preserves 16 existing specialist article URLs and adds 48 unique articles under 8 editorial topics, while retaining specialty categories.
+
+## V3.0 release candidate
+Approval requires successful export and browser quality gates, content-audit.json (at least 178 editorial routes, 64 articles, eight topics of eight), original asset integrity and matching web-preview/revision.txt. The release candidate is not a declaration of visual approval or production deployment. Almarai is bundled; DIN Next Arabic is a CSS preference only unless a licensed font is installed. WhatsApp messages are prepared locally and not sent by automated tests.

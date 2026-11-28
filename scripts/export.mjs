@@ -198,5 +198,6 @@ missing('head').append('<meta name="robots" content="noindex,follow">');
 missing('head').html(`<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>الصفحة غير موجودة | ديكورات الرياض</title><link rel="stylesheet" href="${absolute('/wp-content/themes/riyadh-decor/style.css')}">`);
 missing('body').html(`<main class="rd-shell rd-section"><h1>الصفحة غير موجودة</h1><p><a href="${absolute('/')}">العودة إلى الرئيسية</a></p></main>`);
 await save('/404.html', missing.html());
+await save('/content-audit.json',JSON.stringify({editorialPages:editorialPaths.size,articleCount:articlePaths.size,target:178,technicalRoutes:routes.size-editorialPaths.size,exportedRoutes:routes.size,editorialPaths:[...editorialPaths]},null,2));
 console.log(`Editorial content audit: ${editorialPaths.size} published page/post routes, ${articlePaths.size} articles, target 178 (technical routes excluded).`);
 console.log(`Exported ${routes.size} routes, ${articles.length} searchable entries and ${assets.size} referenced assets.`);

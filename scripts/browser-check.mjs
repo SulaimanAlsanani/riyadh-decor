@@ -250,6 +250,21 @@ try {
  assert.ok(wa.searchParams.get('text').includes('موقع جديد'));
  assert.ok(wa.searchParams.get('text').includes('أجهز المقاسات'));
  report.interactions.push('prefilled quote and WhatsApp message, not sent');
+ await page.goto(base+'estimate/');
+ await page.locator('[data-estimate] [name=service]').selectOption('flooring');
+ await page.locator('[name=length]').fill('5');await page.locator('[name=width]').fill('4');await page.locator('[name=quantity]').fill('2');await page.locator('[name=waste]').fill('10');
+ assert.ok((await page.locator('[data-estimate-result]').textContent()).includes('44.00'));
+ await page.locator('[name=waste]').fill('51');assert.ok((await page.locator('[data-estimate-result]').textContent()).includes('صحيحة'));await page.locator('[name=waste]').fill('10');
+ await page.locator('[data-estimate] button[type=submit]').click();await page.waitForURL('**/contact/?**');assert.ok((await page.locator('[name=details]').inputValue()).includes('44.00'));
+ await page.locator('[name=customer]').fill('اختبار');await page.locator('[name=area]').fill('الرياض');await page.locator('.rd-extra-services summary').click();await page.locator('[name=extra_service]').last().check();await page.locator('[data-request] button[type=submit]').click();
+ assert.ok(new URL(await page.locator('[data-request-send]').getAttribute('href')).searchParams.get('text').includes('خدمات إضافية'));
+ await page.goto(base+'favorites/');await page.evaluate(()=>localStorage.setItem('rd-favorites-v1','{broken'));await page.reload();assert.ok((await page.locator('[data-favorites-status]').textContent()).includes('لم تحفظ'));await page.evaluate(()=>localStorage.removeItem('rd-favorites-v1'));
+ await page.goto(base+'search/?s='+encodeURIComponent('مرايا'));await page.locator('.rd-search-filters button').last().click();assert.equal(await page.locator('#rd-search-results li:not([hidden]):not([data-kind=article])').count(),0);
+ report.interactions.push('release: quantity bounds, multi-service WhatsApp, corrupted storage and search classification');
+ const audit=JSON.parse(await readFile(join(root,'content-audit.json'),'utf8'));
+ const visited=new Set(report.pages.map(p=>p.path+'@'+p.width));
+ for(const path of audit.editorialPaths){const relative=path.replace(/^\//,'');for(const width of [390,1440])if(!visited.has(relative+'@'+width))await verify(relative,width,900,false);}
+ report.interactions.push('all editorial pages checked on mobile and desktop');
  assert.deepEqual(report.errors,[]);
 } catch(e){report.errors.push(String(e.stack||e));process.exitCode=1;}
 finally {
