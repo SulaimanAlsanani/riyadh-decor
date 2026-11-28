@@ -1,4 +1,4 @@
-# Riyadh Decor Design System v1.2.5
+# Riyadh Decor Design System v1.3.0
 
 RTL-first Arabic theme. Tokens are defined in `riyadh-decor/style.css`; shared icons are rendered by `rd_icon()` in `inc/components.php`.
 
@@ -17,3 +17,5 @@ RTL-first Arabic theme. Tokens are defined in `riyadh-decor/style.css`; shared i
 | Font | DIN Next Arabic if installed, local Almarai 400/700/800 fallback |
 
 Use shared button classes and semantic color tokens. Icons are decorative with adjacent text or accessible labels. Preserve original image files; use object-fit for thumbnails and contain in the lightbox. Test widths 390, 768 and 1440 pixels. Do not add unlicensed fonts.
+
+V1.3.0 adds editorial category/gallery sequencing, room feature banners, detail section navigation, gallery thumbnail navigation and a quote review flow. Existing brand tokens remain unchanged.

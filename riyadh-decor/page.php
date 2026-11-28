@@ -22,7 +22,8 @@ while (have_posts()) :
     <?php rd_page_top(get_the_title(), $service['intro'], 'services', 'الخدمات'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_actions($slug); ?>
-        <div class="rd-service-layout rd-detail-layout">
+        <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-designs">صور التصاميم</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
+        <div class="rd-service-layout rd-detail-layout" id="service-options">
             <div>
                 <h2 class="rd-detail-heading"><span aria-hidden="true">01</span> خيارات التصميم والتشطيب</h2>
                 <ul><?php foreach ($service['choices'] as $choice): ?><li><?php echo esc_html($choice); ?></li><?php endforeach; ?></ul>
@@ -38,12 +39,12 @@ while (have_posts()) :
         </div>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
         <?php if (!empty($service['portfolio'])): ?>
-            <section class="rd-service-portfolio" aria-label="<?php echo esc_attr($service['gallery_title']); ?>">
+            <section id="service-designs" class="rd-service-portfolio" aria-label="<?php echo esc_attr($service['gallery_title']); ?>">
                 <?php rd_heading($service['gallery_title'], 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
                 <?php rd_image_gallery($service['portfolio'], $slug); ?>
             </section>
         <?php endif; ?>
-        <h2>أسئلة شائعة</h2>
+        <h2 id="service-faq">أسئلة شائعة</h2>
         <?php rd_faq($service['faq']); ?>
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
         <?php rd_related_services($slug); ?>

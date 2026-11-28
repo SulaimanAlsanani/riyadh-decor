@@ -52,7 +52,9 @@ try {
  assert.equal(await page.locator('.rd-visual-categories a').count(),4);
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-material-story img').count(),3);
- assert.equal(await page.locator('.rd-footer-lead a').count(),1);
+ assert.equal(await page.locator('.rd-room-photos img').count(),2);
+ await page.screenshot({path:'qa-report/home-full-desktop.png',fullPage:true});
+ assert.equal(await page.locator('.rd-footer-lead a').count(),2);
  assert.equal(await page.locator('.rd-float .rd-icon').count(),2);
  const tokens=await page.evaluate(()=>({control:getComputedStyle(document.documentElement).getPropertyValue('--rd-control-height').trim(),radius:getComputedStyle(document.documentElement).getPropertyValue('--rd-card-radius').trim()}));
  assert.equal(tokens.control,'44px');assert.equal(tokens.radius,'14px');
@@ -89,6 +91,9 @@ try {
  report.interactions.push('individual design share link');
  await page.locator('[data-gallery-image]').first().click();
  await page.locator('dialog[open]').waitFor();
+ assert.ok(await page.locator('.rd-dialog-thumbs button').count()>1);
+ await page.locator('.rd-dialog-thumbs button').nth(1).click();
+ assert.equal(await page.locator('.rd-dialog-thumbs button').nth(1).getAttribute('aria-pressed'),'true');
  await page.locator('dialog [data-next]').click();
  await page.locator('dialog [data-close]').click();
  report.interactions.push('gallery lightbox');
@@ -101,6 +106,7 @@ try {
  await form.locator('[name=customer]').fill('اختبار آلي');
  await form.locator('[name=area]').fill('الرياض');
  await form.locator('[name=details]').fill('طلب اختبار للمقاسات');
+ assert.ok((await form.locator('[data-details-count]').textContent()).startsWith(String('طلب اختبار للمقاسات'.length)));
  assert.equal(await form.locator('select option:checked').getAttribute('data-service-key'),'mirrors');
  await form.locator('button[type=submit]').click();
  const link=await form.locator('[data-request-send]').getAttribute('href');

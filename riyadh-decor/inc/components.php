@@ -178,7 +178,8 @@ function rd_faq($items) {
 function rd_request_form($selected = '') {
     ?>
     <?php $services = rd_services(); ?>
-    <form class="rd-form" method="post" data-request data-whatsapp="<?php echo esc_url(rd_wa()); ?>">
+    <form class="rd-form rd-quote-v13" method="post" data-request data-whatsapp="<?php echo esc_url(rd_wa()); ?>">
+        <div class="rd-form-intro"><h3>تفاصيل طلب عرض السعر</h3><p>١. أدخل التفاصيل · ٢. راجع الرسالة · ٣. أرسلها عبر واتساب</p></div>
         <fieldset data-request-fields disabled>
         <div class="rd-form-row">
             <label>الاسم<input required name="customer" autocomplete="name" maxlength="90" placeholder="اسمك"></label>
@@ -193,7 +194,7 @@ function rd_request_form($selected = '') {
             </select>
         </label>
         <label>تفاصيل المشروع والمقاسات
-            <textarea name="details" required rows="4" maxlength="1000" placeholder="اذكر المساحة، المقاسات التقريبية، وحالة السطح أو الخامة المطلوبة"></textarea>
+            <textarea name="details" required rows="4" maxlength="1000" placeholder="اذكر المساحة، المقاسات التقريبية، وحالة السطح أو الخامة المطلوبة"></textarea><small class="rd-details-count" data-details-count aria-live="off">0 / 1000</small>
         </label>
         </fieldset>
         <div class="rd-form-actions">
@@ -202,7 +203,7 @@ function rd_request_form($selected = '') {
             <noscript><a href="<?php echo esc_url(rd_wa()); ?>" rel="noopener" target="_blank">افتح واتساب لإرسال التفاصيل</a></noscript>
         </div>
         <div class="rd-review" hidden data-request-review>
-            <p>راجع نص الطلب ثم افتح واتساب لإرساله.</p>
+            <h3>راجع طلبك قبل الإرسال</h3><p>لم يتم إرسال أي رسالة بعد.</p>
             <p class="rd-message" data-request-message></p>
             <a class="rd-button rd-button-green" data-request-send rel="noopener" target="_blank">فتح واتساب</a>
             <button class="rd-button rd-button-line" type="button" data-request-edit>تعديل البيانات</button>

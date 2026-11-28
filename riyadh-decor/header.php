@@ -8,7 +8,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="rd-skip" href="#content">انتقل إلى المحتوى</a>
-<header class="rd-header rd-polished-header">
+<header class="rd-header rd-polished-header rd-header-v13">
     <div class="rd-topbar"><div class="rd-shell"><span>الديكور والتشطيبات الداخلية والخارجية · الرياض</span><div><a href="<?php echo esc_url(rd_tel()); ?>"><bdi><?php echo esc_html(rd_phone()); ?></bdi></a><a href="<?php echo esc_url(rd_wa()); ?>" target="_blank" rel="noopener">واتساب</a></div></div></div>
     <div class="rd-shell rd-header-inner">
         <?php if (has_custom_logo()): ?>
@@ -40,6 +40,7 @@
             </details>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">المعرض</a>
             <a href="<?php echo esc_url(rd_url('about')); ?>">من نحن</a>
+            <a class="rd-nav-search" href="<?php echo esc_url(rd_url('services')); ?>#content"><?php rd_icon('zoom'); ?><span>استكشف الخدمات</span></a>
             <a class="rd-mobile-contact" href="<?php echo esc_url(rd_url('contact')); ?>">تواصل معنا</a>
         </nav>
         <a class="rd-button rd-button-solid rd-header-cta" href="<?php echo esc_url(rd_url('contact')); ?>">اطلب عرض سعر</a>

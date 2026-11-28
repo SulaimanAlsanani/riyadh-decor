@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.5
+Version: 1.3.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -608,4 +608,55 @@ h3 { font-weight:var(--rd-weight-bold); }
 @media(prefers-reduced-motion:reduce) {
  html { scroll-behavior:auto; }
  .rd-button,.rd-card-quote,.rd-share-design,.rd-menu-toggle,.rd-service-groups button,.rd-card-media img,.rd-photo img,.rd-gallery-tile img { transition:none; }
+}
+
+/* V1.3.0 — architectural editorial composition */
+.rd-home-v13 .rd-hero { min-height:clamp(520px,72vh,740px); }
+.rd-hero-proof { position:absolute; inset-inline-end:48px; inset-block-start:32px; display:grid; gap:0; padding:var(--rd-space-4); background:#092b27d9; border:1px solid #ffffff40; border-radius:var(--rd-card-radius); color:white; }
+.rd-hero-proof strong { font-size:2rem; line-height:1.2; color:var(--orange); }
+.rd-hero-proof span { font-size:var(--rd-text-sm); }
+.rd-home-v13 .rd-home-intro { padding-block-end:var(--section-space); }
+.rd-home-v13 .rd-ideas { background:var(--deep); color:white; }
+.rd-home-v13 .rd-ideas .rd-section-head p { color:#dbe9e2; }
+.rd-home-v13 .rd-ideas .rd-gallery-kicker { color:var(--orange); }
+.rd-home-v13 .rd-ideas .rd-button-line { color:white; border-color:#ffffff80; }
+.rd-home-v13 .rd-ideas .rd-button-line:hover { background:#ffffff20; }
+.rd-room-banner { display:grid; grid-template-columns:1.1fr 1fr; gap:var(--rd-space-6); background:white; border:1px solid var(--line); border-radius:var(--rd-card-radius); overflow:hidden; align-items:center; }
+.rd-room-photos { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+.rd-room-photos img { width:100%; aspect-ratio:3/4; object-fit:cover; }
+.rd-room-copy { padding:var(--rd-space-6); }
+.rd-room-copy p { color:var(--dim); margin-top:var(--rd-space-3); }
+.rd-visual-categories a { transition:box-shadow var(--rd-motion),border-color var(--rd-motion); }
+.rd-visual-categories a:hover { box-shadow:var(--rd-shadow); }
+.rd-detail-jump { display:flex; flex-wrap:wrap; gap:var(--rd-space-2); margin-block:0 var(--rd-space-6); }
+.rd-detail-jump a { min-height:var(--rd-control-height); display:flex; align-items:center; padding-inline:var(--rd-space-3); background:var(--soft); border:1px solid var(--line); border-radius:var(--rd-control-radius); text-decoration:none; font-weight:700; font-size:var(--rd-text-sm); }
+.rd-detail-jump a:hover { border-color:var(--green); }
+.rd-header-v13 .rd-nav-search { display:inline-flex; align-items:center; gap:4px; }
+.rd-header-v13 .rd-nav-search span { font-size:.82rem; }
+.rd-header-v13 .rd-mega-group { border-inline-start:1px solid var(--line); padding-inline-start:12px; }
+.rd-footer-v13>div { flex:1; }
+.rd-form-intro { margin-bottom:var(--rd-space-5); padding-bottom:var(--rd-space-4); border-bottom:1px solid var(--line); }
+.rd-form-intro p { font-size:var(--rd-text-sm); color:var(--dim); margin-top:var(--rd-space-2); }
+.rd-details-count { display:block; text-align:end; color:var(--dim); font-weight:400; font-size:.78rem; }
+.rd-dialog-thumbs { display:flex; gap:6px; overflow-x:auto; padding:4px; }
+.rd-dialog-thumbs button { flex:0 0 54px; padding:2px; border:2px solid transparent; border-radius:6px; background:transparent; }
+.rd-dialog-thumbs button[aria-pressed=true] { border-color:var(--orange); }
+.rd-dialog-thumbs img { width:48px;height:48px;object-fit:cover;border-radius:4px; }
+@media(max-width:1000px) { .rd-header-v13 .rd-nav-search { display:none; } }
+@media(max-width:780px) {
+ .rd-hero-proof { inset-inline-end:16px; inset-block-start:16px; padding:10px; }
+ .rd-hero-proof strong { font-size:1.5rem; }
+ .rd-hero-proof span { font-size:.75rem; }
+ .rd-room-banner { grid-template-columns:1fr; gap:0; }
+ .rd-room-photos img { aspect-ratio:4/3; }
+ .rd-header-v13 .rd-nav-search { display:inline-flex; }
+ .rd-footer-v13 { flex-wrap:wrap; }
+ .rd-footer-v13>div { flex-basis:100%; }
+}
+@media(max-width:510px) {
+ .rd-home-v13 .rd-hero { min-height:530px; }
+ .rd-room-copy { padding:var(--rd-space-4); }
+ .rd-dialog img { height:min(48vh,450px); }
+ .rd-dialog-thumbs img { height:42px;width:42px; }
+ .rd-dialog-thumbs button { flex-basis:48px; }
 }
