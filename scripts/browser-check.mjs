@@ -82,6 +82,14 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ await verify('material-compare/',390,900,true);await verify('favorites/',390,900,true);
+ await page.goto(base+'material-compare/');assert.equal(await page.locator('[data-compare-output] article').count(),2);
+ await page.locator('[data-compare=b]').selectOption({index:2});assert.equal(await page.locator('[data-compare-output] article').count(),2);
+ await page.goto(base+'gallery/mirrors/');await page.locator('[data-favorite]').first().click();assert.equal(await page.locator('[data-favorite]').first().getAttribute('aria-pressed'),'true');
+ await page.goto(base+'favorites/');assert.equal(await page.locator('[data-favorites-items] input:checked').count(),1);
+ await page.locator('[data-favorites-quote]').click();await page.waitForURL('**/contact/?**');assert.equal(await page.locator('[name=selected_design]:checked').count(),1);
+ await page.evaluate(()=>localStorage.removeItem('rd-favorites-v1'));
+ report.interactions.push('material compare, local favorites and design quote transfer');
  for(const slug of ["knowledge-majlis-focal-wall","knowledge-quiet-modern","knowledge-wood-edge","knowledge-paint-test-patch","knowledge-renovation-inventory","knowledge-quantity-sheet","knowledge-mirror-cleaning","knowledge-shade-orientation"]){await verify(slug+'/',390,900,true);await verify(slug+'/',1440,900);assert.equal(await page.locator('.rd-article-guide').count(),1);}
  await page.goto(base+'guides/');
  assert.equal(await page.locator('.rd-knowledge-grid>a').count(),8);
@@ -131,7 +139,7 @@ try {
  assert.equal(await page.locator('.rd-discovery-grid>a').count(),3);
  assert.equal(await page.locator('.rd-home-knowledge .rd-article-card').count(),3);
  await page.locator('.rd-explore-nav summary').click();
- assert.equal(await page.locator('.rd-explore-tray a:visible').count(),6);
+ assert.equal(await page.locator('.rd-explore-nav .rd-explore-tray a:visible').count(),6);
  await page.keyboard.press('Escape');
  assert.equal(await page.locator('.rd-explore-nav').getAttribute('open'),null);
  report.interactions.push('grouped content navigation and home discovery');

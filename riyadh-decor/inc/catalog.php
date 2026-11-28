@@ -141,5 +141,5 @@ function rd_sections() {
         'services' => 'الخدمات', 'gallery' => 'المعرض', 'guides' => 'الأدلة والمقالات',
         'about' => 'من نحن', 'contact' => 'تواصل معنا', 'project-planning' => 'تجهيز المشروع',
         'materials-colors' => 'دليل الخامات والألوان', 'service-finder'=>'اختيار الخدمة', 'estimate'=>'تجهيز تقدير التكلفة', 'faq'=>'الأسئلة الشائعة', 'privacy-policy' => 'سياسة الخصوصية', 'spaces'=>'الديكور حسب المساحة',
-    ] + ['property-types'=>'الديكور حسب نوع العقار','project-guides'=>'أدلة تجهيز وتنفيذ المشاريع','solutions'=>'حلول الديكور والتشطيبات'] + array_map(static fn($item) => $item['title'], rd_space_content()) + array_map(static fn($item) => $item['title'], rd_library_content());
+    ] + ['property-types'=>'الديكور حسب نوع العقار','project-guides'=>'أدلة تجهيز وتنفيذ المشاريع','solutions'=>'حلول الديكور والتشطيبات','material-compare'=>'مقارنة الخامات التفاعلية','favorites'=>'التصاميم المفضلة'] + array_map(static fn($item) => $item['title'], rd_space_content()) + array_map(static fn($item) => $item['title'], rd_library_content());
 }

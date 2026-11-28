@@ -47,7 +47,7 @@
                 <?php foreach(['spaces'=>'حسب المساحة','property-types'=>'حسب العقار','design-styles'=>'أنماط التصميم','material-library'=>'مكتبة الخامات','solutions'=>'حلول الديكور','home-renovation'=>'تجديد المنازل'] as $key=>$label): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($label); ?></a><?php endforeach; ?>
             </div></details>
             <details class="rd-knowledge-nav" data-nav-disclosure><summary>الأدلة والأدوات</summary><div class="rd-nav-tray rd-explore-tray">
-                <?php foreach(['guides'=>'المقالات المتخصصة','project-guides'=>'أدلة تجهيز المشاريع','service-finder'=>'اختيار الخدمة','estimate'=>'حاسبة المقاسات','faq'=>'الأسئلة الشائعة','about'=>'من نحن'] as $key=>$label): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($label); ?></a><?php endforeach; ?>
+                <?php foreach(['guides'=>'المقالات المتخصصة','project-guides'=>'أدلة تجهيز المشاريع','service-finder'=>'اختيار الخدمة','estimate'=>'حاسبة المقاسات','material-compare'=>'مقارنة الخامات','favorites'=>'المفضلة','faq'=>'الأسئلة الشائعة','about'=>'من نحن'] as $key=>$label): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($label); ?></a><?php endforeach; ?>
             </div></details>
             <form class="rd-search rd-nav-search-v23" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>"><label class="rd-visually-hidden" for="rd-nav-search-input">بحث في الموقع</label><input id="rd-nav-search-input" type="search" name="s" placeholder="بحث" required><button type="submit" aria-label="بحث"><?php rd_icon('zoom'); ?></button></form>
             <a class="rd-mobile-contact" href="<?php echo esc_url(rd_url('contact')); ?>">تواصل معنا</a>

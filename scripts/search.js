@@ -29,7 +29,7 @@ async function search() {
         entries.sort((a,b)=>{const score=item=>words.reduce((sum,w)=>sum+(normalize(item.title).includes(w)?3:0),0);return score(b)-score(a);});
         const overview = document.createElement('p');
         overview.textContent = entries.length ? `النتائج (${entries.length})` : 'ما وجدنا نتائج مطابقة.';
-        const list = document.createElement('ul');
+        const filters=document.createElement('div');filters.className='rd-search-filters';const types=[['all','الكل'],['service','الخدمات'],['guide','الأدلة'],['article','المقالات']];const list = document.createElement('ul');
         for (const entry of entries) {
             const item = document.createElement('li');
             const link = document.createElement('a');
@@ -37,7 +37,7 @@ async function search() {
             if (location.pathname.endsWith('/index.html')) result.pathname += 'index.html';
             link.href = result.href;
             link.textContent = entry.title;
-            item.append(link);
+            item.dataset.kind=entry.kind||'guide';const category=document.createElement('small');category.textContent=types.find(x=>x[0]===item.dataset.kind)?.[1]||'الأدلة';item.append(category,link);
             if (entry.excerpt) {
                 const excerpt = document.createElement('p');
                 excerpt.textContent = entry.excerpt;
@@ -45,7 +45,7 @@ async function search() {
             }
             list.append(item);
         }
-        results.replaceChildren(overview, list);
+        for(const [kind,label] of types){const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-pressed',String(kind==='all'));button.addEventListener('click',()=>{for(const other of filters.children)other.setAttribute('aria-pressed',String(other===button));let count=0;for(const item of list.children){item.hidden=kind!=='all'&&item.dataset.kind!==kind;if(!item.hidden)count++;}overview.textContent='النتائج ('+count+')';});filters.append(button);}results.replaceChildren(overview,filters,list);
     } catch {
         results.textContent = 'تعذّر تحميل نتائج البحث. أعد المحاولة.';
     }

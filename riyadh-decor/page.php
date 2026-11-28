@@ -139,6 +139,12 @@ while (have_posts()) :
         </div>
         <p class="screen-reader-text" data-guide-status aria-live="polite"></p>
     </div>
+<?php elseif ($section === 'material-compare' || $section === 'favorites'): ?>
+    <?php rd_page_top(get_the_title(),$section==='favorites'?'احفظ التصاميم في هذا المتصفح واختر ما تريد إرساله مع طلبك.':'قارن الخامات بحسب الاستخدام والتجهيز والعناية؛ لا تغني المقارنة عن مواصفات المنتج الفعلي.'); ?>
+    <div class="rd-shell rd-section rd-tool-panel">
+    <?php if($section==='favorites'): ?><div data-favorites-list data-contact="<?php echo esc_url(rd_url('contact')); ?>"><p role="status" data-favorites-status>التصاميم المحفوظة تظهر هنا عند تفعيل JavaScript.</p><div data-favorites-items></div><button type="button" class="rd-button rd-button-solid" data-favorites-quote hidden>اطلب سعر التصاميم المختارة</button></div><a href="<?php echo esc_url(rd_url('gallery')); ?>">تصفح المعرض</a>
+    <?php else: ?><div data-compare-tool><div class="rd-form-row"><?php foreach(['a'=>'الخامة الأولى','b'=>'الخامة الثانية'] as $side=>$label): ?><label><?php echo esc_html($label); ?><select data-compare="<?php echo esc_attr($side); ?>"><?php foreach(rd_material_catalog() as $key=>$item): ?><option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item['title']); ?></option><?php endforeach; ?></select></label><?php endforeach; ?></div><div class="rd-compare-grid" data-compare-output aria-live="polite"></div><div hidden><?php foreach(rd_material_catalog() as $key=>$item): ?><template data-material="<?php echo esc_attr($key); ?>"><article><h2><?php echo esc_html($item['title']); ?></h2><p><?php echo esc_html($item['intro']); ?></p><ul><?php foreach($item['points'] as $point): ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?></ul><a href="<?php echo esc_url(rd_url($key)); ?>">الدليل الكامل</a></article></template><?php endforeach; ?></div></div><a href="<?php echo esc_url(rd_url('material-library')); ?>#material-comparisons">المقارنات التفصيلية</a><?php endif; ?>
+    </div>
 <?php elseif ($section === 'service-finder' || $section === 'estimate'): ?>
     <?php rd_page_top(get_the_title(), $section === 'estimate' ? 'احسب المساحة التقريبية وجهّز بيانات العرض؛ لا يتم احتساب سعر دون مواصفات معتمدة.' : 'اختر المساحة التي تريد تطويرها لتظهر لك الخدمات المرتبطة بها.'); ?>
     <div class="rd-shell rd-section">
@@ -146,10 +152,10 @@ while (have_posts()) :
         <section class="rd-tool-panel" data-finder>
             <h2>أين تريد تنفيذ الديكور؟</h2>
             <label>المساحة<select data-finder-space><option value="all">جميع المساحات</option><option value="living">المجلس والصالة</option><option value="bedroom">غرفة النوم</option><option value="outdoor">الحوش والسطح</option><option value="renovation">التشطيب والترميم</option></select></label>
-            <p data-finder-status role="status"></p>
+            <label>الاحتياج<select data-finder-need><option value="all">جميع الاحتياجات</option><?php foreach(rd_solution_catalog() as $key=>$item): ?><option value="<?php echo esc_attr(implode(' ',$item['services'])); ?>"><?php echo esc_html($item['title']); ?></option><?php endforeach; ?></select></label><p data-finder-status role="status"></p>
             <div class="rd-finder-grid">
             <?php $spaces = ['living'=>['mirrors','tv-walls','wood-partitions','carved-wood','foam-trim','flooring','chipboard-decor','wallpaper','suspended-ceilings','painting','tempered-glass'], 'bedroom'=>['mirrors','bedrooms','wardrobes','flooring','wallpaper','painting','foam-trim'], 'outdoor'=>['rooftop-annexes','shades-and-screens','tempered-glass'], 'renovation'=>['building-finishing','suspended-ceilings','flooring','painting','tempered-glass']]; foreach ($services as $key=>$item): $tags=[]; foreach($spaces as $space=>$keys) if(in_array($key,$keys,true)) $tags[]=$space; ?>
-                <article data-finder-card="<?php echo esc_attr(implode(' ',$tags)); ?>"><?php rd_image($item['image'], ['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">التفاصيل</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">الصور</a></div></div></article>
+                <article data-finder-key="<?php echo esc_attr($key); ?>" data-finder-card="<?php echo esc_attr(implode(' ',$tags)); ?>"><?php rd_image($item['image'], ['alt'=>'']); ?><div><h3><?php echo esc_html($item['short']); ?></h3><div class="rd-related"><a href="<?php echo esc_url(rd_url('services/'.$key)); ?>">التفاصيل</a><a href="<?php echo esc_url(rd_url('gallery/'.$key)); ?>">الصور</a></div></div></article>
             <?php endforeach; ?>
             </div>
         </section>
@@ -158,7 +164,7 @@ while (have_posts()) :
             <h2>بيانات المشروع الأولية</h2><label>الخدمة<select name="service" required><option value="">اختر الخدمة</option><?php foreach ($services as $key=>$item): ?><option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item['short']); ?></option><?php endforeach; ?></select></label>
             <div class="rd-form-row"><label>الطول بالمتر<input name="length" type="number" min=".1" max="1000" step=".1" required></label><label>العرض أو الارتفاع بالمتر<input name="width" type="number" min=".1" max="1000" step=".1" required></label></div>
             <label>عدد المساحات المتماثلة<input name="quantity" type="number" min="1" max="100" step="1" value="1" required></label>
-            <div class="rd-estimate-result" role="status" data-estimate-result>أدخل المقاسات لمعرفة المساحة التقريبية.</div>
+            <label>هدر تقديري اختياري (%)<input name="waste" type="number" min="0" max="50" step="1" value="0"></label><div class="rd-estimate-result" role="status" data-estimate-result>أدخل المقاسات لمعرفة المساحة التقريبية.</div>
             <p>المساحة الهندسية ليست كمية التوريد أو سعر التنفيذ؛ تختلف وحدة التسعير والهدر والتجهيز حسب الخدمة.</p>
             <button class="rd-button rd-button-solid" type="submit">متابعة طلب التقدير</button>
         </form>

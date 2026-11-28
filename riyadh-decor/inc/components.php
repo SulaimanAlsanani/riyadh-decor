@@ -148,7 +148,7 @@ function rd_image_gallery($keys, $specialty = '') {
                     <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div><small class="rd-design-reference">مرجع التصميم: <bdi><?php echo esc_html($key); ?></bdi></small>
                     <div class="rd-photo-actions">
                     <?php if($service): ?><a class="rd-card-quote" href="<?php echo esc_url(add_query_arg(['service'=>$specialty,'design'=>$key],rd_url('contact'))); ?>">اطلب سعر هذا التصميم</a><?php endif; ?><a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
-                    <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><?php rd_icon('share'); ?><span>مشاركة</span></button>
+                    <?php if($service): ?><button type="button" class="rd-favorite-button" data-favorite hidden aria-pressed="false" data-service="<?php echo esc_attr($specialty); ?>" data-design="<?php echo esc_attr($key); ?>">حفظ التصميم</button><?php endif; ?><button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><?php rd_icon('share'); ?><span>مشاركة</span></button>
                     </div><span class="rd-share-status" role="status"></span>
                 </figcaption>
             </figure>
@@ -205,6 +205,7 @@ function rd_request_form($selected = '') {
                 <?php endforeach; ?>
             </select>
         </label>
+        <details class="rd-extra-services"><summary>إضافة خدمات أخرى (اختياري)</summary><div class="rd-extra-options"><?php foreach($services as $key=>$item): ?><label><input type="checkbox" name="extra_service" value="<?php echo esc_attr($item['name']); ?>"><?php echo esc_html($item['short']); ?></label><?php endforeach; ?></div></details><div data-quote-designs hidden><h3>التصاميم المختارة</h3><div data-quote-design-list></div></div>
         <div class="rd-form-row"><label>حالة الموقع (اختياري)<select name="site_state"><option value="">اختر الحالة</option><option>موقع جديد</option><option>تجديد موقع قائم</option><option>ترميم أو إصلاح</option></select></label><label>مرحلة المشروع (اختياري)<select name="stage"><option value="">اختر المرحلة</option><option>أقارن التصاميم</option><option>أجهز المقاسات</option><option>جاهز لمناقشة التنفيذ</option></select></label></div>
         <label>تفاصيل المشروع والمقاسات
             <textarea name="details" required rows="4" maxlength="1000" placeholder="اذكر المساحة، المقاسات التقريبية، وحالة السطح أو الخامة المطلوبة"></textarea><small class="rd-details-count" data-details-count aria-live="off">0 / 1000</small>

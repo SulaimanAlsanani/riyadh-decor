@@ -118,7 +118,7 @@ for (const [path, source] of routes) {
     if (articlePaths.has(path) || (path.startsWith('/services/') && path !== '/services/') || $('#content .rd-space-content,#content .rd-library-content').length) {
         const title = $('#content h1').first().text().trim();
         const excerpt = $('meta[name="description"]').attr('content') || $('#content p').first().text().trim();
-        articles.push({ path, title, excerpt, kind:articlePaths.has(path)?'article':'guide', text: $('#content').text().replace(/\s+/g, ' ').trim() });
+        articles.push({ path, title, excerpt, kind:articlePaths.has(path)?'article':path.startsWith('/services/')?'service':'guide', text: $('#content').text().replace(/\s+/g, ' ').trim() });
     }
 
     if (path === '/search/') {
