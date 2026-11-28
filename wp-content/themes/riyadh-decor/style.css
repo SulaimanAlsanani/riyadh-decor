@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.0
+Version: 1.2.1
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -433,3 +433,48 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
  .rd-float { bottom:max(10px,env(safe-area-inset-bottom)); }
 }
 @media(prefers-reduced-motion:reduce) { .rd-service-card-grid .rd-card-media img { transition:none; } }
+
+/* V1.2.1 — original photography and visual hierarchy */
+.rd-polished-header { box-shadow:0 3px 16px #092b2709; }
+.rd-polished-header .rd-header-inner { min-height:80px; }
+.rd-polished-header .rd-brand img { width:60px; height:60px; }
+.rd-polished-header .rd-topbar .rd-shell { min-height:32px; }
+.rd-hero { min-height:clamp(460px,64vh,670px); }
+.rd-hero-image { object-position:center 52%; }
+.rd-hero::after { background:linear-gradient(270deg,#092b27f5 0%,#092b27c9 30%,#092b2759 52%,#092b2700 83%),linear-gradient(0deg,#092b2740,transparent 28%); }
+.rd-hero-copy { max-width:620px; padding-inline-end:20px; }
+.rd-hero-copy h1 { max-width:620px; }
+.rd-hero-copy>p:not(.rd-kicker) { max-width:490px; color:#eef5ee; font-size:clamp(1rem,1.5vw,1.2rem); }
+.rd-hero-copy .rd-kicker { display:inline-block; border-inline-start:3px solid var(--orange); padding-inline-start:12px; }
+.rd-hero-caption { background:#092b27dc; }
+.rd-home-intro { padding-block-start:clamp(28px,4vw,52px); }
+.rd-ideas { background:linear-gradient(180deg,#eef3ee,#e5eee8); }
+.rd-editorial-gallery .rd-gallery-tile::after { background:linear-gradient(0deg,#092b27f2,#092b2760 35%,transparent 70%); }
+.rd-editorial-gallery .rd-gallery-tile>span { background:none; }
+.rd-split-banner { display:grid; grid-template-columns:1fr 1fr; min-height:350px; align-items:stretch; }
+.rd-split-banner>img { position:static; grid-column:2; grid-row:1; width:100%; height:100%; min-height:350px; object-fit:cover; object-position:center; z-index:auto; }
+.rd-split-banner::after { display:none; }
+.rd-split-banner .rd-home-banner-content { grid-column:1; grid-row:1; align-self:center; max-width:none; }
+.rd-home-steps .rd-steps { gap:14px; }
+.rd-polished-footer { padding-block-start:0; }
+.rd-footer-lead { display:flex; align-items:center; justify-content:space-between; gap:22px; padding-block:28px; border-block-end:1px solid #ffffff30; margin-block-end:30px; }
+.rd-footer-lead h2 { font-size:clamp(1.4rem,2.5vw,2rem); }
+.rd-footer-lead p { color:#bfdbd0; margin-top:6px; }
+.rd-polished-footer .rd-footer-grid a:not(.rd-footer-brand) { text-decoration:none; }
+.rd-polished-footer .rd-footer-grid a:not(.rd-footer-brand):hover { text-decoration:underline; }
+@media(max-width:780px) {
+ .rd-polished-header .rd-header-inner { min-height:70px; }
+ .rd-polished-header .rd-brand img { width:52px; height:52px; }
+ .rd-hero::after { background:linear-gradient(0deg,#092b27fa,#092b27bc 38%,#092b2733 74%,transparent); }
+ .rd-hero-copy { padding-inline-end:0; }
+ .rd-split-banner { grid-template-columns:1fr; }
+ .rd-split-banner>img { grid-column:1; grid-row:1; height:clamp(220px,50vw,340px); min-height:0; }
+ .rd-split-banner .rd-home-banner-content { grid-column:1; grid-row:2; }
+}
+@media(max-width:510px) {
+ .rd-hero { min-height:500px; }
+ .rd-hero-content { padding-block:110px 64px; }
+ .rd-footer-lead { align-items:stretch; flex-direction:column; gap:12px; padding-block:22px; }
+ .rd-footer-lead .rd-button { justify-content:center; }
+ .rd-split-banner .rd-home-banner-content { padding:22px; }
+}
