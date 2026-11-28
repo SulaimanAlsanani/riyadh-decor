@@ -323,6 +323,10 @@ for (const button of document.querySelectorAll('[data-share-design]')) {
 /* Mobile quote shortcut: visible only when the actual quote form is off-screen. */
 const quoteShortcut = document.querySelector('[data-mobile-quote]');
 const quoteTarget = document.querySelector('#request');
+const quickTarget = document.querySelector('#quick-quote');
 if (quoteShortcut && quoteTarget && 'IntersectionObserver' in window) {
- new IntersectionObserver(([entry])=>{quoteShortcut.hidden=entry.isIntersecting;},{threshold:0.1}).observe(quoteTarget);
+ const visibility = new Map();
+ const observer = new IntersectionObserver(entries=>{for(const entry of entries)visibility.set(entry.target,entry.isIntersecting);quoteShortcut.hidden=[...visibility.values()].some(Boolean);},{threshold:0.05});
+ observer.observe(quoteTarget);
+ if(quickTarget)observer.observe(quickTarget);
 }
