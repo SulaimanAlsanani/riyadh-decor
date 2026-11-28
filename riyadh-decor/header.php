@@ -8,7 +8,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="rd-skip" href="#content">انتقل إلى المحتوى</a>
-<header class="rd-header">
+<header class="rd-header rd-polished-header">
     <div class="rd-topbar"><div class="rd-shell"><span>الديكور والتشطيبات الداخلية والخارجية · الرياض</span><div><a href="<?php echo esc_url(rd_tel()); ?>"><bdi><?php echo esc_html(rd_phone()); ?></bdi></a><a href="<?php echo esc_url(rd_wa()); ?>" target="_blank" rel="noopener">واتساب</a></div></div></div>
     <div class="rd-shell rd-header-inner">
         <?php if (has_custom_logo()): ?>

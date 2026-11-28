@@ -5,7 +5,7 @@ $services = rd_services();
 <main id="content">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
-        <div class="rd-shell rd-hero-content">
+        <div class="rd-shell rd-hero-content"><div class="rd-hero-copy">
             <p class="rd-kicker">ديكورات وتشطيبات · الرياض</p>
             <h1 id="rd-hero-title"><?php echo esc_html(get_theme_mod('rd_hero_title', 'تشطيبات تليق بتفاصيل بيتك')); ?></h1>
             <p><?php echo esc_html(get_theme_mod('rd_hero_text', 'ديكورات حسب المقاس، وأعمال تشطيب وترميم للمنازل والفلل في الرياض.')); ?></p>
@@ -13,6 +13,7 @@ $services = rd_services();
                 <a class="rd-button rd-button-solid" href="#request">اطلب عرض سعر</a>
                 <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery')); ?>">شاهد المعرض</a>
             </div>
+        </div>
         </div>
         <div class="rd-hero-caption">صورة توضيحية لتصميم مجلس بلمسات خشبية</div>
     </section>
@@ -59,11 +60,11 @@ $services = rd_services();
         </div>
     </section>
 
-    <section class="rd-shell rd-home-banner" aria-labelledby="rd-home-banner-title">
+    <section class="rd-shell rd-home-banner rd-split-banner" aria-labelledby="rd-home-banner-title">
         <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
         <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a></div>
     </section>
-    <section class="rd-shell rd-section" id="steps">
+    <section class="rd-shell rd-section rd-home-steps" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <ol class="rd-steps">
             <li><h3>شارك تفاصيل المساحة</h3><p>أرسل نوع العمل والحي وصور المكان والمقاسات الأولية.</p></li>

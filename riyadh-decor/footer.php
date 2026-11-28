@@ -1,4 +1,5 @@
-<footer class="rd-footer">
+<footer class="rd-footer rd-polished-footer">
+    <div class="rd-shell rd-footer-lead"><div><h2>ابدأ بتفاصيل مساحتك</h2><p>تصفح التصاميم أو شاركنا متطلبات مشروعك في الرياض.</p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(rd_url('contact')); ?>">اطلب عرض سعر</a></div>
     <div class="rd-shell rd-footer-grid">
         <div>
             <a class="rd-footer-brand" href="<?php echo esc_url(rd_url()); ?>"><img src="<?php echo esc_url(rd_logo_url()); ?>" alt="" width="68" height="68" loading="lazy" decoding="async"><strong>ديكورات الرياض</strong></a>
@@ -21,7 +22,7 @@
             <a href="<?php echo esc_url(rd_tel()); ?>"><bdi><?php echo esc_html(rd_phone()); ?></bdi></a>
             <a href="<?php echo esc_url(rd_wa()); ?>" rel="noopener" target="_blank">محادثة واتساب</a>
             <p><?php echo esc_html(get_theme_mod('rd_location', 'الرياض، السعودية')); ?></p>
-            <a class="rd-button rd-button-solid rd-footer-quote" href="<?php echo esc_url(rd_url('contact')); ?>">اطلب عرض سعر</a>
+
         </div>
     </div>
     <div class="rd-shell rd-footer-bottom">

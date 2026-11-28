@@ -47,6 +47,9 @@ try {
  for(const section of ['services','gallery']){
    for(const entry of await readdir(join(root,section),{withFileTypes:true})) if(entry.isDirectory()) await verify(section+'/'+entry.name+'/',1440,900);
  }
+ await page.goto(base);
+ assert.equal(await page.locator('.rd-split-banner img').count(),1);
+ assert.equal(await page.locator('.rd-footer-lead a').count(),1);
  await page.goto(base+'services/?group=decor');
  await page.locator('[data-service-filters]').waitFor({state:'visible'});
  assert.equal(await page.locator('[data-service-group="decor"]').getAttribute('aria-pressed'),'true');
