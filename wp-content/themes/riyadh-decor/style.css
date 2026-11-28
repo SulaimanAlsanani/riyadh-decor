@@ -1,14 +1,14 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.5.1
+Version: 1.7.1
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-@import url("assets/fonts.css");
+
 :root {
     --ink:#102b28; --dim:#52625d; --green:#086e64; --deep:#103e38; --dark:#092b27;
     --orange:#f89922; --orange-hover:#ffc062; --cream:#faf8f3; --soft:#eef3ee; --line:#dce5dc;
@@ -729,3 +729,34 @@ h3 { font-weight:var(--rd-weight-bold); }
 @media(max-width:780px){.rd-content-guide .rd-advice-grid,.rd-advice-grid{grid-template-columns:1fr;}}
 
 .rd-editorial-links { margin-block:32px; } .rd-editorial-links .rd-cards { grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),360px)); }
+
+/* V1.6.0 — editorial and project tools */
+.rd-about-feature,.rd-blog-feature{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;background:var(--soft);border-radius:14px;overflow:hidden;margin-block:20px 28px}.rd-about-feature img,.rd-blog-feature img{width:100%;aspect-ratio:4/3;object-fit:cover}.rd-about-feature>div,.rd-blog-feature>div{padding:20px}.rd-tool-panel{padding:24px;border:1px solid var(--line);border-radius:14px;background:white}.rd-tool-panel select{display:block;width:100%;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:9px}.rd-finder-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.rd-finder-grid article{border:1px solid var(--line);border-radius:14px;overflow:hidden}.rd-finder-grid img{width:100%;aspect-ratio:4/3;object-fit:cover}.rd-finder-grid article>div{padding:12px}.rd-estimate-result{background:var(--soft);padding:16px;border-radius:9px;font-weight:700;margin-block:12px}.rd-journey-tools{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;padding:24px;background:var(--soft);border-radius:14px;margin-block:24px}.rd-tool-panel h2{margin-bottom:16px}@media(max-width:780px){.rd-about-feature,.rd-blog-feature,.rd-journey-tools{grid-template-columns:1fr}.rd-finder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rd-tool-panel{padding:12px}}
+
+/* V1.7.0 — unified commercial surfaces */
+.rd-home-v17 .rd-hero-copy { max-width:650px; }
+.rd-home-v17 .rd-hero-copy h1 { line-height:1.35; }
+.rd-home-v17 .rd-split-banner,.rd-home-v17 .rd-room-banner,.rd-blog-feature,.rd-about-feature { border-radius:14px; overflow:hidden; }
+.rd-home-v17 .rd-split-banner img { object-fit:cover; }
+.rd-home-v17 .rd-material-story { overflow:hidden; border-radius:14px; }
+.rd-home-v17 .rd-material-story img { object-fit:cover; }
+.rd-service-value { display:flex; gap:20px; align-items:center; justify-content:space-between; border:1px solid #dce3df; border-inline-start:4px solid #086e64; border-radius:14px; padding:24px; margin-block:20px; }
+.rd-service-value h2 { margin-block:4px 8px; }
+.rd-service-value .rd-button { flex-shrink:0; }
+.rd-gallery-tools { display:flex; flex-wrap:wrap; align-items:end; gap:12px; padding:16px; border:1px solid #dce3df; border-radius:14px; margin-block:16px; }
+.rd-gallery-tools[hidden],.rd-photo[hidden] { display:none!important; }
+.rd-gallery-tools label { flex:1 1 220px; }
+.rd-gallery-tools input { display:block; width:100%; min-height:44px; border:1px solid #b8c7c0; border-radius:9px; padding:8px; }
+.rd-gallery-tools p { flex-basis:100%; margin:0; }
+.rd-header-v17 .rd-navigation { gap:clamp(6px,1vw,16px); }
+.rd-footer-v17 .rd-footer-grid h2:not(:first-child) { margin-top:16px; }
+@media(max-width:780px){.rd-service-value{align-items:stretch;flex-direction:column;padding:16px}.rd-home-v17 .rd-hero-copy{max-width:100%}.rd-gallery-tools{padding:12px}.rd-gallery-tools label{flex-basis:100%}}
+
+/* V1.7.1 — prevent the initial mobile navigation from changing document height. */
+.rd-menu-toggle { display:none; }
+@media(max-width:780px) {
+ .rd-header-v17 .rd-menu-toggle:not([hidden]) { display:inline-flex; }
+ .rd-header-v17 .rd-navigation[data-initial-menu] { display:none; }
+ .rd-header-v17 .rd-navigation:not([data-initial-menu]):not([hidden]) { position:absolute; inset-inline:0; top:100%; width:100%; background:white; box-shadow:0 12px 20px #092b2726; padding:12px; }
+ .rd-header-v17 .rd-header-inner { min-height:70px; flex-wrap:nowrap; }
+}

@@ -14,6 +14,7 @@ if (menuToggle && navigation) {
     };
 
     setMenu(false);
+    navigation.removeAttribute("data-initial-menu");
     smallScreen.addEventListener('change', () => setMenu(false));
     menuToggle.addEventListener('click', () => setMenu(navigation.hidden));
     navigation.addEventListener('click', (event) => {
@@ -128,6 +129,8 @@ for (const form of document.querySelectorAll('[data-request]')) {
             'الاسم: ' + data.get('customer').trim(),
             'الحي أو المنطقة: ' + data.get('area').trim(),
             'الخدمة: ' + data.get('service'),
+            ...(data.get('site_state') ? ['حالة الموقع: '+data.get('site_state')] : []),
+            ...(data.get('stage') ? ['مرحلة المشروع: '+data.get('stage')] : []),
             'التفاصيل والمقاسات: ' + data.get('details').trim(),
         ];
         const message = lines.join('\n');
@@ -330,3 +333,11 @@ if (quoteShortcut && quoteTarget && 'IntersectionObserver' in window) {
  observer.observe(quoteTarget);
  if(quickTarget)observer.observe(quickTarget);
 }
+
+for(const finder of document.querySelectorAll('[data-finder]')) {const select=finder.querySelector('[data-finder-space]');const update=()=>{let count=0;for(const card of finder.querySelectorAll('[data-finder-card]')){card.hidden=select.value!=='all'&&!card.dataset.finderCard.split(' ').includes(select.value);if(!card.hidden)count++;}finder.querySelector('[data-finder-status]').textContent='الخدمات المناسبة: '+count;};select.addEventListener('change',update);update();}
+for(const form of document.querySelectorAll('[data-estimate]')){const result=form.querySelector('[data-estimate-result]');const area=()=>Number(form.elements.namedItem('length').value)*Number(form.elements.namedItem('width').value)*Number(form.elements.namedItem('quantity').value);form.addEventListener('input',()=>{result.textContent=form.elements.namedItem('length').validity.valid&&form.elements.namedItem('width').validity.valid&&form.elements.namedItem('quantity').validity.valid&&area()>0?'المساحة التقريبية: '+area().toLocaleString('ar-SA',{maximumFractionDigits:2})+' م²':'أدخل مقاسات صحيحة.';});form.addEventListener('submit',e=>{e.preventDefault();const url=new URL(form.action);url.searchParams.set('service',form.elements.service.value);url.searchParams.set('dimensions',form.elements.namedItem('length').value+' × '+form.elements.namedItem('width').value+' م، العدد '+form.elements.namedItem('quantity').value+'، المساحة التقريبية '+area().toFixed(2)+' م²');location.assign(url.href);});}
+for(const form of document.querySelectorAll('[data-request]')){const dimensions=new URLSearchParams(location.search).get('dimensions');if(dimensions&&!form.elements.details.value){form.elements.details.value=dimensions.slice(0,200);form.elements.details.dispatchEvent(new Event('input',{bubbles:true}));}}
+
+/* V1.7.0: filter captions without changing the lightbox source order. */
+for(const tools of document.querySelectorAll('[data-gallery-tools]')){const gallery=tools.parentElement.querySelector('[data-gallery]');if(!gallery)continue;const input=tools.querySelector('[data-gallery-search]');const update=()=>{let count=0;for(const item of gallery.querySelectorAll('.rd-photo')){item.hidden=!normalizeServiceSearch(item.querySelector('.rd-photo-caption').textContent).includes(normalizeServiceSearch(input.value));if(!item.hidden)count++;}tools.querySelector('[data-gallery-results]').textContent='الصور المطابقة: '+count;};input.addEventListener('input',update);tools.querySelector('[data-gallery-clear]').addEventListener('click',()=>{input.value='';update();input.focus();});tools.hidden=false;update();}
+for(const form of document.querySelectorAll('[data-estimate]')){const service=new URLSearchParams(location.search).get('service');if(service&&Array.from(form.elements.service.options).some(o=>o.value===service))form.elements.service.value=service;}
