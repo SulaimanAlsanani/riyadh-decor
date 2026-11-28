@@ -90,18 +90,21 @@ function rd_service_cards($services, $section = 'services') {
                     <button type="button" data-service-group="<?php echo esc_attr($group); ?>" aria-pressed="<?php echo $group === 'all' ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr($grid_id); ?>"><?php echo esc_html($label); ?></button>
                 <?php endforeach; ?>
             </div>
-            <p class="screen-reader-text" role="status" data-service-status></p>
+            <p class="rd-service-count" role="status" data-service-status><?php echo esc_html(sprintf('عدد النتائج: %s', number_format_i18n($total))); ?></p>
         </div>
     <?php endif; ?>
-    <div id="<?php echo esc_attr($grid_id); ?>" class="rd-cards<?php echo $total === 1 ? ' rd-service-card-single' : ''; ?>">
+    <div id="<?php echo esc_attr($grid_id); ?>" class="rd-cards rd-service-card-grid<?php echo $total === 1 ? ' rd-service-card-single' : ''; ?>">
         <?php foreach ($services as $slug => $service): ?>
             <?php $url = rd_url($section . '/' . $slug); ?>
             <article class="rd-card" data-service-card="<?php echo esc_attr($service_groups[$slug] ?? ''); ?>" data-service-name="<?php echo esc_attr($service['name'] . ' ' . $service['short']); ?>">
                 <a class="rd-card-media" tabindex="-1" aria-hidden="true" href="<?php echo esc_url($url); ?>"><?php rd_image($service['image'], ['alt' => '']); ?></a>
                 <div class="rd-card-body">
+                    <?php if (isset($service_groups[$slug], $group_labels[$service_groups[$slug]])): ?>
+                        <span class="rd-category"><?php echo esc_html($group_labels[$service_groups[$slug]]); ?></span>
+                    <?php endif; ?>
                     <h3><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($service['card_title'] ?? $service['name']); ?></a></h3>
                     <p><?php echo esc_html($service['intro']); ?></p>
-                    <a class="rd-text-link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($link_label); ?><span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
+                    <a class="rd-text-link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($link_label); ?> <span aria-hidden="true">←</span><span class="screen-reader-text">: <?php echo esc_html($service['short']); ?></span></a>
                 </div>
             </article>
         <?php endforeach; ?>

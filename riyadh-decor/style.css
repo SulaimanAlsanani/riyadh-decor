@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.0.5
+Version: 1.0.6
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -227,4 +227,39 @@ summary { cursor:pointer; }
 @media(prefers-reduced-motion:reduce) {
     html { scroll-behavior:auto; }
     *, *::before, *::after { transition-duration:0s !important; }
+}
+
+/* Service discovery and gallery refinement */
+.rd-service-filters { padding:16px; border:1px solid var(--line); background:var(--white); border-radius:14px; }
+.rd-service-count { flex-basis:100%; color:var(--dim); font-size:.86rem; margin:0; }
+.rd-service-card-grid .rd-card { display:flex; flex-direction:column; transition:box-shadow .2s ease,border-color .2s ease; }
+.rd-service-card-grid .rd-card:hover { border-color:#abc3b7; box-shadow:0 8px 24px #103e3810; }
+.rd-service-card-grid .rd-card-body { flex:1; display:flex; flex-direction:column; align-items:flex-start; }
+.rd-service-card-grid .rd-card-body p { flex:1; }
+.rd-service-card-grid .rd-text-link { display:inline-flex; align-items:center; gap:8px; min-height:40px; margin-block-start:8px; text-decoration:none; }
+.rd-service-card-grid .rd-text-link:hover { text-decoration:underline; }
+.rd-gallery-kicker { color:var(--green)!important; font-size:.9rem; font-weight:800; margin-block-end:6px; }
+.rd-featured-gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.rd-gallery-tile { display:flex; align-items:flex-end; min-height:260px; position:relative; isolation:isolate; overflow:hidden; border-radius:var(--radius); background:var(--deep); color:white; text-decoration:none; }
+.rd-gallery-tile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform .25s ease; }
+.rd-gallery-tile::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,#092b27f2 0%,#092b2770 35%,transparent 75%); z-index:-1; }
+.rd-gallery-tile>span { padding:20px; width:100%; }
+.rd-gallery-tile strong { display:block; font-size:1.2rem; }
+.rd-gallery-tile small { display:block; color:#fff; font-size:.9rem; margin-block-start:4px; }
+.rd-gallery-tile:hover img { transform:scale(1.035); }
+@media(max-width:780px) {
+    .rd-featured-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .rd-service-filters { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; padding:12px; }
+    .rd-service-search { width:100%; }
+    .rd-service-groups { flex-wrap:nowrap; overflow-x:auto; padding-block:3px 6px; scrollbar-width:thin; }
+    .rd-service-groups button { flex:0 0 auto; white-space:nowrap; }
+    .rd-gallery-tile { min-height:220px; }
+}
+@media(max-width:510px) {
+    .rd-service-card-grid .rd-card-body { padding:15px; }
+    .rd-featured-gallery { gap:10px; }
+    .rd-gallery-tile { min-height:190px; border-radius:12px; }
+    .rd-gallery-tile>span { padding:12px; }
+    .rd-gallery-tile strong { font-size:1rem; }
+    .rd-gallery-tile small { font-size:.8rem; }
 }

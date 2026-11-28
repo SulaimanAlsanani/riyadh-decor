@@ -19,13 +19,35 @@ $services = rd_services();
 
     <div class="rd-jump"><div class="rd-shell">
         <a href="#services">الخدمات</a>
-        <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض التصاميم</a>
+        <a href="#design-gallery">معرض التصاميم</a>
         <a href="#steps">خطوات تجهيز المشروع</a>
     </div></div>
 
     <section class="rd-shell rd-section" id="services">
-        <?php rd_heading('الخدمات'); ?>
+        <?php rd_heading('خدمات الديكور والتشطيبات', 'تصفّح الخدمات حسب نوع العمل، أو ابحث مباشرة عن الخدمة التي تحتاجها.'); ?>
         <?php rd_service_cards($services); ?>
+    </section>
+
+    <section class="rd-ideas rd-section" id="design-gallery" aria-labelledby="rd-gallery-title">
+        <div class="rd-shell">
+            <div class="rd-section-head">
+                <div><p class="rd-gallery-kicker">إلهام لمساحتك</p><h2 id="rd-gallery-title">تصفّح أفكار الديكور والتشطيبات</h2><p>نماذج تصاميم من معرض الصور، اختر منها ما يناسب ذوقك ومساحتك.</p></div>
+                <a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery')); ?>">جميع التصاميم</a>
+            </div>
+            <div class="rd-featured-gallery">
+                <?php foreach (['bedrooms', 'tv-walls', 'wood-partitions', 'flooring', 'suspended-ceilings', 'shades-and-screens'] as $slug):
+                    if (!isset($services[$slug])) continue;
+                    $service = $services[$slug];
+                    $pictures = array_values(array_diff($service['portfolio'] ?? [], [$service['image']]));
+                    $picture = $pictures[0] ?? $service['image'];
+                    ?>
+                    <a class="rd-gallery-tile" href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">
+                        <?php rd_image($picture, ['alt' => '']); ?>
+                        <span><strong><?php echo esc_html($service['short']); ?></strong><small>استكشف التصاميم <span aria-hidden="true">←</span></small></span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </section>
 
     <section class="rd-shell rd-section" id="steps">
