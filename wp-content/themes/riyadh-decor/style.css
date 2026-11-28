@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 2.2.0
+Version: 2.3.0
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -789,3 +789,6 @@ h3 { font-weight:var(--rd-weight-bold); }
 .rd-project-references{margin-block:32px}.rd-project-references .rd-space-card img{aspect-ratio:16/10}.rd-library-content .rd-space-feature li{margin-block:8px}.rd-library-content .rd-space-feature ul{padding-inline-start:22px}
 
 .rd-project-references .rd-space-card:focus-visible{outline-offset:-4px}.rd-planning-links{gap:10px}.rd-library-content .rd-space-feature ul{line-height:1.9}
+
+/* V2.3 content navigation */
+.rd-visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.rd-header-v17 .rd-navigation>details{position:relative}.rd-header-v17 .rd-navigation>details.rd-service-nav{position:static}.rd-explore-tray{position:absolute;inset-inline-start:0;top:100%;min-width:230px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px #102b2820;z-index:20}.rd-explore-tray a{display:block;padding:8px 10px;white-space:normal}.rd-nav-search-v23{display:flex;align-items:center;border:1px solid #d5dfda;border-radius:9px;padding:0 6px;max-width:126px;margin:0}.rd-nav-search-v23 input{width:100%;min-width:0;border:0;background:transparent;padding:6px;font:inherit}.rd-nav-search-v23 button{border:0;background:transparent;color:var(--green);padding:6px;cursor:pointer}.rd-discovery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.rd-discovery-grid>a{border:1px solid #d9e2dd;border-radius:14px;overflow:hidden;color:inherit;text-decoration:none;min-width:0}.rd-discovery-grid img{width:100%;aspect-ratio:16/9;object-fit:cover}.rd-discovery-grid>a>div{padding:16px}.rd-discovery-grid h3{margin:0 0 8px}.rd-discovery-grid p{margin:0;color:var(--dim)}.rd-discovery-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.rd-discovery-links>a{padding:10px 14px;border:1px solid #d9e2dd;border-radius:9px;color:var(--green)}@media(max-width:1000px) and (min-width:781px){.rd-header-v17 .rd-navigation{gap:5px}.rd-nav-search-v23{max-width:90px}.rd-header-v17 .rd-navigation>details>summary{font-size:12px}}@media(max-width:780px){.rd-explore-tray{position:static;min-width:0;box-shadow:none}.rd-nav-search-v23{max-width:none;width:100%}.rd-discovery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rd-discovery-grid>a>div{padding:12px}.rd-discovery-links>a{flex:1 1 auto}}
