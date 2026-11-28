@@ -11,7 +11,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 25
     permissions:
       contents: write
     steps:
@@ -34,6 +34,18 @@ jobs:
           node scripts/check-export.mjs
           node scripts/preview.mjs
           printf '%s\n' "$GITHUB_SHA" > web-preview/revision.txt
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save --package-lock=false --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Browser quality gate
+        run: node scripts/browser-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-quality-report
+          path: qa-report/
+          if-no-files-found: ignore
       - name: Update the browser preview
         run: |
           git config user.name 'github-actions[bot]'

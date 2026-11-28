@@ -1,5 +1,6 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 import { load } from 'cheerio';
 
 const output = 'dist';
@@ -62,6 +63,18 @@ for (const match of fonts.matchAll(/url\(([^)]+)\)/g)) {
     try { if (!(await stat(join(output, 'wp-content/themes/riyadh-decor/assets', file))).isFile()) throw new Error(); checked++; }
     catch { errors.push('Missing font: ' + file); }
 }
+const originals = 'riyadh-decor/assets';
+const exported = join(output, 'wp-content/themes/riyadh-decor/assets');
+let preserved = 0;
+for (const name of await readdir(originals)) {
+    if (!/\.(jpg|jpeg|png|webp|gif|svg)$/i.test(name)) continue;
+    const hash = data => createHash('sha256').update(data).digest('hex');
+    try {
+        if (hash(await readFile(join(originals,name))) !== hash(await readFile(join(exported,name)))) throw Error();
+        preserved++;
+    } catch { errors.push('Original image changed or missing: ' + name); }
+}
+console.log('Byte-identical original images: ' + preserved);
 if (checked < 200 || errors.length) {
     console.error([...new Set(errors)].slice(0, 35).join('\n'));
     process.exit(1);

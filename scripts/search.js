@@ -2,7 +2,8 @@
 
 const results = document.querySelector('#rd-search-results');
 const input = document.querySelector('#rd-search-field');
-const searchIndex = new URL('search-index.json', document.currentScript.src);
+const scriptBase = new URL('.', document.currentScript.src);
+const searchIndex = new URL('search-index.json', scriptBase);
 const query = new URLSearchParams(window.location.search).get('s')?.trim() || '';
 input.value = query;
 
@@ -31,7 +32,7 @@ async function search() {
         for (const entry of entries) {
             const item = document.createElement('li');
             const link = document.createElement('a');
-            const result = new URL('..' + entry.path, window.location.href);
+            const result = new URL(entry.path.replace(/^\//, ''), scriptBase);
             if (location.pathname.endsWith('/index.html')) result.pathname += 'index.html';
             link.href = result.href;
             link.textContent = entry.title;

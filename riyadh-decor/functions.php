@@ -139,7 +139,17 @@ add_action('wp_head', function () {
             printf("<meta property=\"og:description\" content=\"%s\">\n", esc_attr($description));
         }
         printf("<meta property=\"og:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
-        printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url(rd_asset('majlis.webp')));
+        $current = get_queried_object();
+        $specialty = $current instanceof WP_Post ? get_post_meta($current->ID, '_rd_specialty', true) : '';
+        $service = rd_services()[$specialty] ?? null;
+        $image = $service ? rd_asset(rd_media_filename($service['image'])) : rd_asset('majlis.webp');
+        $canonical = is_front_page() ? home_url('/') : ($current instanceof WP_Post ? get_permalink($current) : '');
+        printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url($image));
+        printf("<meta property=\"og:image:alt\" content=\"%s\">\n", esc_attr($service['alt'] ?? 'ديكورات الرياض'));
+        echo '<meta property="og:site_name" content="ديكورات الرياض">' . "\n";
+        if ($canonical) printf("<meta property=\"og:url\" content=\"%s\">\n", esc_url($canonical));
+        echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+        printf("<meta name=\"twitter:image\" content=\"%s\">\n", esc_url($image));
         printf("<meta property=\"og:type\" content=\"%s\">\n", is_singular('post') ? 'article' : 'website');
         echo "<meta property=\"og:locale\" content=\"ar_SA\">\n";
     }

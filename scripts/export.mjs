@@ -134,7 +134,7 @@ for (const [path, source] of routes) {
             return [rewrite(sourceUrl, path), descriptor].filter(Boolean).join(' ');
         }).join(', '));
     });
-    $('meta[property^="og:"]').each((_, element) => {
+    $('meta[property^="og:"],meta[name="twitter:image"]').each((_, element) => {
         const value = $(element).attr('content');
         if (value?.startsWith(origin.origin)) $(element).attr('content', rewrite(value, path, true));
     });
