@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.2
+Version: 1.2.3
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -509,4 +509,35 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
  .rd-photo-zoom { width:30px; height:30px; inset-inline-end:6px; inset-block-end:6px; }
  .rd-photo-zoom svg { width:17px; height:17px; }
  .rd-photo figcaption .rd-text-link { font-size:.76rem; }
+}
+
+/* V1.2.3: photography-led editorial home */
+.rd-luxury-home .rd-hero { margin:0; min-height:clamp(480px,67vh,720px); }
+.rd-luxury-home .rd-hero-copy h1 { font-size:clamp(2.75rem,5.5vw,5.2rem); line-height:1.25; }
+.rd-luxury-home .rd-hero-copy>p:not(.rd-kicker) { line-height:1.9; }
+.rd-luxury-home .rd-jump { background:var(--white); color:var(--deep); border-block-end:1px solid var(--line); }
+.rd-luxury-home .rd-jump a { border-color:var(--line); }
+.rd-luxury-home .rd-jump a:hover { background:var(--soft); color:var(--green); }
+.rd-luxury-home .rd-home-intro { grid-template-columns:minmax(0,1fr); gap:24px; padding-block-start:clamp(35px,5vw,64px); }
+.rd-luxury-home .rd-home-intro>div:first-child { max-width:720px; }
+.rd-visual-categories { grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.rd-visual-categories a { position:relative; display:flex; flex-direction:column; align-items:stretch; justify-content:stretch; overflow:hidden; padding:0; gap:0; border-radius:14px; background:white; }
+.rd-visual-categories a>img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+.rd-category-copy { display:flex; flex-direction:column; gap:3px; padding:14px 16px; }
+.rd-category-copy strong { font-size:1.05rem; line-height:1.5; }
+.rd-category-copy small { color:var(--dim); font-size:.83rem; display:flex; justify-content:space-between; }
+.rd-luxury-home .rd-section-head h2 { text-wrap:balance; }
+.rd-luxury-home .rd-gallery-kicker { color:var(--green); font-weight:800; font-size:.86rem; }
+.rd-luxury-home .rd-editorial-gallery { gap:16px; }
+.rd-luxury-home .rd-split-banner { border-radius:18px; }
+.rd-luxury-home .rd-split-banner .rd-button { margin-block:4px; }
+.rd-luxury-home .rd-home-request { margin-block-end:clamp(24px,4vw,48px); }
+@media(max-width:1000px) { .rd-visual-categories { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:510px) {
+ .rd-luxury-home .rd-hero { min-height:500px; }
+ .rd-luxury-home .rd-hero-copy h1 { font-size:clamp(2.3rem,10vw,3.4rem); }
+ .rd-visual-categories { gap:10px; }
+ .rd-category-copy { padding:10px; }
+ .rd-category-copy strong { font-size:.9rem; }
+ .rd-luxury-home .rd-editorial-gallery { gap:10px; }
 }
