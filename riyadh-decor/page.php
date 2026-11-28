@@ -12,15 +12,17 @@ while (have_posts()) :
 <?php if ($service && $kind === 'gallery-item'): ?>
     <?php rd_page_top(get_the_title(), 'أفكار تصميمية توضيحية تساعدك على مقارنة الخامات والإضاءة والتفاصيل.', 'gallery', 'المعرض'); ?>
     <div class="rd-shell rd-section">
+        <?php rd_service_actions($slug, true); ?>
         <?php rd_image_gallery($service['portfolio'], $slug); ?>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
-        <div class="rd-related"><a href="<?php echo esc_url(rd_url('services/' . $slug)); ?>">تفاصيل الخدمة</a></div>
+        <?php rd_related_services($slug, 'gallery'); ?>
         <?php rd_end_cta('أعجبتك إحدى الأفكار؟', $slug); ?>
     </div>
 <?php elseif ($service): ?>
     <?php rd_page_top(get_the_title(), $service['intro'], 'services', 'الخدمات'); ?>
     <div class="rd-shell rd-section">
-        <div class="rd-service-layout">
+        <?php rd_service_actions($slug); ?>
+        <div class="rd-service-layout rd-detail-layout">
             <div>
                 <h2>خيارات التصميم والتشطيب</h2>
                 <ul><?php foreach ($service['choices'] as $choice): ?><li><?php echo esc_html($choice); ?></li><?php endforeach; ?></ul>
@@ -31,9 +33,7 @@ while (have_posts()) :
             </div>
             <div class="rd-feature-image">
                 <?php if (has_post_thumbnail()) { the_post_thumbnail('large', ['loading' => 'eager']); } else { rd_image($service['image'], ['loading' => 'eager', 'alt' => $service['alt']]); } ?>
-                <div class="rd-related">
-                    <a href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استعرض معرض التصاميم</a>
-                </div>
+                <p class="rd-image-note">صورة توضيحية للخامة أو التصميم؛ التنفيذ حسب المقاسات والعينات المعتمدة.</p>
             </div>
         </div>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
@@ -46,6 +46,7 @@ while (have_posts()) :
         <h2>أسئلة شائعة</h2>
         <?php rd_faq($service['faq']); ?>
         <?php rd_end_cta('ابدأ بطلب تقييم لخدمتك', $slug); ?>
+        <?php rd_related_services($slug); ?>
     </div>
 <?php elseif ($section === 'services'): ?>
     <?php rd_page_top('الخدمات', 'خدمات الديكور والتشطيبات الداخلية والخارجية في الرياض.'); ?>

@@ -123,6 +123,7 @@ function rd_image_gallery($keys, $specialty = '') {
     $service = rd_services()[$specialty] ?? null;
     $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_gallery_media());
     ?>
+    <p class="rd-gallery-count"><?php echo esc_html(number_format_i18n(count($keys))); ?> صورة · اضغط على أي صورة لتكبيرها</p>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
             <figure class="rd-photo">
@@ -208,7 +209,51 @@ function rd_end_cta($title = 'تبي تعرف وش يناسب مساحتك؟', $
     ?>
     <aside class="rd-cta">
         <div><h2><?php echo esc_html($title); ?></h2><p>شارك الحي والمقاسات وصور المساحة عشان نناقش نطاق العمل.</p></div>
-        <a class="rd-button rd-button-solid" href="<?php echo esc_url($url); ?>">جهّز طلبك</a>
+        <a class="rd-button rd-button-solid" href="<?php echo esc_url($url); ?>">اطلب عرض سعر</a>
     </aside>
+    <?php
+}
+
+function rd_service_actions($slug, $gallery = false) {
+    $service = rd_services()[$slug] ?? null;
+    if (!$service) return;
+    $quote = add_query_arg('service', $slug, rd_url('contact'));
+    ?>
+    <div class="rd-detail-actions">
+        <div><strong><?php echo esc_html($service['short']); ?></strong><small><?php echo esc_html(number_format_i18n(count($service['portfolio'] ?? []))); ?> نموذج تصميم</small></div>
+        <div class="rd-actions">
+            <a class="rd-button rd-button-solid" href="<?php echo esc_url($quote); ?>">اطلب عرض سعر</a>
+            <a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url(($gallery ? 'services/' : 'gallery/') . $slug)); ?>"><?php echo $gallery ? 'تفاصيل الخدمة' : 'معرض التصاميم'; ?></a>
+        </div>
+    </div>
+    <?php
+}
+
+function rd_related_services($slug, $section = 'services') {
+    $services = rd_services();
+    $related = [];
+    foreach (rd_service_groups() as [$label, $slugs]) {
+        if (!in_array($slug, $slugs, true)) continue;
+        foreach ($slugs as $key) {
+            if ($key !== $slug && isset($services[$key])) $related[$key] = $services[$key];
+        }
+    }
+    foreach ($services as $key => $service) {
+        if ($key !== $slug && count($related) < 3) $related[$key] = $service;
+    }
+    $related = array_slice($related, 0, 3, true);
+    if (!$related) return;
+    ?>
+    <section class="rd-related-section" aria-label="خدمات مرتبطة">
+        <?php rd_heading('خدمات قد تناسب مشروعك', '', rd_url($section), 'عرض الكل'); ?>
+        <div class="rd-related-grid">
+        <?php foreach ($related as $key => $item): ?>
+            <a class="rd-related-tile" href="<?php echo esc_url(rd_url($section . '/' . $key)); ?>">
+                <?php rd_image($item['image'], ['alt' => '']); ?>
+                <span><?php echo esc_html($item['short']); ?> <span aria-hidden="true">←</span></span>
+            </a>
+        <?php endforeach; ?>
+        </div>
+    </section>
     <?php
 }
