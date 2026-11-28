@@ -83,13 +83,12 @@ while (have_posts()) :
     </div>
 <?php elseif ($section === 'contact'): ?>
     <?php rd_page_top('تواصل مع ديكورات الرياض', 'صف لنا موقع المشروع والمساحة والخامات المطلوبة لتبدأ من طلب واضح.'); ?>
-    <section class="rd-shell rd-section rd-request-section">
-        <div><h2>اتصال وواتساب</h2><p><?php echo esc_html(get_theme_mod('rd_location', 'الرياض، السعودية')); ?></p>
-            <div class="rd-actions">
-                <a class="rd-button rd-button-line" href="<?php echo esc_url(rd_tel()); ?>"><bdi><?php echo esc_html(rd_phone()); ?></bdi></a>
-                <a class="rd-button rd-button-green" href="<?php echo esc_url(rd_wa()); ?>" target="_blank" rel="noopener">محادثة واتساب</a>
-            </div>
-            <p>شارك في المحادثة صور الأسطح ومقاساتها وأفضل وقت للتواصل.</p>
+    <section class="rd-shell rd-section rd-request-section rd-contact-layout">
+        <div class="rd-contact-info"><h2>اختر طريقة التواصل</h2><p>نطاق الخدمة: <?php echo esc_html(get_theme_mod('rd_location', 'الرياض، السعودية')); ?></p>
+            <a class="rd-contact-method" href="<?php echo esc_url(rd_tel()); ?>"><strong>اتصال مباشر</strong><bdi><?php echo esc_html(rd_phone()); ?></bdi></a>
+            <a class="rd-contact-method" href="<?php echo esc_url(rd_wa()); ?>" target="_blank" rel="noopener"><strong>محادثة واتساب</strong><span>أرسل صور المساحة والمقاسات ←</span></a>
+            <div class="rd-contact-checklist"><h3>جهّز هذه المعلومات قبل الطلب</h3><ul><li>نوع الخدمة والحي.</li><li>المقاسات التقريبية وصور الموقع.</li><li>الخامات أو التصميم المطلوب.</li></ul></div>
+            <p>النموذج يجهّز رسالة واتساب؛ راجعها قبل إرسالها.</p>
         </div>
         <?php rd_request_form(sanitize_key(wp_unslash($_GET['service'] ?? ''))); ?>
     </section>

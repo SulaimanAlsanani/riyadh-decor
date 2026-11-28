@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.0.7
+Version: 1.0.8
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -291,4 +291,44 @@ summary { cursor:pointer; }
  .rd-photo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
  .rd-photo-grid .rd-photo figcaption { padding:10px; font-size:.84rem; }
  .rd-related-tile>span { padding:10px; font-size:.9rem; }
+}
+
+/* Global navigation, contact and footer */
+html { scroll-padding-top:148px; }
+.rd-topbar { background:var(--dark); color:#eef7ef; font-size:.82rem; }
+.rd-topbar .rd-shell { min-height:34px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.rd-topbar .rd-shell>div { display:flex; gap:18px; }
+.rd-topbar a { text-decoration:none; }
+.rd-topbar a:hover { text-decoration:underline; }
+.rd-header-inner { position:relative; }
+.rd-service-nav { position:static; }
+.rd-mega { inset-inline-start:0; inset-inline-end:0; inset-block-start:100%; width:100%; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; padding:24px; max-height:65vh; }
+.rd-mega-group { min-width:0; }
+.rd-mega-group strong { display:block; border-block-end:1px solid var(--line); padding-block-end:8px; color:var(--green); }
+.rd-mega-group a { display:block; font-weight:500; padding:7px 4px; }
+.rd-mega-bottom { grid-column:1/-1; border-block-start:1px solid var(--line); display:flex; gap:12px; padding-block-start:12px; }
+.rd-mega-bottom a { color:var(--green); font-weight:800; }
+.rd-footer-grid { grid-template-columns:1.4fr 1fr 1.1fr 1fr; gap:24px; }
+.rd-footer-grid .rd-footer-quote { display:inline-flex; color:#21170b; margin-block-start:12px; text-decoration:none; }
+.rd-contact-info { display:grid; gap:14px; }
+.rd-contact-method { display:flex; flex-direction:column; align-items:flex-start; gap:4px; text-decoration:none; background:white; border:1px solid var(--line); border-radius:12px; padding:16px 20px; }
+.rd-contact-method strong { color:var(--green); font-size:1.1rem; }
+.rd-contact-method:hover { border-color:var(--green); }
+.rd-contact-checklist { background:var(--soft); padding:20px; border-radius:12px; }
+.rd-contact-checklist ul { margin-block-end:0; }
+@media(max-width:1000px) { .rd-footer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:780px) {
+ html { scroll-padding-top:82px; }
+ .rd-topbar { display:none; }
+ .rd-mega { position:static; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; padding:12px; gap:12px; max-height:none; overflow:visible; }
+ .rd-mega-group a { overflow-wrap:anywhere; }
+ .rd-mobile-contact { display:block; }
+ .rd-float { bottom:10px; }
+ .rd-contact-layout { gap:24px; }
+}
+@media(max-width:510px) {
+ .rd-mega { grid-template-columns:minmax(0,1fr); }
+ .rd-footer-grid { gap:20px 12px; }
+ .rd-footer-grid>div:first-child { grid-column:1/-1; }
+ .rd-contact-method { padding:14px; }
 }
