@@ -2,7 +2,7 @@
 get_header();
 $services = rd_services();
 ?>
-<main id="content" class="rd-luxury-home rd-home-v13 rd-home-v14 rd-home-v17 rd-home-v20">
+<main id="content" class="rd-luxury-home rd-home-v13 rd-home-v14 rd-home-v17 rd-home-v20 rd-home-v23">
     <section class="rd-hero" aria-labelledby="rd-hero-title">
         <?php rd_image('majlis', ['alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw', 'class' => 'rd-hero-image']); ?>
         <div class="rd-shell rd-hero-content"><div class="rd-hero-copy">
@@ -96,6 +96,11 @@ $services = rd_services();
         <?php endforeach; ?>
         </div>
     </section>
+    <section class="rd-shell rd-section rd-home-discovery" id="discover">
+        <?php rd_heading('اختر طريقك إلى التصميم المناسب','أدلة وخيارات تساعدك على تحديد احتياجك قبل طلب السعر.',rd_url('solutions'),'جميع الحلول'); ?>
+        <div class="rd-discovery-grid"><?php foreach(['design-styles','material-library','project-combinations'] as $key): $item=rd_space_content()[$key]; ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php rd_image($item['image'],['alt'=>'']); ?><div><h3><?php echo esc_html($item['title']); ?></h3><p><?php echo esc_html($item['intro']); ?></p></div></a><?php endforeach; ?></div>
+        <div class="rd-discovery-links"><a href="<?php echo esc_url(rd_url('home-renovation')); ?>">تجديد المنازل ←</a><a href="<?php echo esc_url(rd_url('outdoor-decor')); ?>">الأعمال الخارجية ←</a><a href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز المشاريع ←</a></div>
+    </section>
     <section class="rd-shell rd-section rd-home-steps" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <ol class="rd-steps">
@@ -106,6 +111,7 @@ $services = rd_services();
         </ol><div class="rd-actions rd-planning-links"><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('solutions')); ?>">حلول الديكور حسب احتياجك</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز المشاريع</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('service-finder')); ?>">ساعدني في اختيار الخدمة</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('estimate')); ?>">جهّز المقاسات</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a></div>
     </section>
 
+    <section class="rd-shell rd-section rd-home-knowledge" aria-labelledby="rd-home-knowledge-title"><div class="rd-section-head"><div><span class="rd-gallery-kicker">مركز المعرفة</span><h2 id="rd-home-knowledge-title">اقرأ قبل اعتماد التشطيب</h2><p>أدلة متخصصة لاختيار الخامات وتجهيز مشروعك.</p></div><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('guides')); ?>">جميع المقالات</a></div><div class="rd-cards"><?php rd_guide_cards(rd_guides(3)); ?></div></section>
     <section class="rd-shell rd-section rd-request-section rd-home-request" id="request">
         <div>
             <span class="rd-gallery-kicker">خطوتك الأولى</span><h2>خلّنا نراجع تفاصيل مشروعك</h2>

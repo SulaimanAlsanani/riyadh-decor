@@ -26,7 +26,7 @@
         <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation"><?php rd_icon('menu'); ?> القائمة</button>
         <nav class="rd-navigation" id="rd-navigation" data-initial-menu aria-label="القائمة الرئيسية">
             <a href="<?php echo esc_url(rd_url()); ?>">الرئيسية</a>
-            <details class="rd-service-nav">
+            <details class="rd-service-nav" data-nav-disclosure>
                 <summary>الخدمات</summary>
                 <div class="rd-nav-tray rd-mega">
                     <?php $nav_services = rd_services(); $nav_seen = []; ?>
@@ -43,9 +43,13 @@
                 </div>
             </details>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">المعرض</a>
-            <a href="<?php echo esc_url(rd_url('about')); ?>">من نحن</a>
-            <a class="rd-nav-spaces" href="<?php echo esc_url(rd_url('spaces')); ?>">حسب المساحة</a><a class="rd-nav-guide" href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة</a>
-            <a class="rd-nav-search" href="<?php echo esc_url(rd_url('services')); ?>#content"><?php rd_icon('zoom'); ?><span>استكشف الخدمات</span></a>
+            <details class="rd-explore-nav" data-nav-disclosure><summary>استكشف الديكور</summary><div class="rd-nav-tray rd-explore-tray">
+                <?php foreach(['spaces'=>'حسب المساحة','property-types'=>'حسب العقار','design-styles'=>'أنماط التصميم','material-library'=>'مكتبة الخامات','solutions'=>'حلول الديكور','home-renovation'=>'تجديد المنازل'] as $key=>$label): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($label); ?></a><?php endforeach; ?>
+            </div></details>
+            <details class="rd-knowledge-nav" data-nav-disclosure><summary>الأدلة والأدوات</summary><div class="rd-nav-tray rd-explore-tray">
+                <?php foreach(['guides'=>'المقالات المتخصصة','project-guides'=>'أدلة تجهيز المشاريع','service-finder'=>'اختيار الخدمة','estimate'=>'حاسبة المقاسات','faq'=>'الأسئلة الشائعة','about'=>'من نحن'] as $key=>$label): ?><a href="<?php echo esc_url(rd_url($key)); ?>"><?php echo esc_html($label); ?></a><?php endforeach; ?>
+            </div></details>
+            <form class="rd-search rd-nav-search-v23" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>"><label class="rd-visually-hidden" for="rd-nav-search-input">بحث في الموقع</label><input id="rd-nav-search-input" type="search" name="s" placeholder="بحث" required><button type="submit" aria-label="بحث"><?php rd_icon('zoom'); ?></button></form>
             <a class="rd-mobile-contact" href="<?php echo esc_url(rd_url('contact')); ?>">تواصل معنا</a>
         </nav>
         <a class="rd-button rd-button-solid rd-header-cta" href="<?php echo esc_url(rd_url('contact')); ?>">اطلب عرض سعر</a>

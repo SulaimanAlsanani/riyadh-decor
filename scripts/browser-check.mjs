@@ -110,6 +110,13 @@ try {
  assert.equal(await page.locator('#services [data-service-card]').count(),6);
  assert.equal(await page.locator('#quick-quote').count(),1);
  assert.equal(await page.locator('.rd-home-v20').count(),1);
+ assert.equal(await page.locator('.rd-discovery-grid>a').count(),3);
+ assert.equal(await page.locator('.rd-home-knowledge .rd-article-card').count(),3);
+ await page.locator('.rd-explore-nav summary').click();
+ assert.equal(await page.locator('.rd-explore-tray a:visible').count(),6);
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('.rd-explore-nav').getAttribute('open'),null);
+ report.interactions.push('grouped content navigation and home discovery');
  assert.equal(await page.locator('.rd-visual-categories a').count(),4);
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-material-story img').count(),3);

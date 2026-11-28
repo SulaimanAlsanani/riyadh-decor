@@ -6,13 +6,13 @@
             <p>ديكور وتشطيبات داخلية وخارجية للمنازل والفلل في الرياض.</p>
         </div>
         <div>
-            <h2>روابط سريعة</h2><a href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز وتنفيذ المشاريع</a><a href="<?php echo esc_url(rd_url('property-types')); ?>">ديكور الفلل والشقق</a><a href="<?php echo esc_url(rd_url('spaces')); ?>">الديكور حسب المساحة</a><a href="<?php echo esc_url(rd_url('design-styles')); ?>">أنماط التصميم</a><a href="<?php echo esc_url(rd_url('material-library')); ?>">مكتبة الخامات</a>
+            <h2>استكشف الديكور</h2><a href="<?php echo esc_url(rd_url('solutions')); ?>">حلول الديكور</a><a href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز وتنفيذ المشاريع</a><a href="<?php echo esc_url(rd_url('property-types')); ?>">ديكور الفلل والشقق</a><a href="<?php echo esc_url(rd_url('spaces')); ?>">الديكور حسب المساحة</a><a href="<?php echo esc_url(rd_url('design-styles')); ?>">أنماط التصميم</a><a href="<?php echo esc_url(rd_url('material-library')); ?>">مكتبة الخامات</a>
             <a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات</a>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض الأفكار</a>
             <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a><a href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة والمقالات</a>
         </div>
         <div>
-            <h2>أدوات تجهيز المشروع</h2><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة</a><a href="<?php echo esc_url(rd_url('estimate')); ?>">تجهيز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">الخامات والألوان</a><h2>خدمات مختارة</h2>
+            <h2>الأدلة والأدوات</h2><a href="<?php echo esc_url(rd_url('service-finder')); ?>">اختيار الخدمة</a><a href="<?php echo esc_url(rd_url('estimate')); ?>">تجهيز تقدير التكلفة</a><a href="<?php echo esc_url(rd_url('materials-colors')); ?>">الخامات والألوان</a><h2>خدمات مختارة</h2>
             <?php foreach (['mirrors','bedrooms','tv-walls','flooring','painting'] as $key): if (!isset(rd_services()[$key])) continue; ?>
                 <a href="<?php echo esc_url(rd_url('services/' . $key)); ?>"><?php echo esc_html(rd_services()[$key]['short']); ?></a>
             <?php endforeach; ?>

@@ -4,13 +4,15 @@ const smallScreen = window.matchMedia('(max-width: 780px)');
 const menuToggle = document.querySelector('.rd-menu-toggle');
 const navigation = document.querySelector('#rd-navigation');
 const serviceNav = document.querySelector('.rd-service-nav');
+const navDisclosures = [...document.querySelectorAll('[data-nav-disclosure]')];
+for(const panel of navDisclosures) panel.addEventListener('toggle',()=>{if(panel.open)for(const other of navDisclosures)if(other!==panel)other.open=false;});
 
 if (menuToggle && navigation) {
     const setMenu = (open) => {
         menuToggle.hidden = !smallScreen.matches;
         navigation.hidden = smallScreen.matches && !open;
         menuToggle.setAttribute('aria-expanded', String(smallScreen.matches && open));
-        if (!open && serviceNav) serviceNav.open = false;
+        if (!open) for(const panel of navDisclosures)panel.open=false;
     };
 
     setMenu(false);
@@ -22,16 +24,17 @@ if (menuToggle && navigation) {
     });
     document.addEventListener('keydown', (event) => {
         if (event.key !== 'Escape' || navigation.hidden) return;
-        if (serviceNav?.open) {
-            serviceNav.open = false;
-            serviceNav.querySelector('summary').focus();
+        const activePanel=navDisclosures.find(panel=>panel.open);
+        if (activePanel) {
+            activePanel.open = false;
+            activePanel.querySelector('summary').focus();
         } else if (smallScreen.matches) {
             setMenu(false);
             menuToggle.focus();
         }
     });
     document.addEventListener('click', (event) => {
-        if (serviceNav?.open && !serviceNav.contains(event.target)) serviceNav.open = false;
+        for(const panel of navDisclosures)if(panel.open&&!panel.contains(event.target))panel.open=false;
     });
 }
 
