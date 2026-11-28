@@ -79,6 +79,12 @@ try {
  }
  for(const path of ["majlis-decor/","living-room-decor/","bedroom-decor/","entrance-decor/","outdoor-decor/","home-renovation/","design-styles/","material-library/","decor-coordination/","project-combinations/"]) await verify(path,390,900);
  await verify('spaces/',1440,900,true);
+ for(const path of ["project-guides/","lighting-planning/","wall-preparation/","budget-planning/","handover-checklist/","maintenance-guide/","small-space-planning/"]) { await verify(path,390,900,true); await verify(path,1440,900,true); }
+ await page.goto(base+'project-guides/');
+ assert.equal(await page.locator('.rd-space-card').count(),6);
+ await page.goto(base+'lighting-planning/');
+ assert.equal(await page.locator('.rd-space-services article').count(),3);
+ report.interactions.push('project guidance library and service links');
  for(const path of ["property-types/","material-wood/","material-glass/","material-flooring/","material-paint/","material-ceiling/","material-wallcovering/","compare-flooring/","compare-walls/","compare-partitions/","style-modern/","style-classic/","style-neoclassic/","villa-decor/","apartment-decor/","villa-renovation/","apartment-renovation/"]) await verify(path,390,900);
  await verify('material-library/',1440,900,true);
  await verify('property-types/',1440,900,true);

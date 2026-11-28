@@ -6,7 +6,7 @@
             <p>ديكور وتشطيبات داخلية وخارجية للمنازل والفلل في الرياض.</p>
         </div>
         <div>
-            <h2>روابط سريعة</h2><a href="<?php echo esc_url(rd_url('property-types')); ?>">ديكور الفلل والشقق</a><a href="<?php echo esc_url(rd_url('spaces')); ?>">الديكور حسب المساحة</a><a href="<?php echo esc_url(rd_url('design-styles')); ?>">أنماط التصميم</a><a href="<?php echo esc_url(rd_url('material-library')); ?>">مكتبة الخامات</a>
+            <h2>روابط سريعة</h2><a href="<?php echo esc_url(rd_url('project-guides')); ?>">أدلة تجهيز وتنفيذ المشاريع</a><a href="<?php echo esc_url(rd_url('property-types')); ?>">ديكور الفلل والشقق</a><a href="<?php echo esc_url(rd_url('spaces')); ?>">الديكور حسب المساحة</a><a href="<?php echo esc_url(rd_url('design-styles')); ?>">أنماط التصميم</a><a href="<?php echo esc_url(rd_url('material-library')); ?>">مكتبة الخامات</a>
             <a href="<?php echo esc_url(rd_url('services')); ?>">جميع الخدمات</a>
             <a href="<?php echo esc_url(rd_url('gallery')); ?>">معرض الأفكار</a>
             <a href="<?php echo esc_url(rd_url('project-planning')); ?>">تجهيز المشروع</a><a href="<?php echo esc_url(rd_url('faq')); ?>">الأسئلة الشائعة</a><a href="<?php echo esc_url(rd_url('guides')); ?>">الأدلة والمقالات</a>
