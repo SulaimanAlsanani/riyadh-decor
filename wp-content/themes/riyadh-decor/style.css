@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.2.3
+Version: 1.2.4
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -540,4 +540,27 @@ h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.4; }
  .rd-category-copy { padding:10px; }
  .rd-category-copy strong { font-size:.9rem; }
  .rd-luxury-home .rd-editorial-gallery { gap:10px; }
+}
+
+/* V1.2.4: architectural stories and individual design sharing */
+.rd-material-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.rd-material-story { overflow:hidden; background:var(--white); border:1px solid var(--line); border-radius:14px; }
+.rd-material-story>img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+.rd-material-story>div { padding:20px; }
+.rd-material-story h3 { margin-block:6px 12px; line-height:1.55; }
+.rd-photo-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:4px 8px; }
+.rd-share-design { display:inline-flex; align-items:center; gap:5px; min-height:44px; padding:6px 9px; border:1px solid var(--line); background:var(--soft); color:var(--deep); border-radius:8px; font-size:.8rem; }
+.rd-share-design:hover { border-color:var(--green); }
+.rd-share-status:empty { display:none; }
+.rd-share-status { font-size:.78rem; color:var(--green); }
+.rd-photo:target { outline:3px solid var(--orange); outline-offset:3px; scroll-margin-top:24px; }
+@media(max-width:780px) { .rd-material-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } }
+@media(max-width:510px) {
+ .rd-material-grid { grid-template-columns:1fr; }
+ .rd-material-story { display:grid; grid-template-columns:40% 1fr; align-items:center; }
+ .rd-material-story>img { height:100%; aspect-ratio:auto; min-height:150px; }
+ .rd-material-story>div { padding:12px; min-width:0; }
+ .rd-material-story h3 { font-size:1rem; }
+ .rd-photo-actions { flex-direction:column; align-items:stretch; }
+ .rd-share-design { justify-content:center; }
 }
