@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 require_once __DIR__ . '/service-catalog.php';
+require_once __DIR__ . '/service-advice.php';
 
 function rd_services() {
     return [

@@ -22,7 +22,7 @@ while (have_posts()) :
     <?php rd_page_top(get_the_title(), $service['intro'], 'services', 'الخدمات'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_actions($slug); ?>
-        <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-designs">صور التصاميم</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
+        <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-designs">صور التصاميم</a><a href="#service-guide">دليل الاختيار</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
         <div class="rd-service-layout rd-detail-layout" id="service-options">
             <div>
                 <h2 class="rd-detail-heading"><span aria-hidden="true">01</span> خيارات التصميم والتشطيب</h2>
@@ -43,6 +43,16 @@ while (have_posts()) :
                 <?php rd_heading($service['gallery_title'], 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
                 <?php rd_image_gallery($service['portfolio'], $slug); ?>
             </section>
+        <?php endif; ?>
+        <?php if ($advice = rd_service_advice()[$slug] ?? null): ?>
+        <section class="rd-service-advice" id="service-guide" aria-label="دليل اختيار الخدمة وتجهيزها">
+            <?php rd_heading('دليل اختيار الخدمة وتجهيزها', 'نقاط تساعدك على اتخاذ قرار واضح قبل اعتماد عرض السعر.'); ?>
+            <div class="rd-advice-grid">
+                <?php foreach (['المساحات المناسبة','كيف تختار التصميم؟','ما الذي تراجعه قبل التنفيذ؟','العناية بعد التركيب'] as $i => $label): ?>
+                    <article><span class="rd-gallery-kicker"><?php echo esc_html(number_format_i18n($i+1)); ?></span><h3><?php echo esc_html($label); ?></h3><p><?php echo esc_html($advice[$i]); ?></p></article>
+                <?php endforeach; ?>
+            </div>
+        </section>
         <?php endif; ?>
         <h2 id="service-faq">أسئلة شائعة</h2>
         <?php rd_faq($service['faq']); ?>

@@ -63,6 +63,7 @@ try {
    report.pages.push({path,width,...result});
    if (result.broken.length || result.overflow || result.h1 !== 1) await page.screenshot({path:'qa-report/failure-'+width+'-'+(path.replace(/[^a-z0-9]/gi,'-')||'home')+'.png',fullPage:true});
    assert.equal(result.h1,1,path);
+   if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('.rd-service-advice article').count(),4,path+' content guide');
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
    await page.evaluate(async()=>{await Promise.all([...document.images].filter(i=>i.getAttribute('src')).map(i=>i.decode()));});

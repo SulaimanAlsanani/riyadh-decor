@@ -89,6 +89,14 @@ $services = rd_services();
         <div class="rd-room-photos"><?php rd_image($services['bedrooms']['image'], ['alt'=>'']); ?><?php rd_image($services['mirrors']['image'], ['alt'=>'']); ?></div>
         <div class="rd-room-copy"><span class="rd-gallery-kicker">تفاصيل شخصية</span><h2 id="rd-room-title">غرفة تعكس ذوقك</h2><p>استكشف خلفيات السرير والمرايا حسب المقاس، واختر الخامات والتفاصيل التي تناسب مساحتك.</p><div class="rd-actions"><a class="rd-button rd-button-green" href="<?php echo esc_url(rd_url('gallery/bedrooms')); ?>">خلفيات السرير</a><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('gallery/mirrors')); ?>">المرايا</a></div></div>
     </section>
+    <section class="rd-shell rd-section rd-content-guide" aria-label="دليل تجهيز المشروع">
+        <?php rd_heading('قبل أن تبدأ مشروع الديكور', 'جهّز المعلومات التي تساعدك على مقارنة الخيارات والحصول على عرض واضح.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
+        <div class="rd-advice-grid">
+            <article><h3>المقاسات والصور</h3><p>صوّر المكان وحدّد أبعاده ومواقع الأبواب والمقابس.</p></article>
+            <article><h3>الخامات والألوان</h3><p>اختر أفكارك من المعرض وقارن العينات في إضاءة المكان.</p></article>
+            <article><h3>نطاق العمل</h3><p>راجع بنود التجهيز والتوريد والتركيب وما يشمله عرض السعر.</p></article>
+        </div>
+    </section>
     <section class="rd-shell rd-section rd-home-steps" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <ol class="rd-steps">
