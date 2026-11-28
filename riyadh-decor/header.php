@@ -19,7 +19,7 @@
                 <span>ديكورات الرياض<small>تصميم وتشطيب داخلي</small></span>
             </a>
         <?php endif; ?>
-        <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation" hidden><span aria-hidden="true">☰</span> القائمة</button>
+        <button class="rd-menu-toggle" type="button" aria-expanded="false" aria-controls="rd-navigation" hidden><?php rd_icon('menu'); ?> القائمة</button>
         <nav class="rd-navigation" id="rd-navigation" aria-label="القائمة الرئيسية">
             <a href="<?php echo esc_url(rd_url()); ?>">الرئيسية</a>
             <details class="rd-service-nav">

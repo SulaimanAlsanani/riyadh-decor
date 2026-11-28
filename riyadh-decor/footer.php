@@ -31,8 +31,8 @@
     </div>
 </footer>
 <div class="rd-float" aria-label="خيارات التواصل المباشر">
-    <a href="<?php echo esc_url(rd_tel()); ?>">اتصال</a>
-    <a href="<?php echo esc_url(rd_wa()); ?>" rel="noopener" target="_blank">واتساب</a>
+    <a href="<?php echo esc_url(rd_tel()); ?>"><?php rd_icon('phone'); ?> اتصال</a>
+    <a href="<?php echo esc_url(rd_wa()); ?>" rel="noopener" target="_blank"><?php rd_icon('message'); ?> واتساب</a>
 </div>
 <?php wp_footer(); ?>
 </body>

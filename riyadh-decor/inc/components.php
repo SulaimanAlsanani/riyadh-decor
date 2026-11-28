@@ -131,12 +131,12 @@ function rd_image_gallery($keys, $specialty = '') {
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
             <figure class="rd-photo" id="<?php echo esc_attr('design-' . sanitize_title($key)); ?>">
-                <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?><span class="rd-photo-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M10.5 7v7M7 10.5h7"/></svg></span></a>
+                <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?><span class="rd-photo-zoom" aria-hidden="true"><?php rd_icon('zoom'); ?></span></a>
                 <figcaption>
                     <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div>
                     <div class="rd-photo-actions">
                     <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
-                    <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg><span>مشاركة</span></button>
+                    <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><?php rd_icon('share'); ?><span>مشاركة</span></button>
                     </div><span class="rd-share-status" role="status"></span>
                 </figcaption>
             </figure>
@@ -263,4 +263,17 @@ function rd_related_services($slug, $section = 'services') {
         </div>
     </section>
     <?php
+}
+
+/** Shared inline icon set; all names are controlled locally. */
+function rd_icon($name) {
+    $paths = [
+        'menu' => '<path d="M4 6h16M4 12h16M4 18h16"/>',
+        'phone' => '<path d="M22 16.9v3a2 2 0 0 1-2.2 2A18 18 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8l-1.2 1.2a14 14 0 0 0 4.7 4.7l1.2-1.2a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 1.7 2z"/>',
+        'message' => '<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3H13a8.5 8.5 0 0 1 8 8z"/>',
+        'zoom' => '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M10.5 7v7M7 10.5h7"/>',
+        'share' => '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/>',
+    ];
+    if (!isset($paths[$name])) return;
+    echo '<svg class="rd-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">' . $paths[$name] . '</svg>';
 }

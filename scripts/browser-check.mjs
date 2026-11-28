@@ -53,6 +53,9 @@ try {
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
  assert.equal(await page.locator('.rd-material-story img').count(),3);
  assert.equal(await page.locator('.rd-footer-lead a').count(),1);
+ assert.equal(await page.locator('.rd-float .rd-icon').count(),2);
+ const tokens=await page.evaluate(()=>({control:getComputedStyle(document.documentElement).getPropertyValue('--rd-control-height').trim(),radius:getComputedStyle(document.documentElement).getPropertyValue('--rd-card-radius').trim()}));
+ assert.equal(tokens.control,'44px');assert.equal(tokens.radius,'14px');
  await page.goto(base+'services/?group=decor');
  await page.locator('[data-service-filters]').waitFor({state:'visible'});
  assert.equal(await page.locator('[data-service-group="decor"]').getAttribute('aria-pressed'),'true');
