@@ -7,12 +7,14 @@ while (have_posts()) :
     $kind = get_post_meta(get_the_ID(), '_rd_kind', true);
     $section = get_post_field('post_name', get_the_ID());
     $service = $services[$slug] ?? null;
+    $spec = rd_service_specs()[$slug] ?? null;
 ?>
 <main id="content">
 <?php if ($service && $kind === 'gallery-item'): ?>
     <?php rd_page_top(get_the_title(), 'أفكار تصميمية توضيحية تساعدك على مقارنة الخامات والإضاءة والتفاصيل.', 'gallery', 'المعرض'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_actions($slug, true); ?>
+        <?php if($spec): ?><aside class="rd-gallery-context"><h2><?php echo esc_html($spec['headline']); ?></h2><p><?php echo esc_html($spec['types']); ?>. الصور نماذج توضيحية وليست إثباتًا لتنفيذ مشروع بعينه.</p><a class="rd-button rd-button-line" href="<?php echo esc_url(rd_url('services/'.$slug)); ?>">راجع الخامات ومراحل التجهيز</a></aside><?php endif; ?>
         <?php rd_image_gallery($service['portfolio'], $slug); ?>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
         <?php rd_editorial_links($slug); ?>
@@ -23,8 +25,8 @@ while (have_posts()) :
     <?php rd_page_top(get_the_title(), $service['intro'], 'services', 'الخدمات'); ?>
     <div class="rd-shell rd-section">
         <?php rd_service_actions($slug); ?>
-        <aside class="rd-service-value"><div><span class="rd-gallery-kicker">خطط لخدمتك في الرياض</span><h2>من اختيار التصميم إلى تحديد نطاق العمل</h2><p>حدد المقاسات وحالة الموقع أولًا، ثم راجع الخامات ونطاق العمل قبل اعتماد العرض.</p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', $slug, rd_url('estimate'))); ?>">جهّز المقاسات</a></aside>
-        <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-designs">صور التصاميم</a><a href="#service-guide">دليل الاختيار</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
+        <aside class="rd-service-value rd-service-banner"><div><span class="rd-gallery-kicker">ديكورات الرياض · حسب المقاس</span><h2><?php echo esc_html($spec['headline'] ?? $service['short']); ?></h2><p><?php echo esc_html($spec['types'] ?? $service['intro']); ?></p></div><a class="rd-button rd-button-solid" href="<?php echo esc_url(add_query_arg('service', $slug, rd_url('estimate'))); ?>">جهّز المقاسات</a></aside>
+        <nav class="rd-detail-jump" aria-label="أقسام الخدمة"><a href="#service-options">خيارات التشطيب</a><a href="#service-specifications">الخامات والتنفيذ</a><a href="#service-designs">صور التصاميم</a><a href="#service-guide">دليل الاختيار</a><a href="#service-faq">الأسئلة الشائعة</a></nav>
         <div class="rd-service-layout rd-detail-layout" id="service-options">
             <div>
                 <h2 class="rd-detail-heading"><span aria-hidden="true">01</span> خيارات التصميم والتشطيب</h2>
@@ -40,6 +42,11 @@ while (have_posts()) :
             </div>
         </div>
         <?php if (strlen(trim(get_the_content()))): ?><div class="rd-prose"><?php the_content(); ?></div><?php endif; ?>
+        <?php if($spec): ?><section id="service-specifications" class="rd-service-specifications">
+            <?php rd_heading('الخامات ومواصفات الاختيار','تعتمد المواصفات النهائية على معاينة الموقع وعينات المنتجات الفعلية.'); ?>
+            <div class="rd-spec-grid"><article><h3>أنواع التصاميم</h3><p><?php echo esc_html($spec['types']); ?></p></article><article><h3>المواد والمواصفات</h3><p><?php echo esc_html($spec['materials']); ?></p></article></div>
+            <h2>مراحل التجهيز والتنفيذ</h2><ol class="rd-spec-steps"><?php foreach($spec['steps'] as $i=>$step): ?><li><strong><?php echo esc_html(['المعاينة','اعتماد التفاصيل','التركيب والمراجعة'][$i]); ?></strong><p><?php echo esc_html($step); ?></p></li><?php endforeach; ?></ol>
+        </section><?php endif; ?>
         <?php if (!empty($service['portfolio'])): ?>
             <section id="service-designs" class="rd-service-portfolio" aria-label="<?php echo esc_attr($service['gallery_title']); ?>">
                 <?php rd_heading($service['gallery_title'], 'تصفّح النماذج وافتح أي صورة لمعاينة تفاصيلها.'); ?>
@@ -57,7 +64,7 @@ while (have_posts()) :
         </section>
         <?php endif; ?>
         <h2 id="service-faq">أسئلة شائعة</h2>
-        <?php $editorial = rd_editorial()[$slug] ?? null; rd_faq($service['faq'] + ($editorial ? [$editorial[4] => $editorial[5], 'ما الذي يؤثر في تكلفة هذه الخدمة؟' => $service['price']] : []) + (rd_extra_faq()[$slug] ?? [])); ?>
+        <?php $editorial = rd_editorial()[$slug] ?? null; rd_faq($service['faq'] + ($editorial ? [$editorial[4] => $editorial[5], 'ما الذي يؤثر في تكلفة هذه الخدمة؟' => $service['price']] : []) + (rd_extra_faq()[$slug] ?? []) + ($spec['faq'] ?? [])); ?>
         <?php rd_editorial_links($slug); ?>
         <?php $project_guides=array_filter(rd_library_content(),static fn($item)=>in_array($item['parent'],['project-guides','solutions'],true) && in_array($slug,$item['services'],true)); if($project_guides): ?><section class="rd-project-references"><?php rd_heading('أدلة تساعدك في تجهيز هذه الخدمة','مراجعة الخامات والتجهيز والاستلام قبل اعتماد العمل.',rd_url('solutions'),'حلول الديكور'); rd_space_cards(array_slice($project_guides,0,3,true)); ?></section><?php endif; ?>
         <?php rd_related_services($slug); ?>

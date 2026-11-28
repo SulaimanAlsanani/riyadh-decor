@@ -119,7 +119,9 @@ function rd_description() {
         $services = rd_services();
         $specialty = get_post_meta($current->ID, '_rd_specialty', true);
         if (isset($services[$specialty])) {
-            return $services[$specialty]['intro'] . ' في الرياض، تصفح التصاميم وجهّز طلب عرض السعر.';
+            $spec = rd_service_specs()[$specialty] ?? null;
+            if(get_post_meta($current->ID,'_rd_kind',true)==='gallery-item') return 'معرض '.$services[$specialty]['short'].' في الرياض: صور توضيحية ومراجع تصميم مرتبطة بطلب السعر.';
+            return $services[$specialty]['intro'] . ($spec ? ' '.$spec['types'].'، في الرياض.' : ' في الرياض، تصفح التصاميم وجهّز طلب عرض السعر.');
         }
         $space = rd_space_content()[$current->post_name] ?? rd_library_content()[$current->post_name] ?? null;
         if ($current->post_name === 'solutions') return 'حلول الديكور والتشطيبات في الرياض: الخصوصية والتخزين وتنسيق الألوان والأحواش ومقارنة عروض الأسعار.';

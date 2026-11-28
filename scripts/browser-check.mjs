@@ -66,6 +66,8 @@ try {
    assert.equal(result.h1,1,path);
    if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('[data-related-service]').count(),3,path+' complementary services');
    if(/^services\/[^/]+\/$/.test(path)) assert.equal(await page.locator('.rd-service-advice article').count(),4,path+' content guide');
+   if(/^services\/[^/]+\/$/.test(path)){assert.equal(await page.locator('.rd-spec-grid article').count(),2,path+' specifications');assert.equal(await page.locator('.rd-spec-steps li').count(),3,path+' implementation stages');}
+   if(/^gallery\/[^/]+\/$/.test(path))assert.ok(await page.locator('.rd-design-reference').count()>0,path+' gallery references');
    if(/^services\/[^/]+\/$/.test(path)) assert.ok(await page.locator('.rd-faq details').count()>=4,path+' expanded FAQ');
    assert.equal(result.broken.length,0,path+' broken images');
    assert.equal(result.overflow,false,path+' horizontal overflow');
@@ -184,6 +186,7 @@ try {
  assert.ok(await page.locator('[data-share-design]:visible').count()>0);
  await page.locator('[data-gallery-search]').fill('zzzznotfound');
  assert.equal(await page.locator('.rd-photo:visible').count(),0);
+ assert.ok(await page.locator('[data-gallery-empty]').isVisible());
  await page.locator('[data-gallery-clear]').click();
  assert.ok(await page.locator('.rd-photo:visible').count()>0);
  const designId=await page.locator('.rd-photo').first().getAttribute('id');

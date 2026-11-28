@@ -139,13 +139,13 @@ function rd_image_gallery($keys, $specialty = '') {
     $media = rd_media() + array_map(static fn($photo) => $photo[0], rd_gallery_media());
     ?>
     <div class="rd-gallery-tools" data-gallery-tools hidden><label>ابحث في تفاصيل الصور<input type="search" data-gallery-search placeholder="مثل إضاءة أو خشب"></label><button type="button" class="rd-button rd-button-line" data-gallery-clear>عرض الكل</button><p role="status" data-gallery-results></p></div>
-    <p class="rd-gallery-count"><?php echo esc_html(number_format_i18n(count($keys))); ?> صورة · اضغط على أي صورة لتكبيرها</p>
+    <p class="rd-gallery-count"><?php echo esc_html(number_format_i18n(count($keys))); ?> صورة · اضغط على أي صورة لتكبيرها</p><p class="rd-gallery-empty" data-gallery-empty hidden role="status">لا توجد صور مطابقة. غيّر عبارة البحث أو اختر عرض الكل.</p>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
             <figure class="rd-photo" id="<?php echo esc_attr('design-' . sanitize_title($key)); ?>">
                 <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?><span class="rd-photo-zoom" aria-hidden="true"><?php rd_icon('zoom'); ?></span></a>
                 <figcaption>
-                    <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div>
+                    <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div><small class="rd-design-reference">مرجع التصميم: <bdi><?php echo esc_html($key); ?></bdi></small>
                     <div class="rd-photo-actions">
                     <?php if($service): ?><a class="rd-card-quote" href="<?php echo esc_url(add_query_arg(['service'=>$specialty,'design'=>$key],rd_url('contact'))); ?>">اطلب سعر هذا التصميم</a><?php endif; ?><a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
                     <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><?php rd_icon('share'); ?><span>مشاركة</span></button>
