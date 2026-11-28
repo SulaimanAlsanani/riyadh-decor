@@ -16,6 +16,9 @@ if (menuToggle && navigation) {
     setMenu(false);
     smallScreen.addEventListener('change', () => setMenu(false));
     menuToggle.addEventListener('click', () => setMenu(navigation.hidden));
+    navigation.addEventListener('click', (event) => {
+        if (smallScreen.matches && event.target.closest('a[href]')) setMenu(false);
+    });
     document.addEventListener('keydown', (event) => {
         if (event.key !== 'Escape' || navigation.hidden) return;
         if (serviceNav?.open) {
@@ -80,6 +83,7 @@ for (const list of document.querySelectorAll('[data-service-list]')) {
         groups[0].click();
         groups[0].focus();
     });
+    update();
     filters.hidden = false;
 }
 
