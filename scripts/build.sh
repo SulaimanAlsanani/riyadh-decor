@@ -2,6 +2,7 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
+bash scripts/optimize-hero.sh
 build_dir="$(mktemp -d)"
 server_pid=''
 cleanup() {

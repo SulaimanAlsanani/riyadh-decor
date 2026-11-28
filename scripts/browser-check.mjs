@@ -48,6 +48,7 @@ try {
      if(width===390){await perf.locator('.rd-menu-toggle').click();await perf.keyboard.press('Escape');}else{await perf.locator('.rd-service-nav summary').click();await perf.keyboard.press('Escape');}
      await perf.waitForTimeout(500);
      const eventDuration=await perf.evaluate(()=>window.rdPerf.maxEventDuration);
+     if(width===1440) assert.ok(initial.heroSource.endsWith('majlis-desktop-opt.webp'),'desktop optimized hero');
      report.performance.push({width,profile:'cold cache, 1.6 Mbps, 100ms latency, 4x CPU',...initial,maxSampledInteractionMs:eventDuration});
    } finally {await perf.close();}
  }

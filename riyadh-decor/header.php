@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php if (is_front_page()): ?>
     <link rel="preload" as="image" href="<?php echo esc_url(rd_asset('majlis-sm.webp')); ?>" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" as="image" href="<?php echo esc_url(rd_asset('majlis.webp')); ?>" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="<?php echo esc_url(rd_asset(rd_hero_desktop_file())); ?>" media="(min-width: 769px)" fetchpriority="high">
     <?php endif; ?>
     <?php wp_head(); ?>
 </head>

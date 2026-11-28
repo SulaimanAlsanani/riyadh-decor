@@ -60,6 +60,10 @@ const index = JSON.parse(await readFile(join(output,'search-index.json'),'utf8')
 if(index.filter(x=>/guide-1\/$/.test(x.path)).length < 16) errors.push('Missing specialist articles');
 for(const slug of ["spaces","majlis-decor","living-room-decor","bedroom-decor","entrance-decor","outdoor-decor","home-renovation","design-styles","material-library","decor-coordination","project-combinations"]) {try {const html=load(await readFile(join(output,slug,'index.html'),'utf8'));if(!html('.rd-space-content').length)errors.push('Missing space content: '+slug);}catch{errors.push('Missing space page: '+slug);}}
 for(const slug of ["property-types","material-wood","material-glass","material-flooring","material-paint","material-ceiling","material-wallcovering","compare-flooring","compare-walls","compare-partitions","style-modern","style-classic","style-neoclassic","villa-decor","apartment-decor","villa-renovation","apartment-renovation"]) {try {const html=load(await readFile(join(output,slug,'index.html'),'utf8'));if(!html('.rd-library-content').length||!html('meta[name=description]').attr('content'))errors.push('Missing library content or metadata: '+slug);}catch{errors.push('Missing library page: '+slug);}}
+const heroOriginal=await readFile('riyadh-decor/assets/majlis.webp');
+const heroOptimized=await readFile('riyadh-decor/assets/majlis-desktop-opt.webp');
+if(heroOptimized.length>=heroOriginal.length)errors.push('Hero optimization did not reduce bytes');
+if(!home('.rd-hero-image').attr('srcset')?.includes('majlis-desktop-opt.webp'))errors.push('Optimized hero not connected');
 const fonts = await readFile(join(output, 'wp-content/themes/riyadh-decor/assets/fonts.css'), 'utf8');
 for (const match of fonts.matchAll(/url\(([^)]+)\)/g)) {
     const file = match[1].replace(/['"]/g, '');

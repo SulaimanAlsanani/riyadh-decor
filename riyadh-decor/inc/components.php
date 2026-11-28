@@ -5,6 +5,10 @@ function rd_media_filename($key) {
     return str_ends_with($key, '.jpg') ? $key : $key . '.webp';
 }
 
+function rd_hero_desktop_file() {
+    return is_file(get_theme_file_path('assets/majlis-desktop-opt.webp')) ? 'majlis-desktop-opt.webp' : 'majlis.webp';
+}
+
 function rd_image($key, $attributes = []) {
     $media = rd_media();
     $photo = rd_gallery_media()[$key] ?? null;
@@ -15,9 +19,15 @@ function rd_image($key, $attributes = []) {
     if ($attributes['loading'] === 'lazy' && $attributes['fetchpriority'] === 'auto') $attributes['fetchpriority'] = 'low';
     $dimensions = ['majlis' => [1440, 960], 'painting-service' => [864, 576]];
     [$width, $height] = $photo ? [$photo[1], $photo[2]] : ($dimensions[$key] ?? [504, 504]);
-    printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset(rd_media_filename($key))), $width, $height);
+    $hero = $key === 'majlis' && ($attributes['class'] ?? '') === 'rd-hero-image';
+    $desktop = $hero ? rd_hero_desktop_file() : 'majlis.webp';
+    printf('<img src="%s" width="%d" height="%d"', esc_url(rd_asset($hero ? $desktop : rd_media_filename($key))), $width, $height);
     if ($key === 'majlis') {
-        printf(' srcset="%s 768w, %s 1440w" sizes="%s"', esc_url(rd_asset('majlis-sm.webp')), esc_url(rd_asset('majlis.webp')), esc_attr($attributes['sizes'] ?? '(max-width: 740px) 95vw, 50vw'));
+        if ($hero) {
+            printf(' srcset="%s 768w, %s %dw" sizes="100vw"', esc_url(rd_asset('majlis-sm.webp')), esc_url(rd_asset($desktop)), $desktop === 'majlis-desktop-opt.webp' ? 1280 : 1440);
+        } else {
+            printf(' srcset="%s 768w, %s 1440w" sizes="%s"', esc_url(rd_asset('majlis-sm.webp')), esc_url(rd_asset('majlis.webp')), esc_attr($attributes['sizes'] ?? '(max-width: 740px) 95vw, 50vw'));
+        }
     }
     foreach (['alt','loading','decoding','fetchpriority','class'] as $attribute) {
         if (isset($attributes[$attribute])) {
