@@ -1,7 +1,7 @@
 /*
 Theme Name: Riyadh Decor
 Description: موقع عربي لخدمات الدهانات والديكورات في الرياض.
-Version: 1.4.0
+Version: 1.4.1
 Requires at least: 6.8
 Requires PHP: 8.2
 Text Domain: riyadh-decor
@@ -704,4 +704,17 @@ h3 { font-weight:var(--rd-weight-bold); }
  .rd-home-v14 .rd-material-story>img { aspect-ratio:auto; }
  .rd-mobile-quote:not([hidden]) { display:flex; position:fixed; z-index:6; inset-inline-start:10px; bottom:max(10px,env(safe-area-inset-bottom)); font-size:.8rem; padding-inline:10px; }
  body:has(.rd-mobile-quote:not([hidden])) .rd-float { bottom:64px; }
+}
+
+/* V1.4.1 — stable mobile CTA and predictable media sizing */
+#quick-quote { scroll-margin-top:24px; }
+.rd-quick-form select { width:100%; }
+.rd-home-v14 .rd-hero-copy { min-width:0; }
+.rd-visual-categories img,.rd-material-story>img,.rd-room-photos img { display:block; }
+@media(max-width:510px) {
+ .rd-mobile-quote:not([hidden]) { inset-inline-start:10px; bottom:max(10px,env(safe-area-inset-bottom)); }
+ body:has(.rd-mobile-quote:not([hidden])) .rd-float { bottom:max(10px,env(safe-area-inset-bottom)); inset-inline-end:10px; }
+ .rd-float a { padding-inline:7px; }
+ .rd-float .rd-icon { width:15px;height:15px; }
+ .rd-quick-quote { padding:16px; }
 }
