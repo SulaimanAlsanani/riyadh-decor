@@ -287,3 +287,28 @@ if (guideList && guidePages && guideStatus) {
         }
     });
 }
+
+/* Share a stable design anchor, with a copy fallback. */
+for (const button of document.querySelectorAll('[data-share-design]')) {
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+        const figure = button.closest('.rd-photo');
+        const status = figure.querySelector('.rd-share-status');
+        const url = new URL(location.href);
+        url.hash = figure.id;
+        const title = figure.querySelector('.rd-photo-caption').textContent.trim();
+        try {
+            if (navigator.share) {
+                await navigator.share({title,url:url.href});
+                status.textContent = 'تمت المشاركة.';
+            } else if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(url.href);
+                status.textContent = 'تم نسخ الرابط.';
+            } else {
+                window.prompt('انسخ رابط التصميم',url.href);
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') window.prompt('انسخ رابط التصميم',url.href);
+        }
+    });
+}

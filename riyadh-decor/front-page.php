@@ -68,6 +68,17 @@ $services = rd_services();
         <?php rd_image($services['tv-walls']['image'], ['alt' => '']); ?>
         <div class="rd-home-banner-content"><span class="rd-kicker">تصاميم حسب المساحة</span><h2 id="rd-home-banner-title">تفاصيل صغيرة تغيّر مظهر المكان</h2><p>تصفّح خيارات الخلفيات والخامات، ثم شاركنا المقاسات والأفكار التي تناسب مشروعك.</p><a class="rd-button rd-button-solid" href="#request">ابدأ بطلب عرض سعر</a> <a class="rd-button rd-button-light" href="<?php echo esc_url(rd_url('gallery/tv-walls')); ?>">استكشف الخلفيات</a></div>
     </section>
+    <section class="rd-shell rd-section rd-material-stories" aria-labelledby="rd-material-title">
+        <div class="rd-section-head"><div><span class="rd-gallery-kicker">تفاصيل معمارية</span><h2 id="rd-material-title">خامات وأفكار لكل مساحة</h2></div></div>
+        <div class="rd-material-grid">
+        <?php foreach (['wood-partitions'=>'دفء الخشب وتوازن المساحات','flooring'=>'أرضيات تكمل هوية المكان','shades-and-screens'=>'راحة المساحات الخارجية'] as $slug => $headline): ?>
+            <article class="rd-material-story">
+                <?php rd_image($services[$slug]['image'], ['alt'=>'']); ?>
+                <div><span class="rd-gallery-kicker"><?php echo esc_html($services[$slug]['short']); ?></span><h3><?php echo esc_html($headline); ?></h3><a class="rd-text-link" href="<?php echo esc_url(rd_url('gallery/' . $slug)); ?>">استكشف التصاميم <span aria-hidden="true">←</span></a></div>
+            </article>
+        <?php endforeach; ?>
+        </div>
+    </section>
     <section class="rd-shell rd-section rd-home-steps" id="steps">
         <?php rd_heading('من فكرة إلى مشروع جاهز', 'المقاسات وحالة السطح والخامات توضح المطلوب قبل الاتفاق.', rd_url('project-planning'), 'دليل تجهيز المشروع'); ?>
         <ol class="rd-steps">

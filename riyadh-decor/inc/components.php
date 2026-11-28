@@ -130,11 +130,14 @@ function rd_image_gallery($keys, $specialty = '') {
     <p class="rd-gallery-count"><?php echo esc_html(number_format_i18n(count($keys))); ?> صورة · اضغط على أي صورة لتكبيرها</p>
     <div class="rd-photo-grid" data-gallery>
         <?php foreach ($keys as $key): ?>
-            <figure class="rd-photo">
+            <figure class="rd-photo" id="<?php echo esc_attr('design-' . sanitize_title($key)); ?>">
                 <a href="<?php echo esc_url(rd_asset(rd_media_filename($key))); ?>" data-gallery-image data-caption="<?php echo esc_attr($media[$key]); ?>"><?php rd_image($key); ?><span class="rd-photo-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M10.5 7v7M7 10.5h7"/></svg></span></a>
                 <figcaption>
                     <div class="rd-photo-caption"><?php echo esc_html($media[$key]); ?></div>
-                    <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : ''))); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
+                    <div class="rd-photo-actions">
+                    <a class="rd-text-link" href="<?php echo esc_url(rd_wa('السلام عليكم، عندي استفسار عن تصميم: ' . $media[$key] . ($service ? ' — ' . $service['name'] : '') . ' (' . $key . ')')); ?>" rel="noopener" target="_blank">استفسر عن الفكرة <span aria-hidden="true">←</span></a>
+                    <button type="button" class="rd-share-design" data-share-design hidden aria-label="<?php echo esc_attr('مشاركة ' . $media[$key]); ?>"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg><span>مشاركة</span></button>
+                    </div><span class="rd-share-status" role="status"></span>
                 </figcaption>
             </figure>
         <?php endforeach; ?>

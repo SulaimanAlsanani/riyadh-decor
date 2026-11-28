@@ -51,6 +51,7 @@ try {
  assert.equal(await page.locator('.rd-split-banner img').count(),1);
  assert.equal(await page.locator('.rd-visual-categories a').count(),4);
  assert.equal(await page.locator('.rd-visual-categories img').count(),4);
+ assert.equal(await page.locator('.rd-material-story img').count(),3);
  assert.equal(await page.locator('.rd-footer-lead a').count(),1);
  await page.goto(base+'services/?group=decor');
  await page.locator('[data-service-filters]').waitFor({state:'visible'});
@@ -74,6 +75,15 @@ try {
  report.interactions.push('mobile menu and mega menu');
  await page.goto(base+'gallery/mirrors/');
  assert.ok(await page.locator('.rd-photo-zoom').count()>0);
+ assert.ok(await page.locator('[data-share-design]:visible').count()>0);
+ const designId=await page.locator('.rd-photo').first().getAttribute('id');
+ assert.ok(designId.startsWith('design-'));
+ await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+ await page.evaluate(()=>Object.defineProperty(navigator,'share',{value:undefined,configurable:true}));
+ await page.locator('[data-share-design]').first().click();
+ await page.waitForFunction(()=>document.querySelector('.rd-share-status').textContent.includes('نسخ'));
+ assert.ok((await page.evaluate(()=>navigator.clipboard.readText())).endsWith('#'+designId));
+ report.interactions.push('individual design share link');
  await page.locator('[data-gallery-image]').first().click();
  await page.locator('dialog[open]').waitFor();
  await page.locator('dialog [data-next]').click();
